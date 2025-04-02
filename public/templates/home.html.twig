@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1>Home</h1>
+    <main>
+        <div class="image-container">
+            <a href="{{ asset('img/me.jpg') }}">
+                <img src="{{ asset('img/me.jpg') }}" alt="me">
+            </a>
+        </div>
+        <div class="home-text">
+            <h2>Välkommen till min sida!</h2>
+            <p>
+                Mitt namn är <strong>Michelle Tammi</strong>. Jag är 26 år gammal och bor i Luleå, i norra Sverige.
+                Jag bor tillsammans med min sambo, katt och hund. Jag är född i Uppsala, men har växt upp i Singapore.
+                Mina hobbys är att resa runt i världen, spela piano och läsa böcker. Jag har också bott ett år utomlands
+                i Sydkorea, där jag lärde mig koreanska. Numera tillbringar jag mycket av min fritid på gymmet.
+            </p>
+            <div class="image-cat">
+                <a href="{{ asset('img/cat.jpg') }}">
+                    <img src="{{ asset('img/cat.jpg') }}" alt="cat">
+                </a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

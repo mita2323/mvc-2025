@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lucky Page{% endblock %}
+
+{% block body %}
+    <div class="lucky-container">
+        <h1>Ditt lyckonummer är: <span class="lucky-number">{{ luckyNumber }}</span></h1>
+        <p>och din lyckobild är:</p>
+
+        <div class="lucky-image">
+            <img src="{{ asset('img/' ~ randomImage) }}" alt="Lucky Image">
+        </div>
+
+    </div>
+{% endblock %}

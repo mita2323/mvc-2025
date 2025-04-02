@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+    <h1>About</h1>
+    <main>
+        <div class="about-container">
+            <div class="about-column">
+                <h1>Om mvc kursen</h1>
+                <p>
+                    Kursen <strong>Objektorienterade webbteknologier</strong>, eller <em>mvc</em> som den också kallas, handlar om att lära sig objektorienterade 
+                    programmeringstekniker i PHP. Målet med kursen är att lära ut hur man strukturerar kod med hjälp av MVC-mönstret (Model-View-Controller) 
+                    i ett webbaserat ramverk, samtidigt som man jobbar med med databaser och enhetstestning. Kursen ger verktygen för att på egen hand
+                    bygga och lansera webbapplikationer baserat på ramverk och objektorienterade principer.
+                </p>
+                <p>
+                    Kursens Git-repository finns på GitHub: <a href="https://github.com/dbwebb-se/mvc">github.com/dbwebb-se/mvc</a>.
+                </p>
+                <p>
+                    Mitt personliga GitHub-repo: <a href="https://github.com/mita2323">github.com/mita2323</a>.
+                </p>
+            </div>
+            <div class="about-column image-column">
+                <img src="{{ asset('img/mvc.svg') }}" alt="mvc bild">
+            </div>
+        </div>
+    </main>
+    
+{% endblock %}
