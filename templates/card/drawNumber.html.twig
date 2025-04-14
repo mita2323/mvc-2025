@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Draw Cards{% endblock %}
+
+{% block body %}
+<main>
+    <div class="card-game">
+        <h1>Draw Cards</h1>
+
+        {% if message is defined %}
+            <p>{{ message }}</p>
+        {% elseif cards is not empty %}
+            <div class="deck">
+                {% for card in cards %}
+                    <div class="card {{ card.getSuit() }}">
+                        {{ card|default('')|default('Invalid card') }}
+                    </div>
+                {% endfor %}
+            </div>
+            <p>Cards remaining: {{ remaining }}</p>
+        {% else %}
+            <p>No cards drawn.</p>
+            <p>Cards remaining: {{ remaining }}</p>
+        {% endif %}
+
+        <p><a href="{{ path('deck_draw_form') }}">Draw more cards</a></p>
+    </div>
+</main>
+{% endblock %}

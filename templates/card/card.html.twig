@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kortlek - Landningssida{% endblock %}
+
+{% block body %}
+
+<main>
+    <div class="card-game">
+        <h1>Kortlek - Landningssida</h1>
+
+        <p>Välj en av funktionerna nedan:</p>
+
+        <ul>
+            <li><a href="{{ path('card_deck') }}">Show Sorted Cards</a></li>
+            <li><a href="{{ path('deck_shuffle') }}">Shuffle Deck</a></li>
+            <li><a href="{{ path('deck_draw') }}">Draw a Card</a></li>
+            <li><a href="{{ path('deck_draw_form') }}">Draw a number of Cards</a></li>
+            <li><a href="{{ path('api') }}">API Documentation</a></li>
+            <li><a href="{{ path('session_show') }}">View Session</a></li>
+            <li><a href="{{ path('session_delete') }}">Delete Session</a></li>
+        </ul>
+    </div>
+</main>
+{% endblock %}

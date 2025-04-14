@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}API Översikt{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="api-container">
+            <h1>API</h1>
+            <p>Välkommen! Här finns en sammanställning av alla JSON router som webbplatsen erbjuder:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Namn</th>
+                        <th>Route</th>
+                        <th>Metod</th>
+                        <th>Beskrivning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for route in routes %}
+                        <tr>
+                            <td>{{ route.namn }}</td>
+                            <td>
+                                {% if route.metod == 'POST' %}
+                                    <form action="{{ route.route }}" method="post">
+                                        <button type="submit" class="api-button">
+                                            {{ route.route }}
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <a href="{{ route.route }}">{{ route.route }}</a>
+                                {% endif %}
+                            </td>
+                            <td>{{ route.metod }}</td>
+                            <td>{{ route.beskrivning }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}

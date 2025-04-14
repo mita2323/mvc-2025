@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Card Deck{% endblock %}
+
+{% block body %}
+<main>
+    <div class="card-game">
+        <h1>Card Deck</h1>
+
+        {% if cards is not empty %}
+            <div class="deck">
+                {% for card in cards %}
+                    <div class="card {{ card.getSuit() }}">
+                        {{ card|default('')|default('Invalid card') }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No cards in the deck.</p>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

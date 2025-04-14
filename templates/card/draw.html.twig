@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Draw Card{% endblock %}
+
+{% block body %}
+<main>
+    <div class="card-game">
+        <h1>Draw Card</h1>
+
+        {% if card is not null %}
+            <div class="deck">
+                <div class="card {{ card.getSuit() }}">
+                    {{ card|default('')|default('Invalid card') }}
+                </div>
+            </div>
+            <p>Cards remaining: {{ remaining }}</p>
+        {% else %}
+            <p>{{ message|default('No cards available.') }}</p>
+        {% endif %}
+
+        <p><a href="{{ path('deck_draw') }}">Draw another card</a></p>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Session Debug{% endblock %}
+
+{% block body %}
+
+<main>
+    <div class="session">
+        <h1>Session Debug</h1>
+
+        {{ include('flash.html.twig') }}
+
+        <p>Här visas allt som finns sparat i sessionen:</p>
+
+        {% if sessionData is empty %}
+            <p><em>Sessionen är tom.</em></p>
+        {% else %}
+            <ul>
+            {% for key, value in sessionData %}
+                <li><strong>{{ key }}</strong>: <pre>{{ dump(value) }}</pre></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        <a href="{{ path('session_delete') }}" class="button">Radera session</a>
+    </div>
+</main>
+{% endblock %}

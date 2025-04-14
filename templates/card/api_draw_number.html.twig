@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dra flera kort (JSON){% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container">
+            <h1>Dra flera kort</h1>
+            <p>Välj hur många kort du vill dra från kortleken:</p>
+
+            <form action="" method="post" id="draw-form">
+                <label for="number">Antal kort:</label>
+                <input type="number" id="number" name="number" min="1" max="52" required>
+                <button type="submit">Dra kort</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('draw-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const number = document.getElementById('number').value;
+            this.action = `/api/deck/draw/${number}`;
+            this.submit();
+        });
+    </script>
+{% endblock %}
