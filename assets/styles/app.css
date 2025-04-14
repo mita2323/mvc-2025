@@ -278,11 +278,11 @@ footer p {
 }
 
 a:visited {
-    color: #007bff;
+    color: #0000EE;
 }
 
 .api-button {
-    color: #007bff;
+    color: #0000EE;
     text-decoration: underline;
     background: none;
     border: none;
