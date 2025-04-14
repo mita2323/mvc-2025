@@ -20,7 +20,12 @@
         document.getElementById('draw-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const number = document.getElementById('number').value;
-            this.action = `/api/deck/draw/${number}`;
+
+            const currentHost = window.location.hostname;
+            
+            const baseUrl = (currentHost === 'www.student.bth.se') ? '/~mita23/dbwebb-kurser/mvc/me/report/public' : '';
+
+            this.action = baseUrl + `/api/deck/draw/${number}`;
             this.submit();
         });
     </script>

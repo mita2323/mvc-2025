@@ -23,13 +23,13 @@
                             <td>{{ route.namn }}</td>
                             <td>
                                 {% if route.metod == 'POST' %}
-                                    <form action="{{ route.route }}" method="post">
+                                    <form action="{{ path(route.link) }}" method="post">
                                         <button type="submit" class="api-button">
                                             {{ route.route }}
                                         </button>
                                     </form>
                                 {% else %}
-                                    <a href="{{ route.route }}">{{ route.route }}</a>
+                                    <a href="{{ path(route.link) }}">{{ route.route }}</a>
                                 {% endif %}
                             </td>
                             <td>{{ route.metod }}</td>
