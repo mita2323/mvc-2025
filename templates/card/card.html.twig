@@ -19,6 +19,22 @@
             <li><a href="{{ path('session_show') }}">View Session</a></li>
             <li><a href="{{ path('session_delete') }}">Delete Session</a></li>
         </ul>
+
+        <h1>Klass Struktur</h1>
+        <p>
+            Applikationen består av fyra klasser: Card, CardGameController, ApiController och DeckOfCards. Klassen Card representerar ett enskilt kort med en färg och 
+            ett värde. DeckOfCards fungerar som en samling av Card-objekt, den skapr och lagrar en kortlek med 52 kort och har metoder för att blanda, dra kort, och sorta kortleken. DeckOfCards
+            använder Card för att skapa och lagra kort. CardGameController agerar som en kontrollklass som styr användarens interaktion med kortleken genom
+            olika routes. Den anropar metoder från DeckOfCards för att till exempel blanda eller dra kort, och hanterar även sessionen för att spara spelets
+            tillstånd mellan olika requests. ApiController ansvarar för API-routes som returnerar information om kortleken i JSON-format, till exempel
+            att visa, blanda, eller dra ett eller flera kort via API-anrop.
+        </p>
+
+        <h1>UML Klass Diagram</h1>
+        <div class="uml-diagram">
+            <img src="{{ asset('images/klassdiagram.png') }}" alt="UML Class Diagram">
+        </div>
+
     </div>
 </main>
 {% endblock %}

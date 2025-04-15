@@ -60,17 +60,43 @@
 
             <section id="kmom02">
                 <h2>Kmom02</h2>
+
                 <p>
-                
-                </p>
+                I PHP används objektorienterade konstruktioner för att skapa flexibel och återanvändbar kod. <strong>Arv</strong> gör det möjligt för en underklass att
+                ärva metoder och egenskaper från en förälderklass, vilket skapar en "är-en"-relation. Till exempel kan en Dog klass ärva från Animal för
+                att få en eat()-metod. <strong>Komposition</strong> handlar om att skapa komplexa objekt genom att använda andra objekt som egenskaper, istället för att
+                använda arv där klasser byggs upp av andra objekt, vilket ger större flexibilitet. Till exempel när en Order-klass innehåller flera Product-objekt.
+                <strong>Interface</strong> är som en regelbok som säger vilka metoder en klass måste ha, med implements, utan att bestämma hur de fungerar, som till exempel
+                ett PaymentInterface som kräver att alla betalningsklasser implementerar en processPayment()-metod. <strong>Traits</strong> tillåter återanvändning av 
+                kod i flera klasser utan att använda arv, genom att definiera metoder som kan användas av flera klasser. Detta gör att man unviker kod upprepning.
+                Tillsammans jobbar som så att arv ochb interface sätter upp regler, komposition gör det enkelt att kombinera objekt, och trait minskar upprepning av kod.
+                </p><br>
+
                 <p>
-                
-                </p>
+                För denna uppgiften har jag implementerat en kortleksapplikation med PHP och Symfony, den består av flera klasser och kontrollers för att
+                hantera en kortlek, dra kort och blanda kortleken. Klassen 'Card' representerar ett enskilt med egenskaperna 'suit' (färg) och 'value' (värde).
+                Den innehåller metoder för att hämta dessa värden och konvertera kortet till en läsbar sträng med Unicode-symboler. 'DeckOfCards' hanterar
+                en hel kortlek med 52 kort. Den innehåller metoder för att: skapa en ny kortlek, blanda kort, dra kort, sortera korten efter färg och värde, samt
+                räkna kvarvarande kort. 'CardGameController' hanterar routerna för kortleks applikationen. 'ApiController' innehåller routes för ett JSON API.
+                Den hämtar en sorterad korlek (GET /api/deck), blandar och hämtar kortleken (/POST /api/deck/shuffle), och returnerar strukturerad JSON-svar när man 
+                drar ett eller flera kort (POST /api/dek/draw), (POST /api/deck/draw/{number}).
+                </p><br>
                 <p>
-                
-                </p>
+                Jag är nöjd med hur jag löste uppgiften. Laddningssidan för kortleken (/card) blev en bra startpunkt där man kan välja vad man vill göra med kortleken,
+                och jag tycker korten såg profsiga ut med Unicode-symbolerna. På API-sidan finns alla tillgängliga JSON routes sammanställd i en tabell. Detta ger en bra överblick över vad som webbplatsen
+                erbjuder och gör det enkelt att test olika router. Jag är också nöjd med kod strukturen, vilket gör det lätt att hitta en specifik del av koden.
+                Några Förbättringspotential i min kod hade varit att skapa en hjälp metod för att minska kodupprepning.
+                </p><br>
+
                 <p>
-                
+                Mina reflektioner så här långt med att jobba med Symfony och MVC är att det har varit både lärorikt och kul. Ramverket gör det enkelt
+                att strukturera koden med modeller, vyer och kontroller, vilket gör koden mer lättläst och underhållbar. I början kändes det lite överväldigande
+                men nu kännes det som att jag förstår mer. 
+                </p><br>
+
+                <p>
+                Min TIL för detta kmom är att jag har lärt mig att bygga grunderna till ett kortspel samt att jag har tränat på objektorientering och hur
+                jag skapar mina egna klasser och applikationer i ramverket Symfony.
                 </p>
             </section>
 
