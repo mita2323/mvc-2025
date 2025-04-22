@@ -663,3 +663,22 @@ input {
     font-size: 1.4rem;
     color: #00365d;
 }
+
+.documentation-page h1 {
+    color: #00365d;
+}
+
+.documentation-page h2 {
+    text-align: center;
+    font-size: 2rem;
+    padding: 0.6rem;
+}
+
+.documentation-page p {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.documentation-page a {
+    font-size: 1.6rem;
+}
