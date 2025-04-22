@@ -277,7 +277,7 @@ footer p {
     padding: 0.4em;
 }
 
-a:visited {
+.api-button a:visited {
     color: #0000EE;
 }
 
@@ -496,4 +496,170 @@ input {
 
 .uml-diagram {
     text-align: center;
+}
+
+.game h1 {
+    color: #0056b3;
+}
+
+.game p {
+    font-size: 1.3rem;
+    margin: 0.8rem;
+}
+
+.game h2 {
+    font-size: 2.3rem;
+    margin-bottom: 1rem;
+}
+
+.game li {
+    margin: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.game .start-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.start-button:hover {
+    background-color: #0056b3;
+}
+
+.game .documentation {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.card21 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.deck {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 1.2em;
+    min-width: 60px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card.hearts,
+.card.diamonds {
+    color: #e74c3c;
+    font-size: 1.5rem;
+}
+
+.card.clubs,
+.card.spades {
+    color: #000000;
+    font-size: 1.5rem;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.take, .stay, .reset {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.take {
+    background-color: #3498db;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.take:hover {
+    background-color: #216390;
+    transform: translateY(-2px);
+}
+
+.stay {
+    background-color: #6c995d;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.stay:hover {
+    background-color: #007100;
+    transform: translateY(-2px);
+}
+
+.button-reset {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.reset {
+    background-color: #2ecc71;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.reset:hover {
+    background-color: #035c28;
+    transform: translateY(-2px);
+}
+
+.link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.link a {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 1.3em;
+}
+
+.link a:hover {
+    text-decoration: underline;
+    color: #2980b9;
+}
+
+.card21 h1 {
+    color: #004085;
+}
+
+.card21 .text {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #00365d;
 }

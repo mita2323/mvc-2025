@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Landningssida{% endblock %}
+
+{% block body %}
+
+<main>
+    <div class="game">
+        <h1>Landningssida för spelet</h1>
+
+        <p>
+            21 är ett klassiskt kortspel, även känt som Blackjack. Målet är att få en hand med ett totalt värde så nära 21 som 
+            möjligt utan att gå över. Du spelar mot dealern, och den som har högst poäng utan att "busta" (över 21) vinner.
+        </p>
+
+        <h2>Regler</h2>
+        <ul>
+            <li>Kort 2–10 är värda sitt nummer.</li>
+            <li>Klöver, dam och kung är värda 10 poäng.</li>
+            <li>Ess är värt 1 eller 11 poäng, beroende på vad som är bäst för handen.</li>
+            <li>Du får två kort i början och kan välja att "ta kort" (hit) eller "stå" (stand).</li>
+            <li>Dealern måste ta kort tills deras hand är minst 17.</li>
+            <li>Om din hand går över 21, bustar du och förlorar. Om dealern bustar eller du har högre poäng, vinner du!</li>
+        </ul>
+
+        <p class="documentation">
+            <a href="{{ path('doc') }}">Visa dokumentation</a>
+        </p>
+
+        <div class="button-container">
+            <a href="{{ path('game_start') }}" class="start-button">Starta Spelet</a>
+        </div>
+    </div>
+</main>
+{% endblock %}

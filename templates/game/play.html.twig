@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spela 21{% endblock %}
+
+{% block body %}
+<main>
+    <div class="card21">
+        <h1>Spela 21</h1>
+
+        <h2>Spelarens hand (Poäng: {{ player.getScore }})</h2>
+        <div class="deck">
+            {% for card in player.getHand %}
+                <div class="card {{ card.getSuit() }}">
+                    {{ card.getAsString }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <h2>Dealerns hand (Poäng: {{ dealer.getScore }})</h2>
+        <div class="deck">
+            {% for card in dealer.getHand %}
+                <div class="card {{ card.getSuit() }}">
+                    {{ card.getAsString }}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if status == 'ongoing' %}
+            <div class="button">
+                <a href="{{ path('game_hit') }}" class="take">Ta kort</a>
+                <a href="{{ path('game_stand') }}" class="stay">Stanna</a>
+            </div>
+        {% else %}
+            <p class="text">
+                Spel slut:
+                {% if status == 'player_bust' %}Du bustade! Dealern vinner.{% endif %}
+                {% if status == 'dealer_bust' %}Dealern bustade! Du vinner!{% endif %}
+                {% if status == 'player_win' %}Du vinner!{% endif %}
+                {% if status == 'dealer_win' %}Dealern vinner!{% endif %}
+            </p>
+            <div class="button-reset">
+                <a href="{{ path('game_reset') }}" class="reset">Spela igen</a>
+            </div>
+        {% endif %}
+
+        <p class="link">
+            <a href="{{ path('game') }}">Tillbaka till startsidan</a>
+        </p>
+    </div>
+</main>
+{% endblock %}
