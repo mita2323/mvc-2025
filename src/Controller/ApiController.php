@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Card\DeckOfCards;
+use App\Game\Game;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -120,6 +121,13 @@ class ApiController extends AbstractController
                 'metod' => 'GET',
                 'beskrivning' => 'Raderar innehåller i sessionen.'
             ],
+            [
+                'namn' => 'JSON Spelstatus',
+                'route' => '/api/game',
+                'link' => 'api_game',
+                'metod' => 'GET',
+                'beskrivning' => 'Visar upp den aktuella ställningen för spelet i en JSON struktur.'
+            ],
         ];
 
         return $this->render('api.html.twig', [
@@ -226,5 +234,43 @@ class ApiController extends AbstractController
         ];
 
         return new JsonResponse($jsonData);
+    }
+
+    #[Route('/api/game', name: 'api_game', methods: ['GET'])]
+    public function apiGame(SessionInterface $session): JsonResponse
+    {
+        $game = $session->get('game');
+        if (!$game instanceof Game) {
+            return new JsonResponse([
+                'error' => 'No active game found.'
+            ], 404);
+        }
+
+        $player = $game->getPlayer();
+        $dealer = $game->getDealer();
+
+        $playerHand = array_map(function ($card) {
+            return $card->getAsString();
+        }, $player->getHand());
+
+        $dealerHand = array_map(function ($card) {
+            return $card->getAsString();
+        }, $dealer->getHand());
+
+        return new JsonResponse([
+            'game' => [
+                'status' => $game->getStatus(),
+                'player' => [
+                    'name' => $player->getName(),
+                    'hand' => $playerHand,
+                    'score' => $player->getScore(),
+                ],
+                'dealer' => [
+                    'name' => $dealer->getName(),
+                    'hand' => $dealerHand,
+                    'score' => $dealer->getScore(),
+                ],
+            ]
+        ]);
     }
 }
