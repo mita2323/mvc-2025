@@ -14,13 +14,17 @@
 
         <h2>Psuedokod</h2>
         <p>Följande pseudokod beskriver logiken för att starta spelet och hantera spelarens tur:</p>
+        
+        <div class="psuedo-code">
+            <img src="{{ asset('images/psuedocode.png') }}" alt="Psuedokod">
+        </div>
 
         <h2>Klasser</h2>
         <ul>
-            <li><strong>Card</strong>: Representerar ett enskilt kort med färg och värde, inklusive Unicode-symboler för visning.</li>
-            <li><strong>DeckOfCards</strong>: Hanterar en kortlek med 52 kort, med funktioner för att blanda och dra kort.</li>
+            <li><strong>CardGame</strong>: Representerar ett enskilt kort med färg och värde, inklusive Unicode-symboler för visning.</li>
+            <li><strong>DeckOfCardsGame</strong>: Hanterar en kortlek med 52 kort, med funktioner för att blanda och dra kort.</li>
             <li><strong>Player</strong>: Lagrar en spelares hand och beräknar poäng baserat på kortvärden, med stöd för ess (1 eller 11).</li>
-            <li><strong>Game21</strong>: Styr spelets tillstånd och koordinerar interaktioner mellan spelare, dealer och kortlek.</li>
+            <li><strong>Game</strong>: Styr spelets tillstånd och koordinerar interaktioner mellan spelare, dealer och kortlek.</li>
         </ul>
 
         <p><a href="{{ path('game') }}">Tillbaka till landningssidan</a></p>

@@ -700,3 +700,7 @@ input {
     margin-left: auto;
     margin-right: auto;
 }
+
+.psuedo-code img {
+    width: 25rem;
+}
