@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Game;
 
 use App\Game\CardGame;

@@ -682,3 +682,21 @@ input {
 .documentation-page a {
     font-size: 1.6rem;
 }
+
+.documentation-page ul {
+    padding-bottom: 1.2rem;
+    font-size: 1.2rem;
+    padding-left: 1.2rem;
+}
+
+.documentation-page li {
+    padding: 0.6rem;
+}
+
+.documentation-page img {
+    width: 50rem;
+    padding: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

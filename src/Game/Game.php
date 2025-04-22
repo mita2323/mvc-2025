@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Game;
 
 use App\Game\DeckOfCardsGame;
@@ -28,7 +29,7 @@ class Game
         $this->dealer->clearHand();
         $this->status = 'ongoing';
     }
-        
+
     public function hit(): void
     {
         if ($this->status === 'ongoing') {
@@ -36,28 +37,28 @@ class Game
             if ($card) {
                 $this->player->addCard($card);
                 if ($this->player->getScore() > 21) {
-                $this->status = 'player_bust';
+                    $this->status = 'player_bust';
                 }
             }
         }
     }
-        
+
     public function stand(): void
     {
         if ($this->status !== 'ongoing') {
             return;
         }
-        
+
         while ($this->dealer->getScore() < 17) {
             $card = $this->deck->draw();
             if ($card) {
                 $this->dealer->addCard($card);
             }
         }
-        
+
         $playerScore = $this->player->getScore();
         $dealerScore = $this->dealer->getScore();
-        
+
         if ($dealerScore > 21) {
             $this->status = 'dealer_bust';
         } elseif ($dealerScore >= $playerScore) {
@@ -66,24 +67,24 @@ class Game
             $this->status = 'player_win';
         }
     }
-        
+
     public function getPlayer(): Player
     {
-    return $this->player;
+        return $this->player;
     }
-        
+
     public function getDealer(): Player
     {
-    return $this->dealer;
+        return $this->dealer;
     }
-        
+
     public function getStatus(): string
     {
-    return $this->status;
+        return $this->status;
     }
-        
+
     public function getDeck(): DeckOfCardsGame
     {
-    return $this->deck;
+        return $this->deck;
     }
 }
