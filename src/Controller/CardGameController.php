@@ -44,6 +44,10 @@ class CardGameController extends AbstractController
         }
 
         $deck = $session->get('deck');
+        if (!$deck instanceof DeckOfCards) {
+            $deck = new DeckOfCards();
+            $session->set('deck', $deck);
+        }
 
         $cards = $deck->sortedCards();
 
@@ -71,8 +75,9 @@ class CardGameController extends AbstractController
     {
         $deck = $session->get('deck');
 
-        if (!$deck) {
+        if (!$deck instanceof DeckOfCards) {
             $deck = new DeckOfCards();
+            $session->set('deck', $deck);
         }
 
         $card = $deck->draw();

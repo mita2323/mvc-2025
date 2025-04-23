@@ -185,6 +185,10 @@ class ApiController extends AbstractController
         $drawnCard = $deck->draw();
         $session->set('deck', $deck);
 
+        if ($drawnCard === null) {
+            return new JsonResponse(['error' => 'Failed to draw a card'], 500);
+        }
+
         $jsonData = [
             'cards' => [
                 [

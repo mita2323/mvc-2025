@@ -6,6 +6,7 @@ use App\Card\Card;
 
 class DeckOfCards
 {
+    /** @var Card[] */
     private array $cards = [];
 
     public function __construct()
@@ -25,6 +26,9 @@ class DeckOfCards
         shuffle($this->cards);
     }
 
+    /**
+     * @return Card|null
+     */
     public function draw(): ?Card
     {
         if (empty($this->cards)) {
@@ -33,16 +37,26 @@ class DeckOfCards
         return array_shift($this->cards);
     }
 
+    /**
+     * @param int $number
+     * @return Card[]
+     */
     public function drawMany(int $number): array
     {
         return array_splice($this->cards, 0, $number);
     }
 
+    /**
+     * @return Card[]
+     */
     public function getCards(): array
     {
         return $this->cards;
     }
 
+    /**
+     * @return Card[]
+    */
     public function sortedCards(): array
     {
         $sortedCards = $this->cards;
