@@ -533,12 +533,17 @@ input {
 }
 
 .start-button:hover {
-    background-color: #0056b3;
+    background-color: #013d7c;
 }
 
 .game .documentation {
     text-align: center;
     margin-top: 1.5rem;
+    font-size: 1.7rem;
+}
+
+.documentation a:hover {
+    color: #029f49;
 }
 
 .card21 {
@@ -617,7 +622,7 @@ input {
 }
 
 .stay:hover {
-    background-color: #007100;
+    background-color: #925a00;
     transform: translateY(-2px);
 }
 
@@ -646,7 +651,7 @@ input {
 .link a {
     color: #104b73;
     text-decoration: underline;
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 .link a:hover {
