@@ -6,6 +6,7 @@ use App\Game\CardGame;
 
 class Player
 {
+    /** @var CardGame[] */
     private array $hand = [];
     private string $name;
 
@@ -19,6 +20,9 @@ class Player
         $this->hand[] = $card;
     }
 
+    /**
+     * @return CardGame[]
+     */
     public function getHand(): array
     {
         return $this->hand;
