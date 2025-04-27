@@ -7,11 +7,13 @@
     <div class="card-game">
         <h1>Draw Card</h1>
 
-        {% if card is not null %}
+        {% if hand is not empty %}
             <div class="deck">
-                <div class="card {{ card.getSuit() }}">
-                    {{ card|default('')|default('Invalid card') }}
-                </div>
+                {% for card in hand %}
+                    <div class="card {{ card.getSuit() }}">
+                        {{ card|default('Invalid card') }}
+                    </div>
+                {% endfor %}
             </div>
             <p>Cards remaining: {{ remaining }}</p>
         {% else %}

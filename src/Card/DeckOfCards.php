@@ -2,11 +2,11 @@
 
 namespace App\Card;
 
-use App\Card\Card;
+use App\Card\CardGraphic;
 
 class DeckOfCards
 {
-    /** @var Card[] */
+    /** @var CardGraphic[] */
     private array $cards = [];
 
     public function __construct()
@@ -16,7 +16,7 @@ class DeckOfCards
 
         foreach ($suits as $suit) {
             foreach ($values as $value) {
-                $this->cards[] = new Card($suit, $value);
+                $this->cards[] = new CardGraphic($suit, $value);
             }
         }
     }
@@ -27,9 +27,9 @@ class DeckOfCards
     }
 
     /**
-     * @return Card|null
+     * @return CardGraphic|null
      */
-    public function draw(): ?Card
+    public function draw(): ?CardGraphic
     {
         if (empty($this->cards)) {
             return null;
@@ -39,7 +39,7 @@ class DeckOfCards
 
     /**
      * @param int $number
-     * @return Card[]
+     * @return CardGraphic[]
      */
     public function drawMany(int $number): array
     {
@@ -47,7 +47,7 @@ class DeckOfCards
     }
 
     /**
-     * @return Card[]
+     * @return CardGraphic[]
      */
     public function getCards(): array
     {
@@ -55,7 +55,7 @@ class DeckOfCards
     }
 
     /**
-     * @return Card[]
+     * @return CardGraphic[]
     */
     public function sortedCards(): array
     {

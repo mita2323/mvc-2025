@@ -9,11 +9,11 @@
 
         {% if message is defined %}
             <p>{{ message }}</p>
-        {% elseif cards is not empty %}
+        {% elseif hand is not empty %}
             <div class="deck">
-                {% for card in cards %}
+                {% for card in hand %}
                     <div class="card {{ card.getSuit() }}">
-                        {{ card|default('')|default('Invalid card') }}
+                        {{ card|default('Invalid card') }}
                     </div>
                 {% endfor %}
             </div>

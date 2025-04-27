@@ -22,11 +22,13 @@
 
         <h1>Klass Struktur</h1>
         <p>
-            Applikationen består av fyra klasser: Card, CardGameController, ApiController och DeckOfCards. Klassen Card representerar ett enskilt kort med en färg och 
-            ett värde. DeckOfCards fungerar som en samling av Card-objekt, den skapr och lagrar en kortlek med 52 kort och har metoder för att blanda, dra kort, och sorta kortleken. DeckOfCards
-            använder Card för att skapa och lagra kort. CardGameController agerar som en kontrollklass som styr användarens interaktion med kortleken genom
-            olika routes. Den anropar metoder från DeckOfCards för att till exempel blanda eller dra kort, och hanterar även sessionen för att spara spelets
-            tillstånd mellan olika requests. ApiController ansvarar för API-routes som returnerar information om kortleken i JSON-format, till exempel
+            Applikationen består av fyra klasser: Card, CardGraphic, CardHand, CardGameController, ApiController och DeckOfCards. Klassen
+            Card representerar ett enskilt kort med en färg och ett värde. CardGraphic ärver från Card och lägger till grafisk representation
+            med Unicode-symboler. CardHand representerar en korthand och lagrar flera CardGraphic-objekt. DeckOfCards fungerar som en samling
+            av CardGraphic-objekt, den skapar och lagrar en kortlek med 52 kort och har metoder för att blanda, dra kort, och sorta kortleken.
+            CardGameController agerar som en kontrollklass som styr användarens interaktion med kortleken genom olika routes. Den anropar 
+            metoder från DeckOfCards för att till exempel blanda eller dra kort, och hanterar även sessionen för att spara spelets tillstånd 
+            mellan olika requests. ApiController ansvarar för API-routes som returnerar information om kortleken i JSON-format, till exempel
             att visa, blanda, eller dra ett eller flera kort via API-anrop.
         </p>
 

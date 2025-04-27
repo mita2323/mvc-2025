@@ -1,6 +1,6 @@
 #MVC-kursen
 
-![MVC bild](report/public/img/mvcdiagram.svg)
+![MVC bild](public/img/mvcdiagram.svg)
 
 #För att klona repot:
 

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Card\DeckOfCards;
+use App\Card\CardHand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,23 +82,19 @@ class CardGameController extends AbstractController
         }
 
         $card = $deck->draw();
-        if (!$card) {
+        $hand = new CardHand();
+        if ($card) {
+            $hand->addCard($card);
+        } else {
             $this->addFlash('warning', 'No cards left!');
         }
         $remaining = $deck->count();
         $session->set('deck', $deck);
 
-        if ($card === null) {
-            return $this->render('card/draw.html.twig', [
-                'card' => null,
-                'remaining' => 0,
-                'message' => 'No cards left in the deck.'
-            ]);
-        }
-
         return $this->render('card/draw.html.twig', [
-            'card' => $card,
+            'hand' => $hand->getCards(),
             'remaining' => $remaining,
+            'message' => $card ? null : 'No cards left in the deck.'
         ]);
     }
 
@@ -124,7 +121,7 @@ class CardGameController extends AbstractController
     {
         if ($number < 1) {
             return $this->render('card/drawNumber.html.twig', [
-                'cards' => [],
+                'hand' => [],
                 'remaining' => 0,
                 'message' => 'Invalid number of cards requested.'
             ]);
@@ -140,20 +137,23 @@ class CardGameController extends AbstractController
         $remainingBeforeDraw = $deck->count();
         if ($number > $remainingBeforeDraw) {
             return $this->render('card/drawNumber.html.twig', [
-                'cards' => [],
+                'hand' => [],
                 'remaining' => $remainingBeforeDraw,
                 'message' => 'Not enough cards in the deck to draw ' . $number . '.'
             ]);
         }
 
         $cards = $deck->drawMany($number);
+        $hand = new CardHand();
+        foreach ($cards as $card) {
+            $hand->addCard($card);
+        }
         $remaining = $deck->count();
         $session->set('deck', $deck);
 
         return $this->render('card/drawNumber.html.twig', [
-            'cards' => $cards,
+            'hand' => $hand->getCards(),
             'remaining' => $remaining,
         ]);
     }
-
 }
