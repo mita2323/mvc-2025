@@ -25,28 +25,12 @@ class CardGame
 
     public function __toString(): string
     {
-        return "{$this->value}{$this->getSuitUnicode()}";
+        return "{$this->value} of {$this->suit}";
     }
 
     public function getAsString(): string
     {
         return $this->__toString();
-    }
-
-    protected function getSuitUnicode(): string
-    {
-        switch ($this->suit) {
-            case 'hearts':
-                return '♥';
-            case 'diamonds':
-                return '♦';
-            case 'clubs':
-                return '♣';
-            case 'spades':
-                return '♠';
-            default:
-                return '';
-        }
     }
 
     public function getNumValue(): int

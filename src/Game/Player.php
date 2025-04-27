@@ -2,11 +2,11 @@
 
 namespace App\Game;
 
-use App\Game\CardGame;
+use App\Game\CardGameGraphic;
 
 class Player
 {
-    /** @var CardGame[] */
+    /** @var CardGameGraphic[] */
     private array $hand = [];
     private string $name;
 
@@ -15,13 +15,13 @@ class Player
         $this->name = $name;
     }
 
-    public function addCard(CardGame $card): void
+    public function addCard(CardGameGraphic $card): void
     {
         $this->hand[] = $card;
     }
 
     /**
-     * @return CardGame[]
+     * @return CardGameGraphic[]
      */
     public function getHand(): array
     {

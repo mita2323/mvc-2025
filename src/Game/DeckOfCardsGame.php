@@ -2,11 +2,11 @@
 
 namespace App\Game;
 
-use App\Game\CardGame;
+use App\Game\CardGameGraphic;
 
 class DeckOfCardsGame
 {
-    /** @var CardGame[] */
+    /** @var CardGameGraphic[] */
     private array $cards = [];
 
     public function __construct()
@@ -16,7 +16,7 @@ class DeckOfCardsGame
 
         foreach ($suits as $suit) {
             foreach ($values as $value) {
-                $this->cards[] = new CardGame($suit, $value);
+                $this->cards[] = new CardGameGraphic($suit, $value);
             }
         }
     }
@@ -26,7 +26,10 @@ class DeckOfCardsGame
         shuffle($this->cards);
     }
 
-    public function draw(): ?CardGame
+    /**
+     * @return CardGameGraphic|null
+     */
+    public function draw(): ?CardGameGraphic
     {
         if (empty($this->cards)) {
             return null;
@@ -35,7 +38,7 @@ class DeckOfCardsGame
     }
 
     /**
-     * @return CardGame[]
+     * @return CardGameGraphic[]
      */
     public function drawMany(int $number): array
     {
@@ -43,7 +46,7 @@ class DeckOfCardsGame
     }
 
     /**
-     * @return CardGame[]
+     * @return CardGameGraphic[]
      */
     public function getCards(): array
     {
@@ -51,7 +54,7 @@ class DeckOfCardsGame
     }
 
     /**
-     * @return CardGame[]
+     * @return CardGameGraphic[]
      */
     public function sortedCards(): array
     {
@@ -76,3 +79,4 @@ class DeckOfCardsGame
         return count($this->cards);
     }
 }
+
