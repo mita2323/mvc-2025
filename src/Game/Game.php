@@ -51,9 +51,10 @@ class Game
 
         while ($this->dealer->getScore() < 17) {
             $card = $this->deck->draw();
-            if ($card) {
-                $this->dealer->addCard($card);
+            if ($card === null) {
+                break;
             }
+            $this->dealer->addCard($card);
         }
 
         $playerScore = $this->player->getScore();

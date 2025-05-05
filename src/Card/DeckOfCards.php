@@ -63,13 +63,13 @@ class DeckOfCards
         $suitOrder = ['hearts', 'diamonds', 'clubs', 'spades'];
         $valueOrder = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
-        usort($sortedCards, function ($a, $b) use ($suitOrder, $valueOrder) {
-            $suitCompare = array_search($a->getSuit(), $suitOrder) <=> array_search($b->getSuit(), $suitOrder);
+        usort($sortedCards, function ($card1, $card2) use ($suitOrder, $valueOrder) {
+            $suitCompare = array_search($card1->getSuit(), $suitOrder) <=> array_search($card2->getSuit(), $suitOrder);
             if ($suitCompare !== 0) {
                 return $suitCompare;
             }
 
-            return array_search($a->getValue(), $valueOrder) <=> array_search($b->getValue(), $valueOrder);
+            return array_search($card1->getValue(), $valueOrder) <=> array_search($card2->getValue(), $valueOrder);
         });
 
         return $sortedCards;

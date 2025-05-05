@@ -83,11 +83,10 @@ class CardGameController extends AbstractController
 
         $card = $deck->draw();
         $hand = new CardHand();
-        if ($card) {
-            $hand->addCard($card);
-        } else {
+        if (!$card) {
             $this->addFlash('warning', 'No cards left!');
         }
+
         $remaining = $deck->count();
         $session->set('deck', $deck);
 
@@ -105,7 +104,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/card/deck/draw/number", name: "deck_draw_init", methods: ['POST'])]
-    public function drawInit(Request $request, SessionInterface $session): Response
+    public function drawInit(Request $request): Response
     {
         $numCards = (int) $request->request->get('num_cards');
 

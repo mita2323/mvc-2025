@@ -14,7 +14,7 @@ class CardGameGraphic extends CardGame
         return $this->__toString();
     }
 
-    protected function getSuitUnicode(): string
+    public function getSuitUnicode(): string
     {
         switch ($this->suit) {
             case 'hearts':
