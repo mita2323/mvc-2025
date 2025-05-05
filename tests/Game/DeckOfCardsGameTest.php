@@ -10,12 +10,18 @@ use App\Game\DeckOfCardsGame;
  */
 class DeckOfCardsGameTest extends TestCase
 {
+    /**
+     * Test that the deck initially has 52 cards.
+     */
     public function testDeckHas52CardsInitially(): void
     {
         $deck = new DeckOfCardsGame();
         $this->assertCount(52, $deck->getCards());
     }
 
+    /**
+     * Test that shuffling the deck changes the order of the cards.
+     */
     public function testShuffleDeck(): void
     {
         $deck = new DeckOfCardsGame();
@@ -26,6 +32,9 @@ class DeckOfCardsGameTest extends TestCase
         $this->assertNotEquals($original, $shuffled);
     }
 
+    /**
+     * Test that drawing one card reduces the deck by one.
+     */
     public function testDrawOneCard(): void
     {
         $deck = new DeckOfCardsGame();
@@ -34,6 +43,9 @@ class DeckOfCardsGameTest extends TestCase
         $this->assertCount(51, $deck->getCards());
     }
 
+    /**
+     * Test that drawing multiple cards reduces the deck by the correct number.
+     */
     public function testDrawManyCards(): void
     {
         $deck = new DeckOfCardsGame();
@@ -42,6 +54,9 @@ class DeckOfCardsGameTest extends TestCase
         $this->assertCount(47, $deck->getCards());
     }
 
+    /**
+     * Test that the deck returns sorted cards in the correct order.
+     */
     public function testSortedCards(): void
     {
         $deck = new DeckOfCardsGame();
@@ -50,6 +65,9 @@ class DeckOfCardsGameTest extends TestCase
         $this->assertEquals('2', $sorted[0]->getValue());
     }
 
+    /**
+     * Test that drawing from an empty deck returns null.
+     */
     public function testDrawWhenDeckIsEmpty(): void
     {
         $deck = new DeckOfCardsGame();
@@ -59,6 +77,9 @@ class DeckOfCardsGameTest extends TestCase
         $this->assertNull($deck->draw());
     }
 
+    /**
+     * Test that the deck count reflects the number of remaining cards.
+     */
     public function testCount(): void
     {
         $deck = new DeckOfCardsGame();

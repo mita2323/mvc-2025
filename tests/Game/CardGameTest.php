@@ -10,6 +10,9 @@ use App\Game\CardGame;
  */
 class CardGameTest extends TestCase
 {
+    /**
+     * Test create card with suit and value.
+     */
     public function testCreateCard(): void
     {
         $card = new CardGame('hearts', 'Q');
@@ -18,12 +21,18 @@ class CardGameTest extends TestCase
         $this->assertEquals('Q', $card->getValue());
     }
 
+    /**
+     * Test card string representation.
+     */
     public function testToString(): void
     {
         $card = new CardGame('diamonds', '10');
         $this->assertEquals('10 of diamonds', $card->getAsString());
     }
 
+    /**
+     * Test the numeric value of cards.
+     */
     public function testNumericValue(): void
     {
         $card = new CardGame('spades', 'K');
@@ -36,6 +45,9 @@ class CardGameTest extends TestCase
         $this->assertEquals(7, $card->getNumValue());
     }
 
+    /**
+     * Test getting the full string representation of the card.
+     */
     public function testGetAsString(): void
     {
         $card = new CardGame('hearts', 'K');

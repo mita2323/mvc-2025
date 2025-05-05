@@ -10,6 +10,9 @@ use App\Game\CardGameGraphic;
  */
 class CardGameGraphicTest extends TestCase
 {
+    /**
+     * Test create card with suit and value.
+     */
     public function testCreateCard(): void
     {
         $card = new CardGameGraphic('hearts', 'A');
@@ -18,6 +21,9 @@ class CardGameGraphicTest extends TestCase
         $this->assertEquals('A', $card->getValue());
     }
 
+    /**
+     * Test card string representation.
+     */
     public function testGraphicCardToString(): void
     {
         $card = new CardGameGraphic('clubs', 'J');
@@ -27,6 +33,9 @@ class CardGameGraphicTest extends TestCase
         $this->assertEquals('A♥', $card->getAsString());
     }
 
+    /**
+     * Test string representation for all suits (hearts, diamonds, clubs, spades).
+     */
     public function testToStringAllSuits(): void
     {
         $cards = [
@@ -42,12 +51,18 @@ class CardGameGraphicTest extends TestCase
         }
     }
 
+    /**
+     * Test getting the string representation of a card.
+     */
     public function testGetAsString(): void
     {
         $card = new CardGameGraphic('spades', 'A');
         $this->assertEquals('A♠', $card->getAsString());
     }
 
+    /**
+     * Test the unicode representation of the card's suit.
+     */
     public function testGetSuitUnicode(): void
     {
         $cards = [

@@ -13,6 +13,9 @@ use App\Game\CardGameGraphic;
  */
 class GameTest extends TestCase
 {
+    /**
+     * Test that the game status is ongoing after starting the game.
+     */
     public function testGameStarts(): void
     {
         $game = new Game();
@@ -20,6 +23,9 @@ class GameTest extends TestCase
         $this->assertEquals('ongoing', $game->getStatus());
     }
 
+    /**
+     * Test that the player's hand increases in size when the player hits.
+     */
     public function testPlayerHit(): void
     {
         $game = new Game();
@@ -29,6 +35,9 @@ class GameTest extends TestCase
         $this->assertGreaterThan($initial, count($game->getPlayer()->getHand()));
     }
 
+    /**
+     * Test that the game status changes to a result (win/loss/bust) after the player stands.
+     */
     public function testGameStand(): void
     {
         $game = new Game();
@@ -41,18 +50,27 @@ class GameTest extends TestCase
         ]);
     }
 
+    /**
+     * Test that the dealer is returned as a Player instance.
+     */
     public function testGetDealerReturnsDealerInstance(): void
     {
         $game = new Game();
         $this->assertInstanceOf(Player::class, $game->getDealer());
     }
 
+    /**
+     * Test that the deck is returned as a DeckOfCardsGame instance.
+     */
     public function testGetDeckReturnsDeckInstance(): void
     {
         $game = new Game();
         $this->assertInstanceOf(DeckOfCardsGame::class, $game->getDeck());
     }
 
+    /**
+     * Test that the player cannot hit when the game is not ongoing.
+     */
     public function testHitWhenGameNotOngoing(): void
     {
         $game = new Game();
@@ -61,6 +79,9 @@ class GameTest extends TestCase
         $this->assertEquals($initial, count($game->getPlayer()->getHand()));
     }
 
+    /**
+     * Test the the game does not proceed when the player tries to stand before the game starts.
+     */
     public function testStandWhenGameNotOngoing(): void
     {
         $game = new Game();
@@ -68,6 +89,9 @@ class GameTest extends TestCase
         $this->assertEquals('not_started', $game->getStatus());
     }
 
+    /**
+     * Test that the game status changes to player_bust if the player exceeds 21 points.
+     */
     public function testPlayerBustOnHit(): void
     {
         $game = new Game();
@@ -80,6 +104,9 @@ class GameTest extends TestCase
         $this->assertEquals('player_bust', $game->getStatus());
     }
 
+    /**
+     * Test that dealer draws cards when below 17.
+     */
     public function testDealerDrawsCardsBelow17(): void
     {
         $game = new Game();
