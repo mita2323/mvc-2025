@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add New Book{% endblock %}
+
+{% block body %}
+<main>
+    <div class="create-book">
+        <h1>Add a New Book</h1>
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+
+        <form method="post" action="{{ path('book_create') }}">
+            <div class="input-book">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-input" id="title" name="title" required>
+            </div>
+            <div class="input-book">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" class="form-input" id="isbn" name="isbn" required>
+            </div>
+            <div class="input-book">
+                <label for="author" class="form-label">Author</label>
+                <input type="text" class="form-input" id="author" name="author" required>
+            </div>
+            <div class="input-book">
+                <label for="image" class="form-label">Image (optional)</label>
+                <input type="file" class="form-input" id="image" name="image" accept="image/*">
+            </div>
+            <button type="submit" class="save-button">Save book</button>
+        </form>
+
+        <p class="link">
+            <a href="{{ path('library') }}">Back to library</a>
+        </p>
+    </div>
+</main>
+{% endblock %}
