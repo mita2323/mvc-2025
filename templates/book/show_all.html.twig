@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All Books{% endblock %}
+
+{% block body %}
+<main>
+    <div class="show-all">
+        <h1>All Books</h1>
+
+        {% if books|length > 0 %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>ISBN</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.isbn }}</td>
+                            <td>{{ book.author }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No books found.</p>
+        {% endif %}
+
+        <p class="link">
+            <a href="{{ path('library') }}">Back to library</a>
+        </p>
+    </div>
+</main>
+{% endblock %}

@@ -771,9 +771,81 @@ input {
     margin-bottom: 5px;
     font-weight: bold;
 }
+
 .form-input {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.show-all h1 {
+    color: #0056b3;
+}
+
+.show-all p {
+    font-size: 1.3rem;
+    margin: 0.8rem;
+}
+
+.show-all {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.show-all .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+.show-all .table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 1.5rem;
+}
+
+.show-all .table th {
+    background-color: #a4d2ff;
+    font-weight: bold;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.show-all .table a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.show-all .table a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.show-all .link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.show-all .link a {
+    color: #007bff;
+    text-decoration: none;
+    padding: 8px 16px;
+    display: inline-block;
+}
+
+.show-all .link a:hover {
+    border-radius: 4px;
+    color: #002245;
+}
+
+.show-all .no-books {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 20px;
+}
+

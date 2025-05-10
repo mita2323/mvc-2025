@@ -49,10 +49,16 @@ final class BookController extends AbstractController
         return $this->render('book/create.html.twig');
     }
 
+    
     #[Route('/library/show', name: 'book_show_all')]
     public function showAllBooks(
         BookRepository $bookRepository
     ): Response {
-        
+        $books = $bookRepository
+            ->findAll();
+
+        return $this->render('book/show_all.html.twig', [
+            'books' => $books,
+        ]);
     }
 }
