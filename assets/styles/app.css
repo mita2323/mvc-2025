@@ -709,3 +709,28 @@ input {
 .psuedo-code img {
     width: 25rem;
 }
+
+.library h1 {
+    color: #0056b3;
+}
+
+.library p {
+    font-size: 1.3rem;
+    margin: 0.8rem;
+}
+
+.library h2 {
+    font-size: 2.3rem;
+    margin-bottom: 1rem;
+}
+
+.library li {
+    margin: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.library .documentation {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1.7rem;
+}
