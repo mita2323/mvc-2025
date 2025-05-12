@@ -27,6 +27,7 @@
             </form>
 
             <p class="link">
+                <a href="{{ path('book_delete_by_id', {'id': book.id}) }}" class="delete-link" onclick="return confirm('Are you sure you want to delete this book?')">Delete Book</a> |
                 <a href="{{ path('book_show_all') }}">See all books</a> |
                 <a href="{{ path('library') }}">Back to library</a>
             </p>
