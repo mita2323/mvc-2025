@@ -29,7 +29,7 @@
                                         </button>
                                     </form>
                                 {% else %}
-                                    <a href="{{ path(route.link) }}">{{ route.route }}</a>
+                                    <a href="{{ path(route.link, route.link == 'library_book_by_isbn' ? {'isbn': '9780451530783'} : {}) }}">{{ route.route }}</a>
                                 {% endif %}
                             </td>
                             <td>{{ route.metod }}</td>

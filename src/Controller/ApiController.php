@@ -136,6 +136,13 @@ class ApiController extends AbstractController
                 'link' => 'library_books',
                 'metod' => 'GET',
                 'beskrivning' => 'Visar upp samtliga böcker i biblioteket.'
+            ],
+            [
+                'namn' => 'Bok efter ISBN',
+                'route' => '/api/library/book/{isbn}',
+                'link' => 'library_book_by_isbn',
+                'metod' => 'GET',
+                'beskrivning' => 'Visar en specifik bok baserat på dess ISBN-nummer.'
             ]
         ];
 
@@ -307,6 +314,28 @@ class ApiController extends AbstractController
                 'imageUrl' => $book->getImageUrl(),
             ];
         }, $books);
+
+        return new JsonResponse($jsonData);
+    }
+
+    #[Route('/api/library/book/{isbn}', name: 'library_book_by_isbn', methods: ['GET'])]
+    public function libraryBookByIsbn(string $isbn, ManagerRegistry $doctrine): JsonResponse
+    {
+        $book = $doctrine->getRepository(Book::class)->findOneBy(['isbn' => $isbn]);
+
+        if (!$book) {
+            return new JsonResponse([
+                'message' => 'No book found for ISBN ' . $isbn
+            ], 404);
+        }
+
+        $jsonData = [
+            'id' => $book->getId(),
+            'title' => $book->getTitle(),
+            'isbn' => $book->getIsbn(),
+            'author' => $book->getAuthor(),
+            'imageUrl' => $book->getImageUrl(),
+        ];
 
         return new JsonResponse($jsonData);
     }
