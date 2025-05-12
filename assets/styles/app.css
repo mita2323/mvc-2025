@@ -712,6 +712,11 @@ input {
 
 .library h1 {
     color: #0056b3;
+    font-size: 4rem;
+}
+
+.library a {
+    font-size: 1.8rem;
 }
 
 .library p {
@@ -777,6 +782,18 @@ input {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.image-url {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-book label {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .show-all h1 {
@@ -849,3 +866,17 @@ input {
     margin-top: 20px;
 }
 
+.show-one h1 {
+    color: #0056b3;
+}
+
+.show-one p {
+    font-size: 1.8rem;
+    margin: 0.8rem;
+}
+
+.show-one {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}

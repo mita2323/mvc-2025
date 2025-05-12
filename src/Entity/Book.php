@@ -27,7 +27,8 @@ class Book
     private ?string $author = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    #[Assert\Url(message: "The image must be a valid URL")]
+    private ?string $imageUrl = null;
 
     public function getId(): ?int
     {
@@ -67,14 +68,14 @@ class Book
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImageUrl(): ?string
     {
-        return $this->image;
+        return $this->imageUrl;
     }
 
-    public function setImage(?string $image): static
+    public function setImageUrl(?string $imageUrl): static
     {
-        $this->image = $image;
+        $this->imageUrl = $imageUrl;
         return $this;
     }
 }

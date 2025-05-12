@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book Details{% endblock %}
+
+{% block body %}
+<main>
+    <div class="show-one">
+        <h1>{{ book.title }}</h1>
+        <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+       
+       {% if book.imageUrl %}
+            <img src="{{ book.imageUrl }}" alt="{{ book.title }}" style="max-width: 200px;">
+        {% else %}
+            <p class="no-image">No image available.</p>
+        {% endif %} 
+
+        <p class="link">
+            <a href="{{ path('library') }}">Back to library</a>
+        </p>
+    </div>
+</main>
+{% endblock %}

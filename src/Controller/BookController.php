@@ -19,37 +19,37 @@ final class BookController extends AbstractController
             'controller_name' => 'BookController',
         ]);
     }
-
     #[Route('/library/create', name: 'book_create')]
-    public function createBook(
-        Request $request, ManagerRegistry $doctrine
-    ): Response {
+    public function createBook(Request $request, ManagerRegistry $doctrine): Response
+    {
         if ($request->isMethod('POST')) {
-            $book = new Book();
-            $book->setTitle($request->request->get('title'));
-            $book->setIsbn($request->request->get('isbn'));
-            $book->setAuthor($request->request->get('author'));
+            $entityManager = $doctrine->getManager();
+            
+            try {
+                $book = new Book();
+                $book->setTitle($request->request->get('title'));
+                $book->setIsbn($request->request->get('isbn'));
+                $book->setAuthor($request->request->get('author'));
+                $book->setImageUrl($request->request->get('image_url'));
 
-            if ($imageFile = $request->files->get('image')) {
-                $newFilename = uniqid('book_', true) . '.' . $imageFile->guessExtension();
-                $imageFile->move($this->getParameter('kernel.project_dir') . '/assets/images', $newFilename);
-                $book->setImage($newFilename);
-            }
-
-            if ($book->getTitle() && $book->getIsbn() && $book->getAuthor()) {
-                $entityManager = $doctrine->getManager();
+                if (empty($book->getTitle()) || empty($book->getIsbn()) || empty($book->getAuthor())) {
+                    throw new \Exception('Title, ISBN and author are required');
+                }
+    
                 $entityManager->persist($book);
                 $entityManager->flush();
+                
+                $this->addFlash('success', 'Book created successfully!');
                 return $this->redirectToRoute('book_show_all');
+    
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Error creating book: '.$e->getMessage());
             }
-
-            $this->addFlash('error', 'All fields except image are required.');
         }
-
+    
         return $this->render('book/create.html.twig');
     }
 
-    
     #[Route('/library/show', name: 'book_show_all')]
     public function showAllBooks(
         BookRepository $bookRepository
@@ -59,6 +59,19 @@ final class BookController extends AbstractController
 
         return $this->render('book/show_all.html.twig', [
             'books' => $books,
+        ]);
+    }
+
+    #[Route('/library/show/{id}', name: 'book_show')]
+    public function showBookById(
+        BookRepository $bookRepository,
+        int $id
+    ): Response {
+        $book = $bookRepository
+            ->find($id);
+
+        return $this->render('book/show_one.html.twig', [
+            'book' => $book,
         ]);
     }
 }

@@ -25,8 +25,9 @@
                 <input type="text" class="form-input" id="author" name="author" required>
             </div>
             <div class="input-book">
-                <label for="image" class="form-label">Image (optional)</label>
-                <input type="file" class="form-input" id="image" name="image" accept="image/*">
+                <label for="image_url">Image URL (optional):</label>
+                <input type="url" class="image-url" name="image_url" 
+                    placeholder="https://example.com/image.jpg">
             </div>
             <button type="submit" class="save-button">Save book</button>
         </form>
