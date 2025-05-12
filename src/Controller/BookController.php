@@ -74,4 +74,49 @@ final class BookController extends AbstractController
             'book' => $book,
         ]);
     }
+
+    #[Route('/library/update/{id}', name: 'book_update')]
+    public function updateBook(
+        Request $request,
+        ManagerRegistry $doctrine,
+        int $id
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Book::class)->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id '.$id
+            );
+        }
+
+        if ($request->isMethod('POST')) {
+            try {
+                $book->setTitle($request->request->get('title'));
+                $book->setIsbn($request->request->get('isbn'));
+                $book->setAuthor($request->request->get('author'));
+                $imageUrl = $request->request->get('image_url');
+
+                if ($imageUrl && !filter_var($imageUrl, FILTER_VALIDATE_URL)) {
+                    throw new \Exception('Invalid image URL.');
+                }
+                $book->setImageUrl($imageUrl);
+
+                if (empty($book->getTitle()) || empty($book->getIsbn()) || empty($book->getAuthor())) {
+                    throw new \Exception('Title, ISBN, and author are required.');
+                }
+
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Book updated successfully!');
+                return $this->redirectToRoute('book_show_all');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Error updating book: ' . $e->getMessage());
+            }
+        }
+
+        return $this->render('book/update.html.twig', [
+            'book' => $book,
+        ]);
+    }
 }

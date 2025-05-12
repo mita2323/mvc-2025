@@ -16,6 +16,8 @@
         {% endif %} 
 
         <p class="link">
+            <a href="{{ path('book_update', {'id': book.id}) }}">Edit Book</a> |
+            <a href="{{ path('book_show_all') }}">Back to all books</a> |
             <a href="{{ path('library') }}">Back to library</a>
         </p>
     </div>

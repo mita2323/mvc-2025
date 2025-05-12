@@ -649,9 +649,11 @@ input {
 }
 
 .link a {
-    color: #104b73;
-    text-decoration: underline;
-    font-size: 1.5em;
+    color: #007bff;
+    text-decoration: none;
+    padding: 8px 16px;
+    display: inline-block;
+    font-size: 1.8rem;
 }
 
 .link a:hover {
@@ -721,7 +723,8 @@ input {
 
 .library p {
     font-size: 1.3rem;
-    margin: 0.8rem;
+    margin: 2rem;
+    text-align: center;
 }
 
 .library h2 {
@@ -872,11 +875,38 @@ input {
 
 .show-one p {
     font-size: 1.8rem;
-    margin: 0.8rem;
+    margin: 1.5rem;
+    text-align: center;
+}
+
+.show-one img {
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-width: 200px;
 }
 
 .show-one {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+}
+
+.show-one .no-image {
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+.update-book h1 {
+    color: #0056b3;
+    font-size: 3rem;
+}
+
+.update-book a {
+    color: #007bff;
+    text-decoration: none;
+    padding: 8px 16px;
+    display: inline-block;
+    font-size: 1.8rem;
 }

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Book{% endblock %}
+
+{% block body %}
+<main>
+    <div class="update-book">
+        <h1>Update Book</h1>
+            <form method="post" action="{{ path('book_update', {'id': book.id}) }}">
+                <div class="input-book">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-input" id="title" name="title" value="{{ book.title }}" required>
+                </div>
+                <div class="input-book">
+                    <label for="isbn" class="form-label">ISBN</label>
+                    <input type="text" class="form-input" id="isbn" name="isbn" value="{{ book.isbn }}" required>
+                </div>
+                <div class="input-book">
+                    <label for="author" class="form-label">Author</label>
+                    <input type="text" class="form-input" id="author" name="author" value="{{ book.author }}" required>
+                </div>
+                <div class="input-book">
+                    <label for="image_url" class="form-label">Image URL (optional)</label>
+                    <input type="url" class="form-input" id="image_url" name="image_url" value="{{ book.imageUrl|default('') }}" placeholder="https://example.com/image.jpg">
+                </div>
+                <button type="submit" class="save-button">Save Changes</button>
+            </form>
+
+            <p class="link">
+                <a href="{{ path('book_show_all') }}">See all books</a> |
+                <a href="{{ path('library') }}">Back to library</a>
+            </p>
+    </div>
+</main>
+{% endblock %}
