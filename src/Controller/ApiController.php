@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Card\DeckOfCards;
 use App\Game\Game;
+use App\Entity\Book;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -128,6 +130,13 @@ class ApiController extends AbstractController
                 'metod' => 'GET',
                 'beskrivning' => 'Visar upp den aktuella ställningen för spelet i en JSON struktur.'
             ],
+            [
+                'namn' => 'Böcker i biblioteket',
+                'route' => '/api/library/books',
+                'link' => 'library_books',
+                'metod' => 'GET',
+                'beskrivning' => 'Visar upp samtliga böcker i biblioteket.'
+            ]
         ];
 
         return $this->render('api.html.twig', [
@@ -276,5 +285,29 @@ class ApiController extends AbstractController
                 ],
             ]
         ]);
+    }
+
+    #[Route('/api/library/books', name: 'library_books', methods: ['GET'])]
+    public function libraryBooks(ManagerRegistry $doctrine): JsonResponse
+    {
+        $books = $doctrine->getRepository(Book::class)->findAll();
+
+        if (empty($books)) {
+            return new JsonResponse([
+                'message' => 'No books in the library.'
+            ], 404);
+        }
+
+        $jsonData = array_map(function ($book) {
+            return [
+                'id' => $book->getId(),
+                'title' => $book->getTitle(),
+                'isbn' => $book->getIsbn(),
+                'author' => $book->getAuthor(),
+                'imageUrl' => $book->getImageUrl(),
+            ];
+        }, $books);
+
+        return new JsonResponse($jsonData);
     }
 }
