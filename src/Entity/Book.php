@@ -12,7 +12,8 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    // @phpstan-ignore property.onlyRead
+    private int $id;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Title cannot be empty")]

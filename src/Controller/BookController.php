@@ -26,13 +26,19 @@ final class BookController extends AbstractController
             $entityManager = $doctrine->getManager();
 
             $book = new Book();
-            $book->setTitle($request->request->get('title'));
-            $book->setIsbn($request->request->get('isbn'));
-            $book->setAuthor($request->request->get('author'));
-            $book->setImageUrl($request->request->get('image_url'));
 
-            if (empty($book->getTitle()) || empty($book->getIsbn()) || empty($book->getAuthor())) {
-                throw new \Exception('Title, ISBN and author are required');
+            $title = (string) $request->request->get('title');
+            $isbn = (string) $request->request->get('isbn');
+            $author = (string) $request->request->get('author');
+            $imageUrl = $request->request->get('image_url', null);
+
+            $book->setTitle($title);
+            $book->setIsbn($isbn);
+            $book->setAuthor($author);
+            $book->setImageUrl($imageUrl ? (string) $imageUrl : null);
+
+            if (empty($title) || empty($isbn) || empty($author)) {
+                throw new \Exception('Title, ISBN, and author are required');
             }
 
             $entityManager->persist($book);
@@ -86,19 +92,23 @@ final class BookController extends AbstractController
         }
 
         if ($request->isMethod('POST')) {
-            $book->setTitle($request->request->get('title'));
-            $book->setIsbn($request->request->get('isbn'));
-            $book->setAuthor($request->request->get('author'));
-            $imageUrl = $request->request->get('image_url');
+            $title = (string) $request->request->get('title');
+            $isbn = (string) $request->request->get('isbn');
+            $author = (string) $request->request->get('author');
+            $imageUrl = $request->request->get('image_url', null);
 
             if ($imageUrl && !filter_var($imageUrl, FILTER_VALIDATE_URL)) {
                 throw new \Exception('Invalid image URL.');
             }
-            $book->setImageUrl($imageUrl);
 
-            if (empty($book->getTitle()) || empty($book->getIsbn()) || empty($book->getAuthor())) {
+            if (empty($title) || empty($isbn) || empty($author)) {
                 throw new \Exception('Title, ISBN, and author are required.');
             }
+
+            $book->setTitle($title);
+            $book->setIsbn($isbn);
+            $book->setAuthor($author);
+            $book->setImageUrl($imageUrl ? (string) $imageUrl : null);
 
             $entityManager->flush();
 
