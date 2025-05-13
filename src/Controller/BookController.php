@@ -24,7 +24,7 @@ final class BookController extends AbstractController
     {
         if ($request->isMethod('POST')) {
             $entityManager = $doctrine->getManager();
-            
+
             $book = new Book();
             $book->setTitle($request->request->get('title'));
             $book->setIsbn($request->request->get('isbn'));
@@ -34,14 +34,14 @@ final class BookController extends AbstractController
             if (empty($book->getTitle()) || empty($book->getIsbn()) || empty($book->getAuthor())) {
                 throw new \Exception('Title, ISBN and author are required');
             }
-    
+
             $entityManager->persist($book);
             $entityManager->flush();
 
             return $this->redirectToRoute('book_show_all');
-    
-            }
-    
+
+        }
+
         return $this->render('book/create.html.twig');
     }
 
@@ -103,7 +103,7 @@ final class BookController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('book_show_all');
-            }
+        }
 
         return $this->render('book/update.html.twig', [
             'book' => $book,

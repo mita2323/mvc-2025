@@ -168,8 +168,44 @@
             <section id="kmom05">
                 <h2>Kmom05</h2>
                 <p>
-                    Redovisningstext för kmom05
-                </p>
+                    Att arbeta igenom övningen med Symfony och Doctrine gick överlag bra och bra lärorikt. Övningen fokuserade på att 
+                    implementera ett bibliotekssystem med CRUD funktionalitet för en Book-entitet. Jag tycker att Doctrine förenklade
+                    hanteringen av databasen - genom att definiera Book-entiteten med attribut som 'id', 'title', 'isbn', 'author' och 
+                    'imageUrl' blev det enkelt att utföra operationer som att skapa, uppdatera och hämta böcker utan att behöva skriva 
+                    rå SQL. Det var också intressant att se hur Symfony och Doctrine integreras och hur man med hjälp av kommandon kan 
+                    generera kod och uppdatera databasschemat.
+                </p><br>
+                
+                <p>
+                    Min Symfony biblioteksapplikation använder sammanlänkade sidor för att användaren ska kunna intuitivt 
+                    navigera med tydliga formulär och navigeringslänkar. Jag har placerat navigeringslänkar strategiskt på 
+                    varje sida för att guida användaren genom applikationen. Från landningssidan kan användaren gå vidare 
+                    till att skapa en bok. Efter att informationen har fyllts in skickas man automatiskt vidare till listan 
+                    med alla böcker. Där kan man klicka på en boktitel för att se all bokinformation. På denna sidan finns 
+                    även olika valmöjligheter som att redigera bokinformationen, radera boken, gå tillbaka till alla böcker 
+                    eller återvända till landningssidan. Om man väljer att redigera en bok får man dessutom möjligheten att 
+                    radera boken. Jag ville att användarupplevelsen skulle kännas smidig, logisk och sammanhängande.
+                </p><br>
+
+                <p>
+                    Att jobba med ORM i CRUD tyckte jag gick överlag bra. ORM gör det möjligt att arbeta med databasen på ett 
+                    objektorienterat sätt, och genom att definiera entiteter i PHP och låta Doctrine hantera kommunikationen med 
+                    databasen, slipper man skriva repetitiv SQL-kod. Detta gör att koden blir mer lättläst och underhållbar. Jämfört 
+                    med att skriva SQL direkt i applikationen, där man hade behövt skriva och underhålla komplexa querys för varje 
+                    CRUD operation, vilket hade tagit mycket mer tid.
+                </p><br>
+
+                <p>
+                    Min uppfattning om ORM så här långt är att det är ett kraftfullt verktyg för att hantera databaser i objektorienterade 
+                    applikationer, särskilt i Symfony. Det underlättar databasoperationer genom att ersätta rå SQL med tydliga och 
+                    strukturerade metoder, vilket förbättrar kodens struktur, läsbarhet och underhållbarhet. Jämfört med andra metoder, som 
+                    rå SQL, erbjuder Doctrine en mer avancerad och flexibel lösning. För mindre projekt kan det kännas som överarbetat, men 
+                    för större applikationer väger fördelarna tyngre och gör det enklare att bygga en välstrukturerad system.
+                </p><br>
+
+                <p>
+                    Min TIL för detta kursmomentet är att jobba med ORM.
+                </p><br>
             </section>
 
             <section id="kmom06">

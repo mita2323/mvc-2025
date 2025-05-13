@@ -11,7 +11,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Product::class);
@@ -19,7 +18,7 @@ class ProductRepository extends ServiceEntityRepository
 
     /**
      * Find all products having a value above the specified one.
-     * 
+     *
      * @return Product[] Returns an array of Product objects
      */
     public function findByMinimumValue($value): array
@@ -35,7 +34,7 @@ class ProductRepository extends ServiceEntityRepository
 
     /**
      * Find all products having a value above the specified one with SQL.
-     * 
+     *
      * @return [][] Returns an array of arrays (i.e. a raw data set)
      */
     public function findByMinimumValue2($value): array
