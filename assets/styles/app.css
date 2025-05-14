@@ -910,3 +910,27 @@ input {
     display: inline-block;
     font-size: 1.8rem;
 }
+
+.metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.metrics h1 {
+    color: #0056b3;
+    font-size: 3rem;
+}
+
+.metrics h2 {
+    font-size: 2.5rem;
+}
+
+.metrics h3 {
+    font-size: 1.7rem;
+    color: #2140c0;
+}
+
+.metrics p {
+    font-size: 1.5rem;
+}

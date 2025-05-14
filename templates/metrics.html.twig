@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="metrics">
+            <h1>Metrics</h1>
+
+            <h2>Introduktion</h2>
+            <h3>Codestyle</h3>
+            <p>
+                Codestyle handlar om reglerna för hur koden ska se ut - till exempel indentering, namngivning och struktur.
+                Har man bra kodstil blir koden lätt att läsa, förstå och underhålla.
+            </p>
+            <h3>Coverage</h3>
+            <p>
+                Coverage handlar om testtäckning och den visar hur stor del av koden som testas. En hög täckningsprocent betyder
+                att en stor procent av koden testas för fel och buggar, vilket gör koden mer pålitlig.
+            </p>
+            <h3>Complexity</h3>
+            <p>
+                Cyklomatisk komplexitet visar hur krånglig koden är, ju högre komplexitet koden har, desto svårare blir koden att 
+                förstå, testa och underhålla. En rekommenderad gräns är att hålla sig under 10.
+            </p>
+            <h3>Cohesion</h3>
+            <p>
+                Cohesion betyder att en del av koden fokuserar på en enskild uppgift. Hög cohesion innebär att alla delar samarbetar
+                mot samma syfte vilket gör koden  mer återanvändbar och lättare att förstå.
+            </p>
+            <h3>Coupling</h3>
+            <p>
+                Coupling handlar om hur starkt delar av koden är beroende av varandra. Om delar av koden har hög coupling kan det
+                bli svårt att ändra en del utan att påverka andra. Låg coupling möjliggör oberoende kod utveckling och testning.
+            </p>
+            <h3>CRAP</h3>
+            <p>
+                CRAP står för Change Risk Anti-Patterns och är ett måt på hur riskabel koden är att ändra, baserat på både 
+                complexity och coverage. Ett högt CRAP-värde betyder att koden är både svår att testa och riskabel att ändra.
+            </p>
+
+            <h2>Phpmetrics</h2>
+
+        </div>
+    </main>
+{% endblock %}
