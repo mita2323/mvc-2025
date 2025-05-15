@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1747317296">
-  <project timestamp="1747317296">
+<coverage generated="1747337238">
+  <project timestamp="1747337238">
     <file name="/home/mita23/dbwebb-kurser/mvc/me/report/src/Card/Card.php">
       <class name="App\Card\Card" namespace="global">
         <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="9" coveredelements="0"/>
@@ -879,8 +879,8 @@
       <line num="38" type="stmt" count="7"/>
       <line num="39" type="stmt" count="2"/>
       <line num="41" type="stmt" count="7"/>
-      <line num="42" type="stmt" count="4"/>
-      <line num="44" type="stmt" count="7"/>
+      <line num="42" type="stmt" count="5"/>
+      <line num="44" type="stmt" count="6"/>
       <metrics loc="47" ncloc="47" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="17" coveredelements="17"/>
     </file>
     <file name="/home/mita23/dbwebb-kurser/mvc/me/report/src/Game/CardGameGraphic.php">
@@ -1005,12 +1005,12 @@
       <line num="41" type="stmt" count="6"/>
       <line num="42" type="stmt" count="6"/>
       <line num="43" type="stmt" count="6"/>
-      <line num="44" type="stmt" count="3"/>
-      <line num="46" type="stmt" count="6"/>
+      <line num="44" type="stmt" count="4"/>
+      <line num="46" type="stmt" count="5"/>
       <line num="50" type="stmt" count="6"/>
-      <line num="51" type="stmt" count="3"/>
-      <line num="52" type="stmt" count="2"/>
-      <line num="54" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="4"/>
+      <line num="52" type="stmt" count="3"/>
+      <line num="54" type="stmt" count="2"/>
       <line num="58" type="stmt" count="6"/>
       <line num="61" type="method" name="clearHand" visibility="public" complexity="1" crap="1" count="6"/>
       <line num="63" type="stmt" count="6"/>
