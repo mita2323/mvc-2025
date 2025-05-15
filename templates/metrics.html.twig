@@ -40,6 +40,37 @@
             </p>
 
             <h2>Phpmetrics</h2>
+            <p>PhpMetrics ger en översikt över kvaliteten på PHP koden och efter att ha analyserad min kod med Phpmetrics har 
+            jag hittat tre förbättringsområden i koden, baserat på mätvärden från PhpMetrics:</p>
+            
+            <p style="text-indent: 1.5em;">
+                1. Visualiseringen över Maintainabiliy/Complexity visar att flera filer i mitt projekt har låg underhållbarhet kombinerat
+                med hög komplexitet. Dessa filer representeras av stora röda cirklar i bilden, och ju större cirkeln är desto högre är den 
+                cyklomatiska komplexiteten. 
+            </p>
+            <p style="text-indent: 1.5em;">
+                2. En annan område som har förbättringspotential är den genomsnittliga cyklomatiska komplexiteten per klass 
+                som ligger på 4.80. Detta tyder på att metoder och klasser innehåller många logiska grener som till exempel 
+                if-satser och loopar, vilket gör koden svårare att testa och ökar risken för buggar. Man kan förbättre detta 
+                genom att bryta ner komplexa metoder i mindre funktioner.
+            </p>
+            <p style="text-indent: 1.5em;">
+                3. En tredje förbättringsområde är violations, där fanns det 7 varningar och 2 errors. Även om de inte är kritiska
+                kan det leda till problem i framtiden.
+            </p>
+
+
+            <div class="phpmetrics">
+                <a href="{{ asset('images/phpmetrics.png') }}" target="_blank">
+                    <img src="{{ asset('images/phpmetrics.png') }}" alt="Phpmetrics">
+                </a>
+            </div>
+
+
+            <h2>Scrutinizer</h2>
+            <div class="scrutinizer">
+                
+            </div>
 
         </div>
     </main>

@@ -934,3 +934,15 @@ input {
 .metrics p {
     font-size: 1.5rem;
 }
+
+.phpmetrics img {
+    width: 950px;
+}
+
+.complexity img {
+    width: 300px;
+}
+
+.scrutinizer img {
+    height: 2rem;
+}
