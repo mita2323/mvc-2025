@@ -943,6 +943,16 @@ input {
     width: 300px;
 }
 
+.report-img img {
+    height: 33rem;
+}
+
 .scrutinizer img {
     height: 2rem;
+    margin: 0.5rem;
+}
+
+.issues-img img {
+    width: 60rem;
+    height: 25rem;
 }

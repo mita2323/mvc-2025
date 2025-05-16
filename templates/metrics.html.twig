@@ -69,8 +69,64 @@
 
             <h2>Scrutinizer</h2>
             <div class="scrutinizer">
-                
+                <a href="https://scrutinizer-ci.com/g/mita2323/mvc-2025/">
+                    <img
+                        src="https://scrutinizer-ci.com/g/mita2323/mvc-2025/badges/quality-score.png?b=main"
+                        alt="Scrutinizer Code Quality">
+                </a>
+                <a href="https://scrutinizer-ci.com/g/mita2323/mvc-2025/code-structure/main/code-coverage">
+                    <img
+                        src="https://scrutinizer-ci.com/g/mita2323/mvc-2025/badges/coverage.png?b=main"
+                        alt="Scrutinizer Code Coverage">
+                </a>
+                <a href="https://scrutinizer-ci.com/g/mita2323/mvc-2025/">
+                    <img
+                        src="https://scrutinizer-ci.com/g/mita2323/mvc-2025/badges/build.png?b=main"
+                        alt="Scrutinizer Build Status">
+                    <img
+                        src="https://scrutinizer-ci.com/g/mita2323/mvc-2025/badges/code-intelligence.svg?b=main"
+                        alt="Scrutinizer Code Intelligence">
+                </a>
             </div>
+
+            <p>
+                Min kod får betyget 9.96 från scrutinizer.
+            </p>
+            <div class="report-img">
+                <a href="{{ asset('images/score.png') }}" target="_blank">
+                    <img src="{{ asset('images/score.png') }}" alt="Score">
+                </a>
+            </div>
+
+            <p>
+                Min Coverage ligger bara på 14% men det beror på att bara Dice/ och Game/ är testad. Min Dice/ folder har 
+                bara 13.3% täckning och min Game/ folder som jag har jobbat med testning på har 98.41% täckning.
+            </p>
+            <div class="report-img">
+                <a href="{{ asset('images/coverage.png') }}" target="_blank">
+                    <img src="{{ asset('images/coverage.png') }}" alt="Coverage">
+                </a>
+            </div>
+
+            <p>Enligt min scrutinizer report har min kod två issues:</p>
+            <p style="text-indent: 1.5em;">
+                1. I Dicehand.php filen tilldelas variabeln $value ett värde med den används aldrig.
+            </p>
+            <p style="text-indent: 1.5em;">
+                2. I Kernel.php kräver MicroKernelTrait att egenskaper som $name och $instanceof är definierade i klassen.
+            </p>
+            <div class="issues-img">
+                <a href="{{ asset('images/issues.png') }}" target="_blank">
+                    <img src="{{ asset('images/issues.png') }}" alt="Issues">
+                </a>
+            </div>
+
+            <p>
+                Ett problem som jag stötte när jag gjorde min första scrutinizer inspection var att den hittade över 4000 issues 
+                på filer som jag inte har skrivit eller känner igen. Felet var att jag hade tools/ incheckad och för att lösa det 
+                behövde jag lägga till tools/ i min .gitignore fil och sedan gjorde en commit och push. Därefter visade Scrutinizer 
+                rätt filer.
+            </p>
 
         </div>
     </main>
