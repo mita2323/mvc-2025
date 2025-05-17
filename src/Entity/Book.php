@@ -69,7 +69,8 @@ class Book
 
     /**
      * Sets the book's title.
-     * @return string|null The title, or null.
+     * @param string $title The title to set.
+     * @return static Returns this instance.
      */
     public function setTitle(string $title): static
     {
@@ -88,7 +89,8 @@ class Book
 
     /**
      * Sets the book's ISBN.
-     * @return string|null The ISBN, or null.
+     * @param string $isbn The ISBN to set.
+     * @return static Returns this instance.
      */
     public function setIsbn(string $isbn): static
     {

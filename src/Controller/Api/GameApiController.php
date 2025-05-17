@@ -17,7 +17,7 @@ class GameApiController extends AbstractController
     /**
      * Retrieves the current game status from the session.
      * @param SessionInterface $session The session storage.
-     * @return JsonReponse The game status or error message.
+     * @return JsonResponse The game status or error message.
      */
     #[Route('', name: 'status', methods: ['GET'])]
     public function gameStatus(SessionInterface $session): JsonResponse
