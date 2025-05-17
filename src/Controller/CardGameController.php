@@ -103,6 +103,7 @@ class CardGameController extends AbstractController
      * @param SessionInterface $session The session for deck storage.
      * @return Response The rendered draw template.
      */
+    #[Route("/card/deck/draw", name: "deck_draw")]
     public function drawCard(SessionInterface $session): Response
     {
         $deck = $session->get('deck');
