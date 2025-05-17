@@ -33,7 +33,7 @@ class DiceHand
     {
         $values = [];
         foreach ($this->hand as $die) {
-            $value = $die->getValue();
+            $values[] = $die->getValue();
         }
         return $values;
     }

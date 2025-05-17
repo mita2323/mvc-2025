@@ -10,8 +10,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * CardGameController class.
+ */
 class CardGameController extends AbstractController
 {
+    /**
+     * Displays all session data.
+     * @param SessionInterface $session The session for accessing data. 
+     * @return Response The rendered session data template.
+     */
     #[Route('/session', name: 'session_show')]
     public function show(SessionInterface $session): Response
     {
@@ -22,6 +30,11 @@ class CardGameController extends AbstractController
         ]);
     }
 
+    /**
+     * Clears the session and redirects to session display.
+     * @param SessionInterface $session The session to clear.
+     * @return Response The redirect response.
+     */
     #[Route('/session/delete', name: 'session_delete')]
     public function delete(SessionInterface $session): Response
     {
@@ -31,12 +44,21 @@ class CardGameController extends AbstractController
         return $this->redirectToRoute('session_show');
     }
 
+    /**
+     * Displays the card game homepage.
+     * @return Response The rendered homepage template.
+     */
     #[Route("/card", name: "card")]
     public function home(): Response
     {
         return $this->render('card/card.html.twig');
     }
 
+    /**
+     * Displays a sorted deck of cards.
+     * @param SessionInterface $session The session for deck storage.
+     * @return Response The rendered deck template.
+     */
     #[Route("/card/deck", name: "card_deck")]
     public function cardDeck(SessionInterface $session): Response
     {
@@ -57,6 +79,11 @@ class CardGameController extends AbstractController
         ]);
     }
 
+    /**
+     * Shuffles the deck and displays it.
+     * @param SessionInterface $session The session for deck storage.
+     * @return Response The rendered shuffle template.
+     */
     #[Route("/card/deck/shuffle", name: "deck_shuffle")]
     public function shuffleDeck(SessionInterface $session): Response
     {
@@ -71,7 +98,11 @@ class CardGameController extends AbstractController
         ]);
     }
 
-    #[Route("/card/deck/draw", name: "deck_draw")]
+    /**
+     * Draws a single card from the deck.
+     * @param SessionInterface $session The session for deck storage.
+     * @return Response The rendered draw template.
+     */
     public function drawCard(SessionInterface $session): Response
     {
         $deck = $session->get('deck');
@@ -83,7 +114,9 @@ class CardGameController extends AbstractController
 
         $card = $deck->draw();
         $hand = new CardHand();
-        if (!$card) {
+        if ($card) {
+            $hand->addCard($card);
+        } else {
             $this->addFlash('warning', 'No cards left!');
         }
 
@@ -97,12 +130,21 @@ class CardGameController extends AbstractController
         ]);
     }
 
+    /**
+     * Renders a form for drawing multiple cards.
+     * @return Response The rendered form template.
+     */
     #[Route("/card/deck/draw/number", name: "deck_draw_form", methods: ['GET'])]
     public function drawForm(): Response
     {
         return $this->render('card/draw_form.html.twig');
     }
 
+    /**
+     * Processes the draw form and redirects to draw cards.
+     * @param Request $request The HTTP request containing form data.
+     * @return Response The redirect response.
+     */
     #[Route("/card/deck/draw/number", name: "deck_draw_init", methods: ['POST'])]
     public function drawInit(Request $request): Response
     {
@@ -115,6 +157,12 @@ class CardGameController extends AbstractController
         return $this->redirectToRoute('deck_draw_number', ['number' => $numCards]);
     }
 
+    /**
+     * Draws multiple cards form the deck.
+     * @param SessionInterface $session The session for deck storage.
+     * @param int $number The number of cards to draw.
+     * @return Response The rendered draw number template.
+     */
     #[Route("/card/deck/draw/{number<\d+>}", name: "deck_draw_number")]
     public function drawCards(SessionInterface $session, int $number): Response
     {

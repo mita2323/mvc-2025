@@ -18,13 +18,13 @@ class Dice
         return $this->value;
     }
 
-    public function getValue(): ?int
+    public function getValue(): int
     {
-        return $this->value;
+        return $this->value ?? 0;
     }
 
     public function getAsString(): string
     {
-        return "[{$this->value}]";
+        return $this->value === null ? "[null]" : "[$this->value]";
     }
 }

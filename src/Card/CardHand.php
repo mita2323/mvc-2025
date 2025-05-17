@@ -6,7 +6,7 @@ use App\Card\CardGraphic;
 
 class CardHand
 {
-    /** @var Card[] */
+    /** @var CardGraphic[] */
     private array $cards = [];
 
     public function addCard(CardGraphic $card): void
@@ -15,7 +15,7 @@ class CardHand
     }
 
     /**
-     * @return Card[]
+     * @return CardGraphic[]
      */
     public function getCards(): array
     {

@@ -10,8 +10,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * Manages book-related operations for the library application.
+ */
 final class BookController extends AbstractController
 {
+    /**
+     * Displays the library index page.
+     * @return Response The rendered index template.
+     */
     #[Route('/library', name: 'library')]
     public function index(): Response
     {
@@ -19,6 +26,14 @@ final class BookController extends AbstractController
             'controller_name' => 'BookController',
         ]);
     }
+
+    /**
+     * Creates a new book entry.
+     * @param Request $request The HTTP request containing form data.
+     * @param ManagerRegistry $doctrine The Doctrine registry for database operations.
+     * @return Response The form template or redirect response.
+     * @throws \Exception If required fields are empty.
+     */
     #[Route('/library/create', name: 'book_create')]
     public function createBook(Request $request, ManagerRegistry $doctrine): Response
     {
@@ -51,6 +66,11 @@ final class BookController extends AbstractController
         return $this->render('book/create.html.twig');
     }
 
+    /**
+     * Displays all books in the library.
+     * @param BookRepository $bookRepository The repository for the book queries.
+     * @return Response The rendered book list template.
+     */
     #[Route('/library/show', name: 'book_show_all')]
     public function showAllBooks(
         BookRepository $bookRepository
@@ -63,6 +83,12 @@ final class BookController extends AbstractController
         ]);
     }
 
+    /**
+     * Displays a single book by ID.
+     * @param BookRepository $bookRepository The repository for book queries.
+     * @param int $id The ID of the book to display.
+     * @return Response The rendered book details template.
+     */
     #[Route('/library/show/{id}', name: 'book_show')]
     public function showBookById(
         BookRepository $bookRepository,
@@ -76,6 +102,15 @@ final class BookController extends AbstractController
         ]);
     }
 
+    /**
+     * Updates an existing book.
+     * @param Request $request The HTTP request containing form data.
+     * @param ManagerRegistry $doctrine The Doctrine registry for database operations.
+     * @param int $id The ID of the book to update.
+     * @return Response  The form template or redirect response.
+     * @throws \Exception If required fields are empty or image URL is invalid.
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If book is not found.
+     */
     #[Route('/library/update/{id}', name: 'book_update')]
     public function updateBook(
         Request $request,
@@ -120,6 +155,13 @@ final class BookController extends AbstractController
         ]);
     }
 
+    /**
+     * Deletes a book by ID.
+     * @param ManagerRegistry $doctrine The Doctrine registry for database operations.
+     * @param int $id The ID of the book to delete.
+     * @return Response The redirect response.
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If book is not found.
+     */
     #[Route('/library/delete/{id}', name: 'book_delete_by_id', methods: ['GET'])]
     public function deleteBookById(ManagerRegistry $doctrine, int $id): Response
     {

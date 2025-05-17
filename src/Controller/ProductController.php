@@ -9,8 +9,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * Manages product related operations.
+ */
 final class ProductController extends AbstractController
 {
+    /**
+     * Displays the product index page.
+     * @return Response The rendered index template.
+     */
     #[Route('/product', name: 'app_product')]
     public function index(): Response
     {
@@ -19,6 +26,11 @@ final class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * Creates a new product with a random name and value.
+     * @param ManagerRegistry $doctrine The Doctrine registry for database operations.
+     * @returns Response The confirmation message.
+     */
     #[Route('/product/create', name: 'product_create')]
     public function createProduct(
         ManagerRegistry $doctrine
@@ -39,6 +51,11 @@ final class ProductController extends AbstractController
         return new Response('Saved new product with id '.$product->getId());
     }
 
+    /**
+     * Displays all products as JSON.
+     * @param ProductRepository $productRepository The repository for product queries.
+     * @return Response The JSON response with product data.
+     */
     #[Route('/product/show', name: 'product_show_all')]
     public function showAllProduct(
         ProductRepository $productRepository
@@ -54,6 +71,12 @@ final class ProductController extends AbstractController
         return $response;
     }
 
+    /**
+     * Displays a single product by ID as JSON.
+     * @param ProductRepository $productRepository The repository for product queries.
+     * @param int $id The ID of the product to display.
+     * @return Response The JSON response with product data.
+     */
     #[Route('/product/show/{id}', name: 'product_by_id')]
     public function showProductById(
         ProductRepository $productRepository,
@@ -65,6 +88,13 @@ final class ProductController extends AbstractController
         return $this->json($product);
     }
 
+    /**
+     * Deletes a product by ID.
+     * @param ManagerRegistry $doctrine The Doctrine registry for database operations.
+     * @param int $id The ID of the product to delete.
+     * @return Response The redirect response.
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If product is not found.
+     */
     #[Route('/product/delete/{id}', name: 'product_delete_by_id')]
     public function deleteProductById(
         ManagerRegistry $doctrine,
@@ -85,6 +115,14 @@ final class ProductController extends AbstractController
         return $this->redirectToRoute('product_show_all');
     }
 
+    /**
+     * Updates a product's value by ID.
+     * @param ManagerRegistry $doctrine The Doctrine registry for database operations.
+     * @param int $id The ID of the product to update.
+     * @param int $value The new value to set.
+     * @return Response The redirect response.
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If product is not found.
+     */
     #[Route('/product/update/{id}/{value}', name: 'product_update')]
     public function updateProduct(
         ManagerRegistry $doctrine,
@@ -106,6 +144,11 @@ final class ProductController extends AbstractController
         return $this->redirectToRoute('product_show_all');
     }
 
+    /**
+     * Displays all products in an HTML view.
+     * @param ProductRepository $productRepository The repository for product queries.
+     * @return Response The rendered product list template.
+     */
     #[Route('/product/view', name: 'product_view_all')]
     public function viewAllProduct(
         ProductRepository $productRepository
@@ -119,6 +162,12 @@ final class ProductController extends AbstractController
         return $this->render('product/view.html.twig', $data);
     }
 
+    /**
+     * Displays products with a minimum value in an HTML view.
+     * @param ProductRepository $productRepository The repository for product queries.
+     * @param int $value The minimum value for filtering products.
+     * @return Response The rendered product list template.
+     */
     #[Route('/product/view/{value}', name: 'product_view_minimum_value')]
     public function viewProductWithMinimumValue(
         ProductRepository $productRepository,
@@ -133,6 +182,12 @@ final class ProductController extends AbstractController
         return $this->render('product/view.html.twig', $data);
     }
 
+    /**
+     * Displays products with a minimum value as JSON.
+     * @param ProductRepository $productRepository The repository for product queries.
+     * @param int $value The minimum value for filtering products.
+     * @return Response The JSON response with product data.
+     */
     #[Route('/product/show/min/{value}', name: 'product_by_min_value')]
     public function showProductByMinimumValue(
         ProductRepository $productRepository,

@@ -4,11 +4,17 @@ namespace App\Card;
 
 use App\Card\CardGraphic;
 
+/**
+ * DeckofCards Class.
+ */
 class DeckOfCards
 {
     /** @var CardGraphic[] */
     private array $cards = [];
 
+    /**
+     * Initializes a new deck with 52 cards.
+     */
     public function __construct()
     {
         $suits = ['hearts', 'diamonds', 'clubs', 'spades'];
@@ -21,13 +27,17 @@ class DeckOfCards
         }
     }
 
+    /**
+     * Shuffles the deck randomly.
+     */
     public function shuffle(): void
     {
         shuffle($this->cards);
     }
 
     /**
-     * @return CardGraphic|null
+     * Draws  the top card from the deck.
+     * @return CardGraphic|null The drawn card, or null is the deck is empty.
      */
     public function draw(): ?CardGraphic
     {
@@ -38,8 +48,9 @@ class DeckOfCards
     }
 
     /**
-     * @param int $number
-     * @return CardGraphic[]
+     * Draws multiple cards from the deck.
+     * @param int $number The number of cards to draw.
+     * @return CardGraphic[] The drawn cards.
      */
     public function drawMany(int $number): array
     {
@@ -47,7 +58,8 @@ class DeckOfCards
     }
 
     /**
-     * @return CardGraphic[]
+     * Gets all the cards in the deck.
+     * @return CardGraphic[] The current cards in the deck.
      */
     public function getCards(): array
     {
@@ -55,7 +67,8 @@ class DeckOfCards
     }
 
     /**
-     * @return CardGraphic[]
+     * Returns a sorted copy of the deck by suit and value.
+     * @return CardGraphic[] The sorted cards.
     */
     public function sortedCards(): array
     {
@@ -75,6 +88,10 @@ class DeckOfCards
         return $sortedCards;
     }
 
+    /**
+     * Counts the number of cards in the deck.
+     * @return int The number of cards.
+     */
     public function count(): int
     {
         return count($this->cards);

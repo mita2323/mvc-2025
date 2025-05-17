@@ -23,13 +23,19 @@
                             <td>{{ route.namn }}</td>
                             <td>
                                 {% if route.metod == 'POST' %}
-                                    <form action="{{ path(route.link) }}" method="post">
+                                    <form action="{{ path(route.link) }}" method="POST">
                                         <button type="submit" class="api-button">
                                             {{ route.route }}
                                         </button>
                                     </form>
                                 {% else %}
-                                    <a href="{{ path(route.link, route.link == 'library_book_by_isbn' ? {'isbn': '9780451530783'} : {}) }}">{{ route.route }}</a>
+                                    {% if route.link == 'library_book_by_isbn' %}
+                                        <a href="{{ path('api_library_book_by_isbn', {'isbn': '9780451530783'}) }}">
+                                            {{ route.route }}
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path(route.link) }}">{{ route.route }}</a>
+                                    {% endif %}
                                 {% endif %}
                             </td>
                             <td>{{ route.metod }}</td>

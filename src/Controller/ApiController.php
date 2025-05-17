@@ -2,18 +2,18 @@
 
 namespace App\Controller;
 
-use App\Card\DeckOfCards;
-use App\Game\Game;
-use App\Entity\Book;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Handles the API overview page.
+ */
 class ApiController extends AbstractController
 {
+    /**
+     * Renders the API overview page with a list of application routes.
+     */
     #[Route('/api', name: 'api')]
     public function api(): Response
     {
@@ -84,7 +84,7 @@ class ApiController extends AbstractController
             [
                 'namn' => 'JSON kortlek sorterad',
                 'route' => '/api/deck',
-                'link' => 'api_deck',
+                'link' => 'api_deck_get',
                 'metod' => 'GET',
                 'beskrivning' => 'Returnerar en JSON struktur med hela kortleken sorterad efter färg och värde.'
             ],
@@ -126,14 +126,14 @@ class ApiController extends AbstractController
             [
                 'namn' => 'JSON Spelstatus',
                 'route' => '/api/game',
-                'link' => 'api_game',
+                'link' => 'api_game_status',
                 'metod' => 'GET',
                 'beskrivning' => 'Visar upp den aktuella ställningen för spelet i en JSON struktur.'
             ],
             [
                 'namn' => 'Böcker i biblioteket',
                 'route' => '/api/library/books',
-                'link' => 'library_books',
+                'link' => 'api_library_books',
                 'metod' => 'GET',
                 'beskrivning' => 'Visar upp samtliga böcker i biblioteket.'
             ],
@@ -146,197 +146,6 @@ class ApiController extends AbstractController
             ]
         ];
 
-        return $this->render('api.html.twig', [
-            'routes' => $routes,
-        ]);
-    }
-
-    #[Route('/api/deck', name: 'api_deck', methods: ['GET'])]
-    public function deck(): JsonResponse
-    {
-        $deck = new DeckOfCards();
-        $sortedCards = $deck->sortedCards();
-
-        $jsonData = array_map(function ($card) {
-            return [
-                'suit' => $card->getSuit(),
-                'value' => $card->getValue(),
-            ];
-        }, $sortedCards);
-
-        return new JsonResponse($jsonData);
-    }
-
-    #[Route('/api/deck/shuffle', name: 'api_deck_shuffle', methods: ['POST'])]
-    public function shuffle(SessionInterface $session): JsonResponse
-    {
-        $deck = new DeckOfCards();
-        $deck->shuffle();
-        $session->set('deck', $deck);
-
-        $shuffledCards = $deck->getCards();
-
-        $jsonData = array_map(function ($card) {
-            return [
-                'suit' => $card->getSuit(),
-                'value' => $card->getValue(),
-            ];
-        }, $shuffledCards);
-
-        return new JsonResponse($jsonData);
-    }
-
-    #[Route('/api/deck/draw', name: 'api_deck_draw', methods: ['POST'])]
-    public function draw(SessionInterface $session): JsonResponse
-    {
-        $deck = $session->get('deck', new DeckOfCards());
-        if (!$deck instanceof DeckOfCards) {
-            $deck = new DeckOfCards();
-        }
-
-        if ($deck->count() === 0) {
-            return new JsonResponse(['error' => 'No cards left in the deck'], 400);
-        }
-
-        $drawnCard = $deck->draw();
-        $session->set('deck', $deck);
-
-        if ($drawnCard === null) {
-            return new JsonResponse(['error' => 'Failed to draw a card'], 500);
-        }
-
-        $jsonData = [
-            'cards' => [
-                [
-                    'suit' => $drawnCard->getSuit(),
-                    'value' => $drawnCard->getValue(),
-                ]
-            ],
-            'remaining' => $deck->count()
-        ];
-
-        return new JsonResponse($jsonData);
-    }
-
-    #[Route('/api/deck/draw/number', name: 'api_deck_draw_number_form', methods: ['GET'])]
-    public function drawNumberForm(): Response
-    {
-        return $this->render('card/api_draw_number.html.twig');
-    }
-
-    #[Route('/api/deck/draw/{number<\d+>}', name: 'api_deck_draw_number', methods: ['POST'])]
-    public function drawNumber(int $number, SessionInterface $session): JsonResponse
-    {
-        $deck = $session->get('deck', new DeckOfCards());
-        if (!$deck instanceof DeckOfCards) {
-            $deck = new DeckOfCards();
-        }
-
-        $remainingCards = $deck->count();
-        if ($number <= 0) {
-            return new JsonResponse(['error' => 'Number of cards must be greater than zero'], 400);
-        }
-        if ($number > $remainingCards) {
-            return new JsonResponse(['error' => 'Not enough cards left in the deck'], 400);
-        }
-
-        $drawnCards = $deck->drawMany($number);
-        $session->set('deck', $deck);
-
-        $jsonData = [
-            'cards' => array_map(function ($card) {
-                return [
-                    'suit' => $card->getSuit(),
-                    'value' => $card->getValue(),
-                ];
-            }, $drawnCards),
-            'remaining' => $deck->count()
-        ];
-
-        return new JsonResponse($jsonData);
-    }
-
-    #[Route('/api/game', name: 'api_game', methods: ['GET'])]
-    public function apiGame(SessionInterface $session): JsonResponse
-    {
-        $game = $session->get('game');
-        if (!$game instanceof Game) {
-            return new JsonResponse([
-                'error' => 'No active game found.'
-            ], 404);
-        }
-
-        $player = $game->getPlayer();
-        $dealer = $game->getDealer();
-
-        $playerHand = array_map(function ($card) {
-            return $card->getAsString();
-        }, $player->getHand());
-
-        $dealerHand = array_map(function ($card) {
-            return $card->getAsString();
-        }, $dealer->getHand());
-
-        return new JsonResponse([
-            'game' => [
-                'status' => $game->getStatus(),
-                'player' => [
-                    'name' => $player->getName(),
-                    'hand' => $playerHand,
-                    'score' => $player->getScore(),
-                ],
-                'dealer' => [
-                    'name' => $dealer->getName(),
-                    'hand' => $dealerHand,
-                    'score' => $dealer->getScore(),
-                ],
-            ]
-        ]);
-    }
-
-    #[Route('/api/library/books', name: 'library_books', methods: ['GET'])]
-    public function libraryBooks(ManagerRegistry $doctrine): JsonResponse
-    {
-        $books = $doctrine->getRepository(Book::class)->findAll();
-
-        if (empty($books)) {
-            return new JsonResponse([
-                'message' => 'No books in the library.'
-            ], 404);
-        }
-
-        $jsonData = array_map(function ($book) {
-            return [
-                'id' => $book->getId(),
-                'title' => $book->getTitle(),
-                'isbn' => $book->getIsbn(),
-                'author' => $book->getAuthor(),
-                'imageUrl' => $book->getImageUrl(),
-            ];
-        }, $books);
-
-        return new JsonResponse($jsonData);
-    }
-
-    #[Route('/api/library/book/{isbn}', name: 'library_book_by_isbn', methods: ['GET'])]
-    public function libraryBookByIsbn(string $isbn, ManagerRegistry $doctrine): JsonResponse
-    {
-        $book = $doctrine->getRepository(Book::class)->findOneBy(['isbn' => $isbn]);
-
-        if (!$book) {
-            return new JsonResponse([
-                'message' => 'No book found for ISBN ' . $isbn
-            ], 404);
-        }
-
-        $jsonData = [
-            'id' => $book->getId(),
-            'title' => $book->getTitle(),
-            'isbn' => $book->getIsbn(),
-            'author' => $book->getAuthor(),
-            'imageUrl' => $book->getImageUrl(),
-        ];
-
-        return new JsonResponse($jsonData);
+        return $this->render('api.html.twig', ['routes' => $routes]);
     }
 }
