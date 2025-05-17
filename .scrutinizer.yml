@@ -22,7 +22,7 @@ build:
                     #- phpcs-run # Not used, missing config file
     tests:
         override:
-            -   command: "composer install && php bin/console doctrine:database:create --env=test && php bin/console doctrine:migrations:migrate --env=test && composer phpunit"
+            -   command: "composer install && php bin/console doctrine:database:create --env=test --no-interaction && php bin/console doctrine:migrations:migrate --env=test --no-interaction && composer phpunit"
                 # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
                 coverage:
                     file: "docs/coverage.clover"
