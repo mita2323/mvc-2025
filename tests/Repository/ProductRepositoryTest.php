@@ -19,11 +19,9 @@ class ProductRepositoryTest extends KernelTestCase
     protected function setUp(): void
     {
         self::bootKernel();
+        $this->repository = static::getContainer()->get(ProductRepository::class);
 
-        $container = static::getContainer();
-        $this->repository = $container->get(ProductRepository::class);
-
-        $entityManager = $container->get('doctrine')->getManager();
+        $entityManager = static::getContainer()->get('doctrine')->getManager();
         $entityManager->createQuery('DELETE FROM App\Entity\Product p')->execute();
 
         $product1 = (new Product())->setName('Cheap Product')->setValue(10);

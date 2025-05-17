@@ -20,9 +20,6 @@ class BookRepositoryTest extends KernelTestCase
     {
         self::bootKernel();
         $this->repository = static::getContainer()->get(BookRepository::class);
-
-        $entityManager = static::getContainer()->get('doctrine')->getManager();
-        $entityManager->createQuery('DELETE FROM App\Entity\Book b')->execute();
     }
 
     /**
