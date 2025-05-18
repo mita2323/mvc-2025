@@ -11,19 +11,26 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class BookRepositoryTest extends KernelTestCase
 {
+    /**
+     * @var BookRepository
+     */
     private BookRepository $repository;
 
     /**
      * Set up test environment before each test method.
+     * @return void
      */
     protected function setUp(): void
     {
         self::bootKernel();
-        $this->repository = static::getContainer()->get(BookRepository::class);
+        /** @var BookRepository $repository */
+        $repository = static::getContainer()->get(BookRepository::class);
+        $this->repository = $repository;
     }
 
     /**
      * Test the repository constructor.
+     * @return void
      */
     public function testConstructor()
     {

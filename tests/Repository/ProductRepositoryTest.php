@@ -4,6 +4,8 @@ namespace App\Tests\Repository;
 
 use App\Entity\Product;
 use App\Repository\ProductRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -11,17 +13,26 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class ProductRepositoryTest extends KernelTestCase
 {
+    /**
+     * @var ProductRepository
+     */
     private ProductRepository $repository;
 
     /**
      * Setup the test environment and load sample products.
+     * @return void
      */
     protected function setUp(): void
     {
         self::bootKernel();
-        $this->repository = static::getContainer()->get(ProductRepository::class);
+        /** @var ProductRepository $repository */
+        $repository = static::getContainer()->get(ProductRepository::class);
+        $this->repository = $repository;
 
-        $entityManager = static::getContainer()->get('doctrine')->getManager();
+        /** @var ManagerRegistry $doctrine */
+        $doctrine = static::getContainer()->get(ManagerRegistry::class);
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = $doctrine->getManager();
         $entityManager->createQuery('DELETE FROM App\Entity\Product p')->execute();
 
         $product1 = (new Product())->setName('Cheap Product')->setValue(10);
@@ -36,6 +47,7 @@ class ProductRepositoryTest extends KernelTestCase
 
     /**
      * Test DQL-based minimum value filter.
+     * @return void
      */
     public function testFindByMinimumValue(): void
     {
@@ -46,11 +58,11 @@ class ProductRepositoryTest extends KernelTestCase
 
     /**
      * Test native SQL-based minimum value filter.
+     * @return void
      */
     public function testFindByMinimumValue2(): void
     {
         $rawResults = $this->repository->findByMinimumValue2(50);
-        $this->assertIsArray($rawResults);
         $this->assertCount(2, $rawResults);
         $this->assertGreaterThanOrEqual(50, $rawResults[0]['value']);
     }

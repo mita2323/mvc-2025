@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Tests\Card;
 
 use App\Card\CardGraphic;

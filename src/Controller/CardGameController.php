@@ -17,7 +17,7 @@ class CardGameController extends AbstractController
 {
     /**
      * Displays all session data.
-     * @param SessionInterface $session The session for accessing data. 
+     * @param SessionInterface $session The session for accessing data.
      * @return Response The rendered session data template.
      */
     #[Route('/session', name: 'session_show')]

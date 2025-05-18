@@ -29,7 +29,6 @@ class DiceGraphicTest extends TestCase
         $dice = new DiceGraphic();
         $dice->roll();
         $value = $dice->getValue();
-        $this->assertIsInt($value);
         $this->assertGreaterThanOrEqual(1, $value);
         $this->assertLessThanOrEqual(6, $value);
 
@@ -47,7 +46,6 @@ class DiceGraphicTest extends TestCase
         $this->assertSame(0, $dice->getValue());
         $dice->roll();
         $value = $dice->getValue();
-        $this->assertIsInt($value);
         $this->assertGreaterThanOrEqual(1, $value);
         $this->assertLessThanOrEqual(6, $value);
     }

@@ -29,7 +29,6 @@ class DiceTest extends TestCase
     {
         $die = new Dice();
         $result = $die->roll();
-        $this->assertIsInt($result);
         $this->assertGreaterThanOrEqual(1, $result);
         $this->assertLessThanOrEqual(6, $result);
         $this->assertSame($result, $die->getValue());
@@ -37,6 +36,7 @@ class DiceTest extends TestCase
 
     /**
      * Test getValue before and after rolling.
+     * @return void
      */
     public function testGetValues(): void
     {

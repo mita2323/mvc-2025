@@ -146,16 +146,66 @@
 
             <h3>Resultat</h3>
             <p style="text-indent: 1.5em;">
-                1. 
+                1. Efter att ha åtgärdit mina scrutinizer issues, några av dem är från den första inspektionen och några som 
+                har uppstått efter att jag gjord kodförbättringar, har jag lyckats få ner antalet issues till 0.
             </p>
             <p style="text-indent: 1.5em;">
-                2. 
+                2. Innan jag implementerade mina förbättringar hade min maintainability/complexity många röda cirklar, och 
+                efter har jag mest gula och gröna cirklar. Jag fokuserade mest på att skriva DocBlock kommentar på de filer 
+                som var röda.
             </p>
+            <div class="report-img">
+                <a href="{{ asset('images/maintainability-after.png') }}" target="_blank">
+                    <img src="{{ asset('images/maintainability-after.png') }}" alt="Maintainabiliy after">
+                </a>
+            </div>
             <p style="text-indent: 1.5em;">
-                3. 
+                3. Genom att skriva fler enhetstester har min coverage gått från 14% till 27% och som ett resultat har mitt scrutinizer 
+                poäng ökat lite från 9.96 till 9.97.
             </p>
+            <div class="report-img">
+                <a href="{{ asset('images/score-after.png') }}" target="_blank">
+                    <img src="{{ asset('images/score-after.png') }}" alt="Score after">
+                </a>
+            </div>
             <p style="text-indent: 1.5em;">
-                4. 
+                4. Den genomsnittliga cyklomatiska komplexiteten per klass har jag lyckats ändra lite från 4.80 till 4.64.
+            </p>
+            <div class="complexity-img">
+                <a href="{{ asset('images/average-cyclomatic.png') }}" target="_blank">
+                    <img src="{{ asset('images/average-cyclomatic.png') }}" alt="Average Cyclomatic complexity">
+                </a>
+            </div>
+
+            <h2>Diskussion</h2>
+            <p>
+                Genom att använda verktyg som PhpMetrics och Scrutinizer kan man arbeta aktivt med kodkvalitet och 'clean code'.
+                Använder man dessa verktyg under tiden man arbetar med sin kod, kan man analysera mätvärden som komplexitet, testtäckning 
+                och underhållbarhet, och på så sätt identifiera problemområden i koden och åtgärda dem.
+            </p>
+            <p>
+                Fördelarna med att arbeta på detta sättet är att man får en bättre förståelse för sin kod. Den blir mer struktureraed och
+                lättare att underhålla, vilket gör det lättare att göra ändringar och minskar risken för buggar och fel. 
+            </p>
+            <p>
+                En neckdel är att det kan vara en tidskrävande process att skriva tester för att öka coverage samt att man 
+                spenderar mycket tid på att förbättra maintainability och complexity. 
+            </p>
+            <p>
+                Andra sätt att jobba  mot 'clean code' kan vara att etablera principer som SOLID, DRY, och KISS för att skriva 
+                tydlig och underhållbar kod. SOLID står för:
+            </p>
+                <p>'S - Single Responsibilty Principle' - handlar om att en klass ska bara göra en sak, vilket gör den enklare 
+                att förstå och testa.</p>
+                <p>'O - Open/closed Principle' - står för att man ska kunna lägga till ny funktion utan att ändra i befintlig kod.</p>
+                <p>'L - Liskov Substitution Principle' - man ska kunna byta ut en subklass mot sin basklass utan att programmet slutar 
+                funkar.</p> 
+                <p>'I - Interface Segregation Principle' - klasser ska inte tvingas implementera metoder de inte använder.</p> 
+                <p>'D - Dependency Inversion Principle' - koden ska vara beroende av abstraktioner inte av en annan specifik klass.</p>
+            <p>
+                DRY står för 'Don't Repeat Yourself' och innebär att man ska undvika att skriva om 
+                samma kod. KISS står för 'Keep It Simple, Stupid' och handlar om att kod lösningar ska vara enkla och att unvika 
+                onödigt komplexitet. 
             </p>
 
         </div>

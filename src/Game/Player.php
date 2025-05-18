@@ -9,11 +9,11 @@ use App\Game\CardGameGraphic;
  */
 class Player
 {
-    /** 
+    /**
      * @var CardGameGraphic[] The player's hand of cards.
      */
     private array $hand = [];
-    /** 
+    /**
      * @var string The player's name.
      */
     private string $name;

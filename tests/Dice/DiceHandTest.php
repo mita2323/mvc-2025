@@ -31,12 +31,15 @@ class DiceHandTest extends TestCase
         $die = new Dice();
         $hand->add($die);
         $hand->roll();
-        
-        $this->assertIsInt($die->getValue());
+
+        $value = $die->getValue();
+        $this->assertGreaterThanOrEqual(1, $value);
+        $this->assertLessThanOrEqual(6, $value);
     }
 
     /**
      * Test getting string representation of dice.
+     * @return void
      */
     public function testGetString()
     {
