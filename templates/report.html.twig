@@ -211,7 +211,31 @@
             <section id="kmom06">
                 <h2>Kmom06</h2>
                 <p>
-                    Redovisningstext för kmom06
+                    Jag uppfattade PhpMetrics som ett väldigt användbart och kraftfullt verktyg för att utvärdera och förbättra 
+                    kodkvalitet i PHP-projekt. Den ger en tydlig överblick över kodens kvalitet genom att visualisera information som 
+                    cyklomatisk komplexitet, testtäckning, och underhållbarhet, vilket hjälper att identifiera förbättringsområden.
+                </p><br>
+                <p>
+                    Att integrera mitt projekt med Scrutinizer var lite jobbigt i början då mitt första
+                    inspektion fick över 4000 issues och visade väldigt många filer som jag inte kände 
+                    igen och som jag inte hade skrivit. Jag lyckades hitta ett lösning på discord efter flera
+                    timmars sökning. Det visade sig att /tools foldern var incheckad i scrutinizer och därifrån
+                    kom all issues, genom att läga till '/tools' in mit .gitignore fil och sedan commita och pusha
+                    kunde jag fixa problemet. Mitt första intryck av Scrutinizer är positiv, det är en kraftful 
+                    verktyg för kodanalys och den ger feedback om kodkvalitet. Badges för byggstatus, kodtäckning, 
+                    och kodkvalitet är tydliga och ger en snabb överblick över projektets status. Efter första bygget
+                    fick jag 14% kodtäckning och 9.96 kodkvalitet.
+                </p><br>
+                <p>
+                    Min syn på kodkvalitet är att det är en viktig del av att skriva förståelig, testbar och underhållbar kod.
+                    Jag tycker att badges, till exempel för testtäckning eller kodstil, kan ge en viss indikation på 
+                    kodens kvalitet, men de visar inte hela bilden. Därför tycker jag att badges ska användas mer som ett stöd 
+                    istället för ett definitivt mått på hur bra koden är.
+                </p><br>
+                <p>
+                    Min TIL för detta kursmomentet är att använda verktygen PHPMetrics för att 
+                    att få en visualisering av kodens komplexitet och underhållbarhet, samt 
+                    Scrutinizer för att identifiera och åtgärda specifik kodproblem.
                 </p>
             </section>
 
