@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{ asset('img/glider.svg') }}">
+        
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body class="project">
+        <header class="project-header" style="background-image: url('/img/background2.jpg') !important;">
+            <span class="site-title"></span>
+        </header>
+
+        <nav class="project">
+            <ul>
+                <li><a href="{{ path('project') }}">BlackJack</a></li>
+                <li><a href="{{ path('about') }}">About</a></li>
+            </ul>
+        </nav>
+
+        {% block body %}{% endblock %}
+        {% block main %}{% endblock %}
+
+        <footer class="project-footer">
+            <p>&copy; {{ "now"|date("Y") }} Michelle Tammi. All rights reserved.</p>
+        </footer>
+    </body>
+</html>

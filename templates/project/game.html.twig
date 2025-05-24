@@ -1,0 +1,21 @@
+{% extends 'project-base.html.twig' %}
+
+{% block title %}Landningssida{% endblock %}
+
+{% block body %}
+
+<main>
+    <div class="blackjack">
+        <h1>BlackJack Game</h1>
+
+        <p style="text-align:center">Read the rules here:</p>
+        <p class="rules">
+            <a href="{{ path('rules') }}">Rules</a>
+        </p>
+
+        <div class="button-container">
+            <a href="{{ path('game_start') }}" class="start-button">Start The Game!</a>
+        </div>
+    </div>
+</main>
+{% endblock %}
