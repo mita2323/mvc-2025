@@ -633,13 +633,13 @@ input {
 }
 
 .reset {
-    background-color: #2ecc71;
-    color: #fff;
+    background-color: #e1b414;
+    color: black;
     font-size: 1.3rem;
 }
 
 .reset:hover {
-    background-color: #035c28;
+    background-color: #1d848d;
     transform: translateY(-2px);
 }
 
@@ -667,8 +667,8 @@ input {
 
 .card21 .text {
     text-align: center;
-    font-size: 1.4rem;
-    color: #00365d;
+    font-size: 2rem;
+    color: #86cdff;
 }
 
 .documentation-page h1 {
@@ -976,8 +976,20 @@ body.project::before {
     z-index: -1;
 }
 
+main.project {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+
 nav.project {
-    background-color: #000000;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
     width: 100%;
     padding: 10px 0;
     margin-bottom: 20px;
@@ -985,7 +997,7 @@ nav.project {
 
 footer.project-footer {
     width: 100%;
-    background-color: #000000;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
     color: white;
     text-align: center;
     padding: 15px 0;
@@ -1042,29 +1054,362 @@ footer.project-footer p {
     color: red;
 }
 
-.blackjack h1 {
-    font-size: 4rem;
-    color: black;
-    font-family: 'Zain', serif;
+.card21 {
+    background: #145214;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    border: 2px solid #d4af37;
+    margin: 0 auto;
 }
 
-.blackjack p {
+.card21 h1 {
+    font-size: 4em;
+    color: #d4af37;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card21 form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#player_fields {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.player-field {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.player-field label {
+    font-size: 1.6em;
+    color: #ffffff;
+    text-align: right;
+    width: auto;
+}
+
+.card21 button[type="submit"] {
+    background: #d4af37;
+    color: #1a1a1a;
+    font-size: 1.6em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 20px;
+}
+
+.card21 button[type="submit"]:hover {
+    background: #e6c74d;
+    transform: scale(1.10);
+}
+
+.card21 button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+.link {
+    margin-top: 20px;
+}
+
+.link a {
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.link a:hover {
+    color: #ffffff;
+}
+
+.player-field input[type="text"],
+.player-field input[type="number"] {
+    padding: 8px;
+    font-size: 1.4em;
+    border: 2px solid #d4af37;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #1a1a1a;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.player-field input:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    outline: none;
+}
+
+.player-field input[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #d4af37;
+    color: #1a1a1a;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.deck {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+    justify-content: center;
+}
+
+.card {
+    width: 60px;
+    height: 90px;
+    background: #ffffff;
+    border: 2px solid #d4af37;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card.hearts, .card.diamonds {
+    color: #ff0000;
+}
+
+.card.clubs, .card.spades {
+    color: #1a1a1a;
+}
+
+.button {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+    justify-content: center;
+}
+
+.button a {
+    background: #d4af37;
+    color: #1a1a1a;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.5em;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.button a:hover {
+    background: #e6c74d;
+    transform: translateY(-2px);
+}
+
+.button a:active {
+    transform: translateY(0);
+}
+
+.text {
+    margin: 20px 0;
+    font-size: 1.1em;
+    color: #ffffff;
+    line-height: 1.5;
+}
+
+.card21 p {
+    font-size: 1.5rem;
+}
+
+.card21 h2 {
+    font-size: 2rem;
+}
+
+.card21 h3 {
     font-size: 1.7rem;
 }
 
-.project .start-button {
-    display: inline-block;
-    padding: 15px 20px;
-    background-color: #6342f9;
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    margin-top: 1rem;
-    font-size: 1.5rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.text {
+    margin: 20px 0;
+    font-size: 1.1em;
+    color: #ffffff;
+    line-height: 1.5;
 }
 
-.project .start-button:hover {
-    transform: scale(1.15);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+.game-result {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid #d4af37;
+}
+
+.game-result h3 {
+    font-size: 1.5em;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
+.result-message {
+    font-size: 1.5em;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.redirect-message {
+    font-size: 1.2em;
+}
+
+.win {
+    color: #28a745;
+}
+
+.loss {
+    color: #dc3545;
+}
+
+.push {
+    color: #d4af37;
+}
+
+.debug {
+    font-size: 0.9em;
+}
+
+.active-hand {
+    border: 3px solid gold;
+    background-color: #ffffcc;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.cardimage {
+    width: 80px;
+    height: 120px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.cardimage.hearts,
+.cardimage.diamonds {
+    color: red;
+    background-color: white;
+}
+
+.cardimage.clubs,
+.cardimage.spades {
+    color: black;
+    background-color: white;
+}
+
+.main.rules {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+
+.blackjack {
+    background: #145214;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    text-align: left;
+    border: 2px solid #d4af37;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+.blackjack h2 {
+    font-size: 3em;
+    color: #d4af37;
+    margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.blackjack  h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #ff9e00;
+}
+
+.blackjack p {
+    font-size: 1.5em;
+}
+
+.blackjack ul {
+    list-style-type: disc;
+    padding-left: 25px;
+    margin-bottom: 30px;
+}
+
+.blackjack ul li {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.blackjack ul li strong {
+    color: #d4af37;
+}
+
+.rules-button {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.rules-button .start-button {
+    background: #d4af37;
+    color: #1a1a1a;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.8em;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+.rules-button .start-button:hover {
+    background: #e6c74d;
+    transform: translateY(-3px);
+}
+
+.rules-button .start-button:active {
+    transform: translateY(0);
 }

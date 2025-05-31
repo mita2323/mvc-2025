@@ -4,21 +4,24 @@
 
 {% block body %}
 
-<main>
-    <div class="game">
+<main class="rules">
+    <div class="blackjack">
 
         <h2>Regler</h2>
         <ul>
-            <li>Kort 2–10 är värda sitt nummer.</li>
-            <li>Klöver, dam och kung är värda 10 poäng.</li>
-            <li>Ess är värt 1 eller 11 poäng, beroende på vad som är bäst för handen.</li>
-            <li>Du får två kort i början och kan välja att "ta kort" (hit) eller "stanna" (stand).</li>
-            <li>Dealern måste ta kort tills deras hand är minst 17.</li>
-            <li>Om din hand går över 21, bustar du och förlorar. Om dealern bustar eller du har högre poäng, vinner du!</li>
+            <li>Kort 2 till 10 är värda sitt numeriska värde.</li>
+            <li>Knekt, Dam och Kung är alla värda 10 poäng.</li>
+            <li>Ess är unikt, det kan vara värt 1 eller 11 poäng, beroende på vad som gynnar din hand bäst utan att du "bustar".</li>
+            <li>Vid spelets start får du två kort. Du kan sedan välja att "Ta kort" (Hit) för att få ett till kort, eller "Stanna" (Stand) för att behålla din nuvarande hand.</li>
+            <li>Målet är att få en hand så nära 21 poäng som möjligt, utan att överstiga det.</li>
+            <li>Om din hand överstiger 21 poäng, har du "bust" och förlorar omgången.</li>
+            <li>Dealern måste fortsätta ta kort tills dennes hand är minst 17 poäng.</li>
+            <li>Du vinner om din hand är närmare 21 än dealerns, eller om dealern bustar. Om ni har samma poäng blir det oavgjort, även kallat "push".</li>
+            <li>En "Blackjack" är när du får 21 poäng på dina första två kort. Detta ger ofta en högre utbetalning!</li>
         </ul>
 
-        <div class="button-container">
-            <a href="{{ path('game_start') }}" class="start-button">Starta Spelet</a>
+        <div class="rules-button">
+            <a href="{{ path('project') }}" class="start-button">Tillbaka till hemsidan</a>
         </div>
     </div>
 </main>

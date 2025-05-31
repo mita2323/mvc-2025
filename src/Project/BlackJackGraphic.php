@@ -2,46 +2,85 @@
 
 namespace App\Project;
 
-/**
- * BlackJackGraphic class.
- */
-class BlackJackGraphic extends BlackJackGame
+class BlackJackGraphic implements \JsonSerializable
 {
+    private string $suit;
+    private string $rank;
+    private int $value;
+
     /**
-     * Returns a string representation of the card with a Unicode suit symbol.
-     * @return string The visual card representation.
+     * Constructor.
+     * @param string $suit Suit of the card ('hearts', 'diamonds', 'clubs', 'spades').
+     * @param string $rank Rank of the card ('2'-'10', 'J', 'Q', 'K', 'A').
      */
-    public function __toString(): string
+    public function __construct(string $suit, string $rank)
     {
-        return "{$this->value}{$this->getSuitUnicode()}";
+        $this->suit = $suit;
+        $this->rank = $rank;
+        $this->value = $this->determineValue($rank);
     }
 
     /**
-     * Returns the card's visual string representation.
-     * @return string The visual card representation.
+     * Determine the numeric value based on the rank.
      */
-    public function getAsString(): string
+    private function determineValue(string $rank): int
     {
-        return $this->__toString();
+        if (in_array($rank, ['J', 'Q', 'K'], true)) {
+            return 10;
+        }
+        if ($rank === 'A') {
+            return 11;
+        }
+        return (int)$rank;
+    }
+
+    public function getSuit(): string
+    {
+        return $this->suit;
+    }
+
+    public function getRank(): string
+    {
+        return $this->rank;
+    }
+
+    public function getValue(): int
+    {
+        return $this->value;
     }
 
     /**
-     * Maps the card's suit to its Unicode symbol.
-     * @return string The Unicode suit symbol or empty string.
+     * Returns the Unicode symbol for the suit.
      */
     public function getSuitUnicode(): string
     {
-        switch ($this->suit) {
-            case 'hearts':
-                return '♥';
-            case 'diamonds':
-                return '♦';
-            case 'clubs':
-                return '♣';
-            case 'spades':
-                return '♠';
-            default:
-                return '';
-        }
+        return match ($this->suit) {
+            'hearts' => '♥',
+            'diamonds' => '♦',
+            'clubs' => '♣',
+            'spades' => '♠',
+            default => '',
+        };
+    }
+
+    /**
+     * Returns a string representation like 'A♥' or '10♠'.
+     */
+    public function __toString(): string
+    {
+        return $this->rank . $this->getSuitUnicode();
+    }
+
+    /**
+     * JSON serialization support.
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'suit' => $this->suit,
+            'rank' => $this->rank,
+            'value' => $this->value,
+            'asString' => $this->__toString(),
+        ];
     }
 }

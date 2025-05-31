@@ -1,0 +1,36 @@
+{% extends 'project-base.html.twig' %}
+
+{% block title %}BlackJack - Satsa{% endblock %}
+
+{% block body %}
+<main class="project">
+    <div class="card21">
+        <h1>Satsa</h1>
+        <h2>{{ player_name }} (Saldo: {{ balance|number_format(0) }} kr)</h2>
+        <p>Du spelar {{ num_hands }} {{ num_hands == 1 ? 'hand' : 'händer' }}.</p>
+        <form action="{{ path('blackjack_start') }}" method="post">
+            <div class="player-field">
+                <label for="bet">Insats per hand (kr):</label>
+                <input
+                    type="number"
+                    id="bet"
+                    name="bet"
+                    min="10"
+                    step="10"
+                    value="10"
+                    required
+                    title="Välj hur mycket du vill satsa per hand."
+                    max="{{ balance|default(0)|round(0, 'floor') }}"
+                >
+            </div>
+            <button type="submit">Dela ut</button>
+        </form>
+        <p class="link">
+            <a href="{{ path('project') }}">Tillbaka</a>
+        </p>
+        <p class="link">
+            <a href="{{ path('blackjack_reset') }}">Återställ spelet</a>
+        </p>
+    </div>
+</main>
+{% endblock %}

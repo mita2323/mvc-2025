@@ -1,50 +1,206 @@
 {% extends 'project-base.html.twig' %}
 
-{% block title %}Spela 21{% endblock %}
+{% block title %}BlackJack{% endblock %}
 
 {% block body %}
-<main>
+<main class="project">
     <div class="card21">
-        <h1>Spela 21</h1>
+        <h1>Spela Blackjack</h1>
 
-        <h2>Spelarens hand (Poäng: {{ player.getScore }})</h2>
-        <div class="deck">
-            {% for card in player.getHand %}
-                <div class="card {{ card.getSuit() }}">
-                    {{ card.getAsString }}
-                </div>
-            {% endfor %}
-        </div>
-
-        <h2>Dealerns hand (Poäng: {{ dealer.getScore }})</h2>
-        <div class="deck">
-            {% for card in dealer.getHand %}
-                <div class="card {{ card.getSuit() }}">
-                    {{ card.getAsString }}
-                </div>
-            {% endfor %}
-        </div>
-
-        {% if status == 'ongoing' %}
-            <div class="button">
-                <a href="{{ path('game_hit') }}" class="take">Ta kort</a>
-                <a href="{{ path('game_stand') }}" class="stay">Stanna</a>
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
             </div>
-        {% else %}
-            <p class="text">
-                Spel slut:
-                {% if status == 'player_bust' %}Du bustade! Dealern vinner.{% endif %}
-                {% if status == 'dealer_bust' %}Dealern bustade! Du vinner!{% endif %}
-                {% if status == 'player_win' %}Du vinner!{% endif %}
-                {% if status == 'dealer_win' %}Dealern vinner!{% endif %}
-            </p>
+        {% endfor %}
+
+        <h2>{{ player.getName() }} (Saldo: {{ player.getBalance|number_format(0) }} kr)</h2>
+
+        <div id="game-results" style="display: none;">
+            <div class="game-result">
+                <h3>Game Results:</h3>
+                {% for handIndex, hand in player.getHands %}
+                    {% set playerScore = player.getScore(handIndex)|default('unknown') %}
+                    {% set dealerScore = dealer.getScore()|default('unknown') %}
+                    {% set bet = player.getOriginalBet(handIndex)|default('unknown') %}
+                    <div class="result-message">
+                        Hand {{ handIndex + 1 }}:
+                        {% if playerScore > 21 %}
+                            <span class="loss">Busted! ({{ playerScore }})</span>
+                        {% elseif player.isBlackjack(handIndex) and not dealer.isBlackjack %}
+                            <span class="win">Blackjack! You won {{ (bet * 2.5)|number_format(2) }} kr</span>
+                        {% elseif dealerScore > 21 %}
+                            <span class="win">Dealer busted! You won {{ (bet * 2)|number_format(2) }} kr</span>
+                        {% elseif playerScore > dealerScore %}
+                            <span class="win">You won {{ (bet * 2)|number_format(2) }} kr!</span>
+                        {% elseif playerScore == dealerScore %}
+                            <span class="push">Push - returned {{ bet|number_format(2) }} kr</span>
+                        {% else %}
+                            <span class="loss">You lost! (You:{{ playerScore }} vs Dealer:{{ dealerScore }})</span>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <p class="redirect-message">The page will update in <span id="countdown">5</span> seconds...</p>
+        </div>
+
+        <div id="game-over-message" style="display: none;">
+            <p class="text">Spelet är slut! Du har inga pengar kvar.</p>
             <div class="button-reset">
-                <a href="{{ path('game_reset') }}" class="reset">Spela igen</a>
+                <a href="{{ path('blackjack_reset') }}" class="reset">Starta ett nytt spel</a>
             </div>
-        {% endif %}
+        </div>
+
+        <div id="game-play">
+            {% for handIndex, hand in player.getHands %}
+                <h3
+                    {% if handIndex == activeHandIndex and status == 'ongoing' %}
+                        style="color: green; font-weight: bold;"
+                    {% endif %}
+                >
+                    Hand {{ handIndex + 1 }}
+                    (Poäng: {{ player.getScore(handIndex)|default('unknown') }},
+                    Insats: {{ player.getOriginalBet(handIndex)|default('unknown')|number_format(2) }} kr)
+                    {% if handIndex == activeHandIndex and status == 'ongoing' %} (Aktiv hand) {% endif %}
+                </h3>
+                <div class="deck player-hand-{{ handIndex }}" style="border: {% if handIndex == activeHandIndex and status == 'ongoing' %}2px solid green{% else %}1px solid #ccc{% endif %}; padding: 0.5em;">
+                    {% for card in hand %}
+                        <div class="cardimage {{ card.getSuit()|default('unknown') }}">
+                            {{ card.getAsString|default('unknown') }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% if handIndex == activeHandIndex and status == 'ongoing' %}
+                    <div class="button" style="margin-top: 0.5em;">
+                        <a href="{{ path('blackjack_hit', {'handIndex': handIndex}) }}" class="take">Ta kort</a>
+                        <a href="{{ path('blackjack_stand', {'handIndex': handIndex}) }}" class="stay">Stanna</a>
+                        {% if hand|length == 2 %}
+                            <a href="{{ path('blackjack_double', {'handIndex': handIndex}) }}" class="double">Dubbla</a>
+                            {% if hand[0].getValue() is defined and hand[0].getValue() == hand[1].getValue() %}
+                                <a href="{{ path('blackjack_split', {'handIndex': handIndex}) }}" class="split">Splitta</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <h2>Dealerns hand (<span id="dealer-score-display">{% if status == 'ongoing' %}?{% else %}{{ dealer.getScore()|default('unknown') }}{% endif %}</span>)</h2>
+            <div class="deck" id="dealer-hand-display">
+                {% if dealer.getHand|length > 0 %}
+                    <div class="cardimage {{ dealer.getHand[0].getSuit()|default('unknown') }}">
+                        {{ dealer.getHand[0].getAsString|default('unknown') }}
+                    </div>
+                {% endif %}
+
+                {% if dealer.getHand|length > 1 %}
+                    <div class="cardimage card-back-placeholder">
+                        <img src="{{ asset('images/card-back.png') }}" alt="Card Back" class="card-back">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <script>
+            try {
+                const gameResults = document.getElementById('game-results');
+                const gameOverMessage = document.getElementById('game-over-message');
+                const gamePlay = document.getElementById('game-play');
+                const countdownElement = document.getElementById('countdown');
+                const dealerHandDisplay = document.getElementById('dealer-hand-display');
+                const dealerScoreDisplay = document.getElementById('dealer-score-display');
+
+                const currentStatus = "{{ status }}";
+                const playerBalance = {{ player.getBalance }};
+                
+                const dealerFullHand = JSON.parse('{{ dealer.getHand|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw }}');
+                const dealerFinalScore = {{ dealer.getScore()|default(0) }};
+
+                function createCardElement(cardData) {
+                    const cardDiv = document.createElement('div');
+                    cardDiv.classList.add('cardimage');
+                    cardDiv.classList.add(cardData.suit);
+                    cardDiv.textContent = cardData.asString;
+                    return cardDiv;
+                }
+
+                async function animateDealerTurn() {
+                    if (!dealerHandDisplay) {
+                        return;
+                    }
+
+                    dealerHandDisplay.innerHTML = '';
+
+                    for (let i = 0; i < dealerFullHand.length; i++) {
+                        const card = dealerFullHand[i];
+                        const cardElement = createCardElement(card);
+                        if (cardElement) {
+                            dealerHandDisplay.appendChild(cardElement);
+                            dealerScoreDisplay.textContent = calculateDealerScore(dealerFullHand.slice(0, i + 1));
+                            await new Promise(resolve => setTimeout(resolve, 1500));
+                        }
+                    }
+
+                    dealerScoreDisplay.textContent = dealerFinalScore;
+
+                    showGameResultsAndRedirect();
+                }
+
+                function calculateDealerScore(hand) {
+                    let score = 0;
+                    let numAces = 0;
+                    for (const card of hand) {
+                        let value = card.value;
+                        if (value === 11) {
+                            numAces++;
+                        }
+                        score += value;
+                    }
+                    while (score > 21 && numAces > 0) {
+                        score -= 10;
+                        numAces--;
+                    }
+                    return score;
+                }
+
+                function showGameResultsAndRedirect() {
+                    if (gameResults) gameResults.style.display = 'block';
+                    if (gamePlay) gamePlay.style.display = 'none';
+
+                    if (playerBalance <= 0) {
+                        if (gameResults) gameResults.style.display = 'none';
+                        if (gameOverMessage) gameOverMessage.style.display = 'block';
+                    } else {
+                        if (countdownElement) {
+                            let countdown = 10;
+                            countdownElement.textContent = countdown;
+
+                            const intervalId = setInterval(() => {
+                                countdown--;
+                                countdownElement.textContent = countdown;
+
+                                if (countdown <= 0) {
+                                    clearInterval(intervalId);
+                                    window.location.href = "{{ path('blackjack_bet') }}";
+                                }
+                            }, 1000);
+                        }
+                    }
+                }
+
+                if (currentStatus !== 'ongoing') {
+                    animateDealerTurn();
+                } else {
+                    if (gameResults) gameResults.style.display = 'none';
+                    if (gameOverMessage) gameOverMessage.style.display = 'none';
+                    if (gamePlay) gamePlay.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('JavaScript error:', error);
+            }
+        </script>
 
         <p class="link">
-            <a href="{{ path('game') }}">Tillbaka till startsidan</a>
+            <a href="{{ path('blackjack_reset') }}">Återställ spelet</a>
         </p>
     </div>
 </main>

@@ -2,51 +2,35 @@
 
 namespace App\Project;
 
-use App\Project\BlackJackGraphic;
-
+/**
+ * The BlackJackDeck class.
+ */
 class BlackJackDeck
 {
-    /** @var BlackJackGraphic[] */
-    private array $cards = [];
+    /**
+     * @var BlackJackGraphic[] The cards in the deck.
+     */
+    private array $cards;
 
+    /**
+     * Initializes a new deck with 52 playing cards.
+     */
     public function __construct()
     {
+        $this->cards = [];
         $suits = ['hearts', 'diamonds', 'clubs', 'spades'];
-        $values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        $cardRanks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
         foreach ($suits as $suit) {
-            foreach ($values as $value) {
-                $this->cards[] = new BlackJackGraphic($suit, $value);
+            foreach ($cardRanks as $rank) {
+                $this->cards[] = new BlackJackGraphic($suit, $rank);
             }
         }
     }
 
-    public function shuffle(): void
-    {
-        shuffle($this->cards);
-    }
-
     /**
-     * @return BlackJackGraphic|null
-     */
-    public function draw(): ?BlackJackGraphic
-    {
-        if (empty($this->cards)) {
-            return null;
-        }
-        return array_shift($this->cards);
-    }
-
-    /**
-     * @return BlackJackGraphic[]
-     */
-    public function drawMany(int $number): array
-    {
-        return array_splice($this->cards, 0, $number);
-    }
-
-    /**
-     * @return BlackJackGraphic[]
+     * Gets all cards in the deck.
+     * @return BlackJackGraphic[] The cards.
      */
     public function getCards(): array
     {
@@ -54,28 +38,36 @@ class BlackJackDeck
     }
 
     /**
-     * @return BlackJackGraphic[]
+     * Shuffles the deck.
      */
-    public function sortedCards(): array
+    public function shuffle(): void
     {
-        $sortedCards = $this->cards;
-        $suitOrder = ['hearts', 'diamonds', 'clubs', 'spades'];
-        $valueOrder = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-
-        usort($sortedCards, function ($card1, $card2) use ($suitOrder, $valueOrder) {
-            $suitCompare = array_search($card1->getSuit(), $suitOrder) <=> array_search($card2->getSuit(), $suitOrder);
-            if ($suitCompare !== 0) {
-                return $suitCompare;
-            }
-
-            return array_search($card1->getValue(), $valueOrder) <=> array_search($card2->getValue(), $valueOrder);
-        });
-
-        return $sortedCards;
+        shuffle($this->cards);
     }
 
-    public function count(): int
+    /**
+     * Draws a card from the deck.
+     * @return BlackJackGraphic|null The drawn card or null if deck is empty.
+     */
+    public function draw(): ?BlackJackGraphic
     {
-        return count($this->cards);
+        $card = array_pop($this->cards) ?: null;
+        return $card;
+    }
+
+    /**
+     * Sets the deck's cards.
+     * @param array $cards Array of BlackJackGraphic objects or arrays with suit/value.
+     */
+    public function setCards(array $cards): void
+    {
+        $this->cards = [];
+        foreach ($cards as $cardData) {
+            if ($cardData instanceof BlackJackGraphic) {
+                $this->cards[] = $cardData;
+            } elseif (is_array($cardData) && isset($cardData['suit'], $cardData['rank'])) {
+                $this->cards[] = new BlackJackGraphic($cardData['suit'], $cardData['rank']);
+            }
+        }
     }
 }
