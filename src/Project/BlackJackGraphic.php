@@ -73,11 +73,7 @@ class BlackJackGraphic implements \JsonSerializable
 
     /**
      * JSON serialization support.
-     * @return array{
-     *     suit: string,
-     *     rank: string,
-     *     value: int
-     * }
+     * @return array{suit: string, rank: string, value: int, asString: string}
      */
     public function jsonSerialize(): array
     {

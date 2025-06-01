@@ -148,7 +148,7 @@ class GetStateTest extends TestCase
         $deckCard2 = new BlackJackGraphic('Clubs', 'Jack');
 
         // Setup player mock to return one hand with two cards and bet info.
-        $this->mockPlayer->method('getName')->willReturn('PlayerOne');
+        $this->mockPlayer->/** @scrutinizer ignore-call */method('getName')->willReturn('PlayerOne');
         $this->mockPlayer->method('getBalance')->willReturn(500);
         $this->mockPlayer->method('getHands')->willReturn([0 => [$playerCard1, $playerCard2]]);
         $this->mockPlayer->method('getBet')->with(0)->willReturn(50);
@@ -158,7 +158,7 @@ class GetStateTest extends TestCase
         $this->mockDealer->method('getHands')->willReturn([[ $dealerCard1, $dealerCard2 ]]);
 
         // Deck mock return two cards
-        $this->mockDeck->method('getCards')->willReturn([$deckCard1, $deckCard2]);
+        $this->mockDeck->/** @scrutinizer ignore-call */method('getCards')->willReturn([$deckCard1, $deckCard2]);
 
         $game = new BlackJack('PlayerOne', $this->entityManagerMock);
 
