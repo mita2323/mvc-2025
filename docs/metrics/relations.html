@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2025-05-18 21:22:42        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2025-05-31 23:27:34        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -93,7 +93,7 @@
                             <path d="M0 0h24v24H0z" fill="none">
                             <path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-6 8h-4v-2h4v2zm0-4h-4v-2h4v2z">
                         </svg>
-                        Violations (7)
+                        Violations (14)
                     </a>
                 </li>
                                     <li>
@@ -490,7 +490,72 @@
         ]
     },
     {
+        "name": "\\App\\Controller\\ProjectController",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Project\\BlackJack",
+            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "\\Symfony\\Component\\HttpFoundation\\Request"
+        ]
+    },
+    {
+        "name": "\\Doctrine\\ORM\\EntityManagerInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Project\\BlackJack",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\App\\Project\\BlackJackDeck",
+            "\\App\\Entity\\Player",
+            "\\App\\Project\\BlackJackPlayer",
+            "\\App\\Entity\\GameSession",
+            "\\App\\Entity\\CardStat",
+            "\\App\\Project\\BlackJackGraphic"
+        ]
+    },
+    {
         "name": "\\OutOfRangeException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\CardStat",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\GameSession",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\DateTime",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\DateTimeInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Player",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\Common\\Collections\\ArrayCollection",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\Common\\Collections\\Collection",
         "size": 3000,
         "relations": []
     },
@@ -529,9 +594,59 @@
         "relations": []
     },
     {
+        "name": "\\App\\Project\\BlackJackDeck",
+        "size": 3000,
+        "relations": [
+            "\\App\\Project\\BlackJackGraphic"
+        ]
+    },
+    {
+        "name": "\\App\\Project\\BlackJackPlayer",
+        "size": 3000,
+        "relations": [
+            "\\App\\Entity\\Player",
+            "\\App\\Project\\BlackJackGraphic",
+            "\\InvalidArgumentException"
+        ]
+    },
+    {
+        "name": "\\App\\Project\\BlackJackGraphic",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\JsonSerializable",
+        "size": 3000,
+        "relations": []
+    },
+    {
         "name": "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
         "size": 3000,
         "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\CardStatRepository",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\GameSessionRepository",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\PlayerRepository",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
+        ]
     }
 ];
 

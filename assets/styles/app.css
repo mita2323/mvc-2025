@@ -1363,9 +1363,10 @@ footer.project-footer p {
 }
 
 .blackjack  h3 {
-    font-size: 2rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
     color: #ff9e00;
+    font-family: 'Zain', serif;
 }
 
 .blackjack p {

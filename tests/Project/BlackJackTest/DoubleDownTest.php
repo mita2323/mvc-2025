@@ -19,19 +19,19 @@ use PHPUnit\Framework\TestCase;
 class DoubleDownTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface
+     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $entityManagerMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $playerRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $gameSessionRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $cardStatRepositoryMock;
     /**

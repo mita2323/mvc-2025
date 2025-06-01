@@ -15,11 +15,11 @@ use PHPUnit\Framework\TestCase;
 class PlayerRepositoryTest extends TestCase
 {
     /**
-     * @var ManagerRegistry
+     * @var ManagerRegistry|\PHPUnit\Framework\MockObject\MockObject
      */
     private $registry;
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $entityManager;
 
@@ -34,8 +34,16 @@ class PlayerRepositoryTest extends TestCase
             ->with(Player::class)
             ->willReturn($this->entityManager);
 
-        $classMetadata = $this->createMock(ClassMetadata::class);
-        $classMetadata->name = Player::class;
+        $classMetadata = new class(Player::class) extends ClassMetadata {
+            public string $name;
+
+            public function __construct(string $name)
+            {
+                parent::__construct($name);
+                $this->name = $name;
+            }
+        };
+
         $this->entityManager->method('getClassMetadata')
             ->with(Player::class)
             ->willReturn($classMetadata);

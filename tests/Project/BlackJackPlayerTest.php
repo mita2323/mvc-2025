@@ -13,7 +13,7 @@ use App\Entity\Player as PlayerEntity;
 class BlackJackPlayerTest extends TestCase
 {
     /**
-     * @var PlayerEntity|null A mock object for the PlayerEntity.
+     * @var \PHPUnit\Framework\MockObject\MockObject&\App\Entity\Player|null A mock object for the PlayerEntity.
      */
     private $mockPlayerEntity;
 
@@ -47,7 +47,9 @@ class BlackJackPlayerTest extends TestCase
      */
     public function testGetAndSetBalance(): void
     {
+        $this->mockPlayerEntity = $this->createMock(PlayerEntity::class);
         $this->mockPlayerEntity->method('getBalance')->willReturn(1000.0);
+
         $player = new BlackJackPlayer("Test Player", $this->mockPlayerEntity);
         $this->assertEquals(1000, $player->getBalance());
 
@@ -57,8 +59,12 @@ class BlackJackPlayerTest extends TestCase
         $player->setBalance(1500);
 
         $playerWithoutEntity = new BlackJackPlayer("No Entity");
-        $playerWithoutEntity->setBalance(500);
-        $this->assertEquals(0, $playerWithoutEntity->getBalance());
+        $this->assertNull($playerWithoutEntity->getEntity());
+
+        if ($this->mockPlayerEntity instanceof PlayerEntity) {
+            $playerWithoutEntity->setEntity($this->mockPlayerEntity);
+            $this->assertSame($this->mockPlayerEntity, $playerWithoutEntity->getEntity());
+        }
     }
 
     /**

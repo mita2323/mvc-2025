@@ -19,23 +19,23 @@ use PHPUnit\Framework\TestCase;
 class StartGameTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface
+     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $entityManagerMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $playerRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $gameSessionRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $cardStatRepositoryMock;
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|BlackJackPlayer
+     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
      */
     private $mockPlayer;
 
@@ -97,7 +97,7 @@ class StartGameTest extends TestCase
         $result = $game->startGame(4, 100);
         $this->assertFalse($result, 'Should return false for numHands > 3');
 
-        $this->entityManagerMock->expects($this->never())->method('persist');
+        $this->entityManagerMock->/** @scrutinizer ignore-call */expects($this->never())->method('persist');
         $this->entityManagerMock->expects($this->never())->method('flush');
     }
 

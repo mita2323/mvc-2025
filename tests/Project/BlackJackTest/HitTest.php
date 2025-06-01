@@ -19,19 +19,19 @@ use PHPUnit\Framework\TestCase;
 class HitTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface
+     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $entityManagerMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $playerRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $gameSessionRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $cardStatRepositoryMock;
     /**
@@ -86,20 +86,6 @@ class HitTest extends TestCase
         $method = $reflection->getMethod($methodName);
         $method->setAccessible(true);
         return $method->invokeArgs($object, $parameters);
-    }
-
-    /**
-     ** Sets a private or protected property of an object for testing purposes.
-     * @param object $object The object instance.
-     * @param string $property The property name.
-     * @param mixed $value The value to set.
-     */
-    private function setPrivateProperty($object, $property, $value): void
-    {
-        $reflection = new \ReflectionClass($object);
-        $prop = $reflection->getProperty($property);
-        $prop->setAccessible(true);
-        $prop->setValue($object, $value);
     }
 
     /**
@@ -164,7 +150,7 @@ class HitTest extends TestCase
         $deckProperty->setValue($game, $mockDeck);
 
         $this->cardStatRepositoryMock->method('findOneBy')->willReturn(null);
-        $this->entityManagerMock->expects($this->atLeastOnce())
+        $this->entityManagerMock->/** @scrutinizer ignore-call */expects($this->atLeastOnce())
             ->method('persist')
             ->with($this->isInstanceOf(CardStat::class));
         $this->entityManagerMock->expects($this->atLeastOnce())->method('flush');
@@ -377,10 +363,6 @@ class HitTest extends TestCase
 
         $game->startGame(1, 100);
         $game->hit(0);
-
-        $scoreAfterHit = $game->getPlayer()->getScore(0);
-
-        $handState = $this->getPrivateProperty($game->getPlayer(), 'handStates')[0] ?? 'unknown';
 
         $this->callPrivateMethod($game, 'evaluateGame');
 

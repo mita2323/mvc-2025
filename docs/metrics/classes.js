@@ -78,7 +78,7 @@ var classes = [
         "totalDataComplexity": 22,
         "totalSystemComplexity": 22,
         "package": "App\\Card\\",
-        "pageRank": 0.18,
+        "pageRank": 0.14,
         "afferentCoupling": 1,
         "efferentCoupling": 1,
         "instability": 0.5,
@@ -157,7 +157,7 @@ var classes = [
         "totalDataComplexity": 5.25,
         "totalSystemComplexity": 32.25,
         "package": "App\\Card\\",
-        "pageRank": 0.09,
+        "pageRank": 0.07,
         "afferentCoupling": 2,
         "efferentCoupling": 1,
         "instability": 0.33,
@@ -1503,6 +1503,185 @@ var classes = [
         "violations": {}
     },
     {
+        "name": "App\\Controller\\ProjectController",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "renderPlayPage",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "project",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "rules",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "about",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "bet",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "start",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "play",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "hit",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "stand",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "double",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "split",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "reset",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 13,
+        "nbMethods": 12,
+        "nbMethodsPrivate": 1,
+        "nbMethodsPublic": 11,
+        "nbMethodsGetter": 0,
+        "nbMethodsSetters": 1,
+        "wmc": 38,
+        "ccn": 27,
+        "ccnMethodMax": 6,
+        "externals": [
+            "Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "Doctrine\\ORM\\EntityManagerInterface",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "App\\Project\\BlackJack",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Request",
+            "Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "App\\Project\\BlackJack",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Request",
+            "Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "App\\Project\\BlackJack",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "App\\Project\\BlackJack",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "App\\Project\\BlackJack",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "App\\Project\\BlackJack",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "App\\Project\\BlackJack",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "App\\Project\\BlackJack",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\HttpFoundation\\Session\\SessionInterface"
+        ],
+        "parents": [
+            "Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController"
+        ],
+        "implements": [],
+        "lcom": 1,
+        "length": 387,
+        "vocabulary": 75,
+        "volume": 2410.55,
+        "difficulty": 20.52,
+        "effort": 49471.12,
+        "level": 0.05,
+        "bugs": 0.8,
+        "time": 2748,
+        "intelligentContent": 117.46,
+        "number_operators": 86,
+        "number_operands": 301,
+        "number_operators_unique": 9,
+        "number_operands_unique": 66,
+        "cloc": 85,
+        "loc": 243,
+        "lloc": 158,
+        "mi": 64.39,
+        "mIwoC": 24.73,
+        "commentWeight": 39.67,
+        "kanDefect": 1.41,
+        "relativeStructuralComplexity": 676,
+        "relativeDataComplexity": 0.86,
+        "relativeSystemComplexity": 676.86,
+        "totalStructuralComplexity": 8788,
+        "totalDataComplexity": 11.22,
+        "totalSystemComplexity": 8799.22,
+        "package": "App\\Controller\\",
+        "pageRank": 0.01,
+        "afferentCoupling": 0,
+        "efferentCoupling": 6,
+        "instability": 1,
+        "numberOfUnitTests": 0,
+        "violations": {}
+    },
+    {
         "name": "App\\Dice\\Dice",
         "interface": false,
         "abstract": false,
@@ -1577,7 +1756,7 @@ var classes = [
         "totalDataComplexity": 12,
         "totalSystemComplexity": 12,
         "package": "App\\Dice\\",
-        "pageRank": 0.06,
+        "pageRank": 0.04,
         "afferentCoupling": 3,
         "efferentCoupling": 0,
         "instability": 0,
@@ -1650,7 +1829,7 @@ var classes = [
         "totalDataComplexity": 1,
         "totalSystemComplexity": 3,
         "package": "App\\Dice\\",
-        "pageRank": 0.02,
+        "pageRank": 0.01,
         "afferentCoupling": 1,
         "efferentCoupling": 2,
         "instability": 0.67,
@@ -1848,6 +2027,324 @@ var classes = [
         "violations": {}
     },
     {
+        "name": "App\\Entity\\CardStat",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "getId",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getCardValue",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setCardValue",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getCount",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setCount",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 5,
+        "nbMethods": 0,
+        "nbMethodsPrivate": 0,
+        "nbMethodsPublic": 0,
+        "nbMethodsGetter": 3,
+        "nbMethodsSetters": 2,
+        "wmc": 0,
+        "ccn": 1,
+        "ccnMethodMax": 0,
+        "externals": [],
+        "parents": [],
+        "implements": [],
+        "lcom": 0,
+        "length": 19,
+        "vocabulary": 6,
+        "volume": 49.11,
+        "difficulty": 3,
+        "effort": 147.34,
+        "level": 0.33,
+        "bugs": 0.02,
+        "time": 8,
+        "intelligentContent": 16.37,
+        "number_operators": 7,
+        "number_operands": 12,
+        "number_operators_unique": 2,
+        "number_operands_unique": 4,
+        "cloc": 40,
+        "loc": 69,
+        "lloc": 29,
+        "mi": 102.34,
+        "mIwoC": 56.12,
+        "commentWeight": 46.22,
+        "kanDefect": 0.15,
+        "relativeStructuralComplexity": 0,
+        "relativeDataComplexity": 5.4,
+        "relativeSystemComplexity": 5.4,
+        "totalStructuralComplexity": 0,
+        "totalDataComplexity": 27,
+        "totalSystemComplexity": 27,
+        "package": "App\\Entity\\",
+        "pageRank": 0.01,
+        "afferentCoupling": 1,
+        "efferentCoupling": 0,
+        "instability": 0,
+        "numberOfUnitTests": 0,
+        "violations": {}
+    },
+    {
+        "name": "App\\Entity\\GameSession",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getId",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getPlayer",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setPlayer",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getNumHands",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setNumHands",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getBetPerHand",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setBetPerHand",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getOutcome",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setOutcome",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getCreatedAt",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setCreatedAt",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 12,
+        "nbMethods": 1,
+        "nbMethodsPrivate": 0,
+        "nbMethodsPublic": 1,
+        "nbMethodsGetter": 6,
+        "nbMethodsSetters": 5,
+        "wmc": 1,
+        "ccn": 1,
+        "ccnMethodMax": 1,
+        "externals": [
+            "DateTime",
+            "DateTimeInterface"
+        ],
+        "parents": [],
+        "implements": [],
+        "lcom": 1,
+        "length": 47,
+        "vocabulary": 11,
+        "volume": 162.59,
+        "difficulty": 3.33,
+        "effort": 541.98,
+        "level": 0.3,
+        "bugs": 0.05,
+        "time": 30,
+        "intelligentContent": 48.78,
+        "number_operators": 17,
+        "number_operands": 30,
+        "number_operators_unique": 2,
+        "number_operands_unique": 9,
+        "cloc": 83,
+        "loc": 146,
+        "lloc": 63,
+        "mi": 91.13,
+        "mIwoC": 45.13,
+        "commentWeight": 46,
+        "kanDefect": 0.15,
+        "relativeStructuralComplexity": 0,
+        "relativeDataComplexity": 11.42,
+        "relativeSystemComplexity": 11.42,
+        "totalStructuralComplexity": 0,
+        "totalDataComplexity": 137,
+        "totalSystemComplexity": 137,
+        "package": "App\\Entity\\",
+        "pageRank": 0.03,
+        "afferentCoupling": 2,
+        "efferentCoupling": 2,
+        "instability": 0.5,
+        "numberOfUnitTests": 0,
+        "violations": {}
+    },
+    {
+        "name": "App\\Entity\\Player",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getId",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getName",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setName",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getBalance",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setBalance",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getNumHands",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setNumHands",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getGameSessions",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "addGameSession",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "removeGameSession",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 11,
+        "nbMethods": 3,
+        "nbMethodsPrivate": 0,
+        "nbMethodsPublic": 3,
+        "nbMethodsGetter": 5,
+        "nbMethodsSetters": 3,
+        "wmc": 6,
+        "ccn": 4,
+        "ccnMethodMax": 3,
+        "externals": [
+            "Doctrine\\Common\\Collections\\ArrayCollection",
+            "Doctrine\\Common\\Collections\\Collection",
+            "App\\Entity\\GameSession",
+            "App\\Entity\\GameSession"
+        ],
+        "parents": [],
+        "implements": [],
+        "lcom": 1,
+        "length": 57,
+        "vocabulary": 15,
+        "volume": 222.69,
+        "difficulty": 7.09,
+        "effort": 1579.09,
+        "level": 0.14,
+        "bugs": 0.07,
+        "time": 88,
+        "intelligentContent": 31.41,
+        "number_operators": 18,
+        "number_operands": 39,
+        "number_operators_unique": 4,
+        "number_operands_unique": 11,
+        "cloc": 71,
+        "loc": 136,
+        "lloc": 65,
+        "mi": 88.47,
+        "mIwoC": 43.48,
+        "commentWeight": 44.99,
+        "kanDefect": 0.36,
+        "relativeStructuralComplexity": 25,
+        "relativeDataComplexity": 1.74,
+        "relativeSystemComplexity": 26.74,
+        "totalStructuralComplexity": 275,
+        "totalDataComplexity": 19.17,
+        "totalSystemComplexity": 294.17,
+        "package": "App\\Entity\\",
+        "pageRank": 0.02,
+        "afferentCoupling": 2,
+        "efferentCoupling": 3,
+        "instability": 0.6,
+        "numberOfUnitTests": 24,
+        "violations": {}
+    },
+    {
         "name": "App\\Entity\\Product",
         "interface": false,
         "abstract": false,
@@ -2011,7 +2508,7 @@ var classes = [
         "totalDataComplexity": 22,
         "totalSystemComplexity": 28,
         "package": "App\\Game\\",
-        "pageRank": 0.23,
+        "pageRank": 0.19,
         "afferentCoupling": 1,
         "efferentCoupling": 0,
         "instability": 0,
@@ -2090,7 +2587,7 @@ var classes = [
         "totalDataComplexity": 7,
         "totalSystemComplexity": 19,
         "package": "App\\Game\\",
-        "pageRank": 0.11,
+        "pageRank": 0.09,
         "afferentCoupling": 2,
         "efferentCoupling": 1,
         "instability": 0.33,
@@ -2395,7 +2892,7 @@ var classes = [
         "totalDataComplexity": 6.67,
         "totalSystemComplexity": 30.67,
         "package": "App\\Game\\",
-        "pageRank": 0.03,
+        "pageRank": 0.02,
         "afferentCoupling": 1,
         "efferentCoupling": 1,
         "instability": 0.5,
@@ -2457,6 +2954,666 @@ var classes = [
         "efferentCoupling": 1,
         "instability": 1,
         "numberOfUnitTests": 0,
+        "violations": {}
+    },
+    {
+        "name": "App\\Project\\BlackJack",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "createDeck",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "startGame",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "hit",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "stand",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "doubleDown",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "split",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "updateHandStateAfterAction",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "advanceTurnLogic",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "findNextActiveHand",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "playDealer",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "evaluateGame",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "updateCardStat",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getActiveHandIndex",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getPlayer",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getDealer",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getStatus",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getDeck",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getState",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "reset",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 20,
+        "nbMethods": 15,
+        "nbMethodsPrivate": 7,
+        "nbMethodsPublic": 8,
+        "nbMethodsGetter": 5,
+        "nbMethodsSetters": 0,
+        "wmc": 92,
+        "ccn": 78,
+        "ccnMethodMax": 15,
+        "externals": [
+            "Doctrine\\ORM\\EntityManagerInterface",
+            "App\\Project\\BlackJackDeck",
+            "App\\Entity\\Player",
+            "App\\Project\\BlackJackPlayer",
+            "App\\Project\\BlackJackPlayer",
+            "App\\Project\\BlackJackDeck",
+            "App\\Project\\BlackJackDeck",
+            "App\\Entity\\GameSession",
+            "App\\Entity\\CardStat",
+            "App\\Project\\BlackJackPlayer",
+            "App\\Project\\BlackJackPlayer",
+            "App\\Project\\BlackJackDeck",
+            "App\\Project\\BlackJackDeck",
+            "App\\Project\\BlackJackGraphic",
+            "App\\Project\\BlackJackPlayer",
+            "App\\Project\\BlackJackGraphic",
+            "App\\Project\\BlackJackPlayer",
+            "App\\Project\\BlackJackGraphic"
+        ],
+        "parents": [],
+        "implements": [],
+        "lcom": 1,
+        "length": 747,
+        "vocabulary": 90,
+        "volume": 4849.41,
+        "difficulty": 62.41,
+        "effort": 302656.59,
+        "level": 0.02,
+        "bugs": 1.62,
+        "time": 16814,
+        "intelligentContent": 77.7,
+        "number_operators": 211,
+        "number_operands": 536,
+        "number_operators_unique": 17,
+        "number_operands_unique": 73,
+        "cloc": 119,
+        "loc": 480,
+        "lloc": 361,
+        "mi": 42.77,
+        "mIwoC": 7.91,
+        "commentWeight": 34.86,
+        "kanDefect": 4.6,
+        "relativeStructuralComplexity": 2401,
+        "relativeDataComplexity": 0.69,
+        "relativeSystemComplexity": 2401.69,
+        "totalStructuralComplexity": 48020,
+        "totalDataComplexity": 13.84,
+        "totalSystemComplexity": 48033.84,
+        "package": "App\\Project\\",
+        "pageRank": 0.01,
+        "afferentCoupling": 1,
+        "efferentCoupling": 7,
+        "instability": 0.88,
+        "numberOfUnitTests": 24,
+        "violations": {}
+    },
+    {
+        "name": "App\\Project\\BlackJackDeck",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getCards",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "shuffle",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "draw",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setCards",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 5,
+        "nbMethods": 4,
+        "nbMethodsPrivate": 0,
+        "nbMethodsPublic": 4,
+        "nbMethodsGetter": 1,
+        "nbMethodsSetters": 0,
+        "wmc": 11,
+        "ccn": 8,
+        "ccnMethodMax": 5,
+        "externals": [
+            "App\\Project\\BlackJackGraphic",
+            "App\\Project\\BlackJackGraphic"
+        ],
+        "parents": [],
+        "implements": [],
+        "lcom": 1,
+        "length": 61,
+        "vocabulary": 29,
+        "volume": 296.34,
+        "difficulty": 3.92,
+        "effort": 1161.64,
+        "level": 0.26,
+        "bugs": 0.1,
+        "time": 65,
+        "intelligentContent": 75.6,
+        "number_operators": 12,
+        "number_operands": 49,
+        "number_operators_unique": 4,
+        "number_operands_unique": 25,
+        "cloc": 24,
+        "loc": 64,
+        "lloc": 40,
+        "mi": 87.3,
+        "mIwoC": 46.67,
+        "commentWeight": 40.63,
+        "kanDefect": 0.91,
+        "relativeStructuralComplexity": 0,
+        "relativeDataComplexity": 2.2,
+        "relativeSystemComplexity": 2.2,
+        "totalStructuralComplexity": 0,
+        "totalDataComplexity": 11,
+        "totalSystemComplexity": 11,
+        "package": "App\\Project\\",
+        "pageRank": 0.02,
+        "afferentCoupling": 1,
+        "efferentCoupling": 1,
+        "instability": 0.5,
+        "numberOfUnitTests": 8,
+        "violations": {}
+    },
+    {
+        "name": "App\\Project\\BlackJackGraphic",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "determineValue",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getSuit",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getRank",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getValue",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getSuitUnicode",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "__toString",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "jsonSerialize",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 8,
+        "nbMethods": 5,
+        "nbMethodsPrivate": 1,
+        "nbMethodsPublic": 4,
+        "nbMethodsGetter": 3,
+        "nbMethodsSetters": 0,
+        "wmc": 7,
+        "ccn": 3,
+        "ccnMethodMax": 3,
+        "externals": [
+            "JsonSerializable"
+        ],
+        "parents": [],
+        "implements": [
+            "JsonSerializable"
+        ],
+        "lcom": 1,
+        "length": 59,
+        "vocabulary": 26,
+        "volume": 277.33,
+        "difficulty": 5.12,
+        "effort": 1419.64,
+        "level": 0.2,
+        "bugs": 0.09,
+        "time": 79,
+        "intelligentContent": 54.18,
+        "number_operators": 16,
+        "number_operands": 43,
+        "number_operators_unique": 5,
+        "number_operands_unique": 21,
+        "cloc": 17,
+        "loc": 70,
+        "lloc": 53,
+        "mi": 79.45,
+        "mIwoC": 44.88,
+        "commentWeight": 34.57,
+        "kanDefect": 0.29,
+        "relativeStructuralComplexity": 9,
+        "relativeDataComplexity": 2.34,
+        "relativeSystemComplexity": 11.34,
+        "totalStructuralComplexity": 72,
+        "totalDataComplexity": 18.75,
+        "totalSystemComplexity": 90.75,
+        "package": "App\\Project\\",
+        "pageRank": 0.06,
+        "afferentCoupling": 3,
+        "efferentCoupling": 1,
+        "instability": 0.25,
+        "numberOfUnitTests": 133,
+        "violations": {}
+    },
+    {
+        "name": "App\\Project\\BlackJackPlayer",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setOriginalBets",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getOriginalBet",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getOriginalBets",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getEntity",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setEntity",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "addCard",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getHands",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getHand",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getName",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getBalance",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setBalance",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "placeBet",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setBet",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setAllBets",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "winBet",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getBets",
+                "role": "getter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getBet",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getScore",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getCardValue",
+                "role": null,
+                "public": false,
+                "private": true,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "clearHands",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "initializeNewHand",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "splitHand",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "isBlackjack",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "getHandState",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setHandState",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "stand",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "bust",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "isHandActive",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setHands",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "setAllHandStates",
+                "role": "setter",
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 31,
+        "nbMethods": 23,
+        "nbMethodsPrivate": 1,
+        "nbMethodsPublic": 22,
+        "nbMethodsGetter": 5,
+        "nbMethodsSetters": 3,
+        "wmc": 52,
+        "ccn": 30,
+        "ccnMethodMax": 8,
+        "externals": [
+            "App\\Entity\\Player",
+            "App\\Project\\BlackJackGraphic",
+            "InvalidArgumentException"
+        ],
+        "parents": [],
+        "implements": [],
+        "lcom": 1,
+        "length": 355,
+        "vocabulary": 55,
+        "volume": 2052.38,
+        "difficulty": 51.28,
+        "effort": 105250.39,
+        "level": 0.02,
+        "bugs": 0.68,
+        "time": 5847,
+        "intelligentContent": 40.02,
+        "number_operators": 105,
+        "number_operands": 250,
+        "number_operators_unique": 16,
+        "number_operands_unique": 39,
+        "cloc": 162,
+        "loc": 364,
+        "lloc": 202,
+        "mi": 65.44,
+        "mIwoC": 22.48,
+        "commentWeight": 42.95,
+        "kanDefect": 1.38,
+        "relativeStructuralComplexity": 121,
+        "relativeDataComplexity": 1.83,
+        "relativeSystemComplexity": 122.83,
+        "totalStructuralComplexity": 3751,
+        "totalDataComplexity": 56.75,
+        "totalSystemComplexity": 3807.75,
+        "package": "App\\Project\\",
+        "pageRank": 0.02,
+        "afferentCoupling": 1,
+        "efferentCoupling": 3,
+        "instability": 0.75,
+        "numberOfUnitTests": 60,
         "violations": {}
     },
     {
@@ -2523,6 +3680,204 @@ var classes = [
         "efferentCoupling": 2,
         "instability": 0.67,
         "numberOfUnitTests": 0,
+        "violations": {}
+    },
+    {
+        "name": "App\\Repository\\CardStatRepository",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 1,
+        "nbMethods": 1,
+        "nbMethodsPrivate": 0,
+        "nbMethodsPublic": 1,
+        "nbMethodsGetter": 0,
+        "nbMethodsSetters": 0,
+        "wmc": 1,
+        "ccn": 1,
+        "ccnMethodMax": 1,
+        "externals": [
+            "Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "Doctrine\\Persistence\\ManagerRegistry"
+        ],
+        "parents": [
+            "Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository"
+        ],
+        "implements": [],
+        "lcom": 1,
+        "length": 2,
+        "vocabulary": 1,
+        "volume": 0,
+        "difficulty": 0,
+        "effort": 0,
+        "level": 1,
+        "bugs": 0,
+        "time": 0,
+        "intelligentContent": 0,
+        "number_operators": 0,
+        "number_operands": 2,
+        "number_operators_unique": 0,
+        "number_operands_unique": 1,
+        "cloc": 27,
+        "loc": 34,
+        "lloc": 8,
+        "mi": 220.1,
+        "mIwoC": 171,
+        "commentWeight": 49.1,
+        "kanDefect": 0.15,
+        "relativeStructuralComplexity": 1,
+        "relativeDataComplexity": 0.5,
+        "relativeSystemComplexity": 1.5,
+        "totalStructuralComplexity": 1,
+        "totalDataComplexity": 0.5,
+        "totalSystemComplexity": 1.5,
+        "package": "App\\Repository\\",
+        "pageRank": 0.01,
+        "afferentCoupling": 0,
+        "efferentCoupling": 2,
+        "instability": 1,
+        "numberOfUnitTests": 1,
+        "violations": {}
+    },
+    {
+        "name": "App\\Repository\\GameSessionRepository",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 1,
+        "nbMethods": 1,
+        "nbMethodsPrivate": 0,
+        "nbMethodsPublic": 1,
+        "nbMethodsGetter": 0,
+        "nbMethodsSetters": 0,
+        "wmc": 1,
+        "ccn": 1,
+        "ccnMethodMax": 1,
+        "externals": [
+            "Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "Doctrine\\Persistence\\ManagerRegistry"
+        ],
+        "parents": [
+            "Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository"
+        ],
+        "implements": [],
+        "lcom": 1,
+        "length": 2,
+        "vocabulary": 1,
+        "volume": 0,
+        "difficulty": 0,
+        "effort": 0,
+        "level": 1,
+        "bugs": 0,
+        "time": 0,
+        "intelligentContent": 0,
+        "number_operators": 0,
+        "number_operands": 2,
+        "number_operators_unique": 0,
+        "number_operands_unique": 1,
+        "cloc": 27,
+        "loc": 34,
+        "lloc": 8,
+        "mi": 220.1,
+        "mIwoC": 171,
+        "commentWeight": 49.1,
+        "kanDefect": 0.15,
+        "relativeStructuralComplexity": 1,
+        "relativeDataComplexity": 0.5,
+        "relativeSystemComplexity": 1.5,
+        "totalStructuralComplexity": 1,
+        "totalDataComplexity": 0.5,
+        "totalSystemComplexity": 1.5,
+        "package": "App\\Repository\\",
+        "pageRank": 0.01,
+        "afferentCoupling": 0,
+        "efferentCoupling": 2,
+        "instability": 1,
+        "numberOfUnitTests": 1,
+        "violations": {}
+    },
+    {
+        "name": "App\\Repository\\PlayerRepository",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "__construct",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 1,
+        "nbMethods": 1,
+        "nbMethodsPrivate": 0,
+        "nbMethodsPublic": 1,
+        "nbMethodsGetter": 0,
+        "nbMethodsSetters": 0,
+        "wmc": 1,
+        "ccn": 1,
+        "ccnMethodMax": 1,
+        "externals": [
+            "Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "Doctrine\\Persistence\\ManagerRegistry"
+        ],
+        "parents": [
+            "Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository"
+        ],
+        "implements": [],
+        "lcom": 1,
+        "length": 2,
+        "vocabulary": 1,
+        "volume": 0,
+        "difficulty": 0,
+        "effort": 0,
+        "level": 1,
+        "bugs": 0,
+        "time": 0,
+        "intelligentContent": 0,
+        "number_operators": 0,
+        "number_operands": 2,
+        "number_operators_unique": 0,
+        "number_operands_unique": 1,
+        "cloc": 27,
+        "loc": 34,
+        "lloc": 8,
+        "mi": 220.1,
+        "mIwoC": 171,
+        "commentWeight": 49.1,
+        "kanDefect": 0.15,
+        "relativeStructuralComplexity": 1,
+        "relativeDataComplexity": 0.5,
+        "relativeSystemComplexity": 1.5,
+        "totalStructuralComplexity": 1,
+        "totalDataComplexity": 0.5,
+        "totalSystemComplexity": 1.5,
+        "package": "App\\Repository\\",
+        "pageRank": 0.01,
+        "afferentCoupling": 0,
+        "efferentCoupling": 2,
+        "instability": 1,
+        "numberOfUnitTests": 1,
         "violations": {}
     },
     {
@@ -2598,7 +3953,7 @@ var classes = [
         "totalDataComplexity": 0.75,
         "totalSystemComplexity": 363.75,
         "package": "App\\Repository\\",
-        "pageRank": 0.02,
+        "pageRank": 0.01,
         "afferentCoupling": 1,
         "efferentCoupling": 2,
         "instability": 0.67,

@@ -15,11 +15,11 @@ use PHPUnit\Framework\TestCase;
 class CardStatRepositoryTest extends TestCase
 {
     /**
-     * @var ManagerRegistry
+     * @var ManagerRegistry|\PHPUnit\Framework\MockObject\MockObject
      */
     private $registry;
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $entityManager;
 
@@ -34,11 +34,23 @@ class CardStatRepositoryTest extends TestCase
             ->with(CardStat::class)
             ->willReturn($this->entityManager);
 
-        $classMetadata = $this->createMock(ClassMetadata::class);
-        $classMetadata->name = CardStat::class;
-        $this->entityManager->method('getClassMetadata')
-            ->with(CardStat::class)
-            ->willReturn($classMetadata);
+            $classMetadata = new class(CardStat::class) extends ClassMetadata {
+                public string $name;
+                public function __construct(string $name)
+                {
+                    parent::__construct($name);
+                    $this->name = $name;
+                }
+            };
+
+            $this->entityManager->method('getClassMetadata')
+                ->with(CardStat::class)
+                ->willReturnCallback(function ($className) use ($classMetadata) {
+                    if (!$classMetadata instanceof ClassMetadata) {
+                        throw new \LogicException('Expected instance of ClassMetadata');
+                    }
+                    return $classMetadata;
+                });
     }
 
     /**

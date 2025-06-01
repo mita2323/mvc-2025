@@ -147,7 +147,7 @@ class BlackJackPlayer
      */
     public function getBalance(): int
     {
-        return $this->entity ? $this->entity->getBalance() : 0;
+        return (int) ($this->entity?->getBalance() ?? 0);
     }
 
     /**

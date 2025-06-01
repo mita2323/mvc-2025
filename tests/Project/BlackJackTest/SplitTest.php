@@ -19,19 +19,19 @@ use PHPUnit\Framework\TestCase;
 class SplitTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface
+     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $entityManagerMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $playerRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $gameSessionRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $cardStatRepositoryMock;
     /**
@@ -110,7 +110,7 @@ class SplitTest extends TestCase
         $this->assertFalse($game->split(-1));
         $this->assertFalse($game->split(99));
 
-        $this->entityManagerMock->expects($this->never())->method('persist');
+        $this->entityManagerMock->/** @scrutinizer ignore-call */expects($this->never())->method('persist');
         $this->entityManagerMock->expects($this->never())->method('flush');
     }
 

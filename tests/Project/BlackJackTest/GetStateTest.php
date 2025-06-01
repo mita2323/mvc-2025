@@ -19,19 +19,19 @@ use PHPUnit\Framework\TestCase;
 class GetStateTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface
+     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $entityManagerMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $playerRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $gameSessionRepositoryMock;
     /**
-     * @var EntityRepository
+     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $cardStatRepositoryMock;
     /**
@@ -88,15 +88,15 @@ class GetStateTest extends TestCase
     public function testGetStateWithNoHandsAndEmptyDeck()
     {
         // Setup mocks for empty hands and balance
-        $this->mockPlayer->method('getName')->willReturn('TestPlayer');
-        $this->mockPlayer->method('getBalance')->willReturn(1000);
-        $this->mockPlayer->method('getHands')->willReturn([]);
+        $this->mockPlayer->/** @scrutinizer ignore-call */method('getName')->willReturn('TestPlayer');
+        $this->mockPlayer->/** @scrutinizer ignore-call */method('getBalance')->willReturn(1000);
+        $this->mockPlayer->/** @scrutinizer ignore-call */method('getHands')->willReturn([]);
 
         // Dealer has no hands
-        $this->mockDealer->method('getHands')->willReturn([]);
+        $this->mockDealer->/** @scrutinizer ignore-call */method('getHands')->willReturn([]);
 
         // Deck is empty
-        $this->mockDeck->method('getCards')->willReturn([]);
+        $this->mockDeck->/** @scrutinizer ignore-call */method('getCards')->willReturn([]);
 
         $game = new BlackJack('TestPlayer', $this->entityManagerMock);
 

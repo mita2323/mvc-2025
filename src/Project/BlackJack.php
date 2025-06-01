@@ -48,11 +48,6 @@ class BlackJack
      */
     private int $activeHandIndex = 0;
 
-    /**
-     * Player entity linked to this game.
-     * @var PlayerEntity|null
-     */
-
     private $playerEntity;
     /**
      * Current game session entity.
@@ -406,7 +401,10 @@ class BlackJack
 
         $this->status = 'game_over';
 
-        $this->entityManager->persist($this->player->getEntity());
+        $playerEntity = $this->player->getEntity();
+        if ($playerEntity !== null) {
+            $this->entityManager->persist($playerEntity);
+        }
         $this->entityManager->flush();
 
         $gameSession = $this->entityManager->getRepository(GameSession::class)->findOneBy([], ['id' => 'DESC']);
