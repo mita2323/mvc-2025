@@ -11,6 +11,7 @@ use App\Entity\GameSession;
 use App\Entity\CardStat;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,19 +20,22 @@ use PHPUnit\Framework\TestCase;
 class ResetTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityManagerInterface&MockObject
      */
     private $entityManagerMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<PlayerEntity>&MockObject
      */
     private $playerRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<GameSession>&MockObject
      */
     private $gameSessionRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<CardStat>&MockObject
      */
     private $cardStatRepositoryMock;
 

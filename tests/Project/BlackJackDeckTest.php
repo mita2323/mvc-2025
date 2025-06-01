@@ -52,7 +52,6 @@ class BlackJackDeckTest extends TestCase
     {
         $deck = new BlackJackDeck();
         $cards = $deck->getCards();
-        $this->assertIsArray($cards);
         $this->assertCount(52, $cards);
     }
 
@@ -71,8 +70,8 @@ class BlackJackDeckTest extends TestCase
         $this->assertNotEquals($initialCards, $shuffledCards, "Shuffled deck should not have the same order as the initial deck (statistically likely).");
         $this->assertCount(52, $shuffledCards, "Shuffling should not change the number of cards.");
 
-        $initialCardStrings = array_map(fn($card) => (string)$card, $initialCards);
-        $shuffledCardStrings = array_map(fn($card) => (string)$card, $shuffledCards);
+        $initialCardStrings = array_map(fn ($card) => (string)$card, $initialCards);
+        $shuffledCardStrings = array_map(fn ($card) => (string)$card, $shuffledCards);
         sort($initialCardStrings);
         sort($shuffledCardStrings);
         $this->assertEquals($initialCardStrings, $shuffledCardStrings, "Shuffling should retain all original cards.");

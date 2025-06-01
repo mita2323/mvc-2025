@@ -13,10 +13,10 @@ class CardStat
 {
     /**
      * The unique id for CardStat.
+     * @var int|null The unique identifier; null until persisted
      */
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    // @phpstan-ignore-next-line
     private ?int $id = null;
 
     /**

@@ -34,23 +34,18 @@ class CardStatRepositoryTest extends TestCase
             ->with(CardStat::class)
             ->willReturn($this->entityManager);
 
-            $classMetadata = new class(CardStat::class) extends ClassMetadata {
-                public string $name;
-                public function __construct(string $name)
-                {
-                    parent::__construct($name);
-                    $this->name = $name;
-                }
-            };
+        $classMetadata = new class (CardStat::class) extends ClassMetadata {
+            public function __construct(string $name)
+            {
+                parent::__construct($name);
+            }
+        };
 
-            $this->entityManager->method('getClassMetadata')
-                ->with(CardStat::class)
-                ->willReturnCallback(function (/** @scrutinizer ignore-unused */$className) use ($classMetadata) {
-                    if (!$classMetadata instanceof ClassMetadata) {
-                        throw new \LogicException('Expected instance of ClassMetadata');
-                    }
-                    return $classMetadata;
-                });
+        $this->entityManager->method('getClassMetadata')
+            ->with(CardStat::class)
+            ->willReturnCallback(function (/** @scrutinizer ignore-unused */$className) use ($classMetadata) {
+                return $classMetadata;
+            });
     }
 
     /**
@@ -58,8 +53,14 @@ class CardStatRepositoryTest extends TestCase
      */
     public function testConstruct(): void
     {
+        // @phpstan-ignore-next-line
         $repository = new CardStatRepository($this->registry);
         $this->assertInstanceOf(CardStatRepository::class, $repository);
-        $this->assertSame($this->entityManager, $repository->getEntityManager());
+
+        $refMethod = new \ReflectionMethod($repository, 'getEntityManager');
+        $refMethod->setAccessible(true);
+        $entityManager = $refMethod->invoke($repository);
+
+        $this->assertSame($this->entityManager, $entityManager);
     }
 }

@@ -11,6 +11,7 @@ use App\Entity\GameSession;
 use App\Entity\CardStat;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,35 +20,24 @@ use PHPUnit\Framework\TestCase;
 class HitTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityManagerInterface&MockObject
      */
     private $entityManagerMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<PlayerEntity>&MockObject
      */
     private $playerRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<GameSession>&MockObject
      */
     private $gameSessionRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<CardStat>&MockObject
      */
     private $cardStatRepositoryMock;
-    /**
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockPlayer;
-    /**
-     * Mock instance of the dealer player for testing dealer-related functionality.
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockDealer;
-    /**
-     * Mock instance of the deck for testing deck-related interactions.
-     * @var BlackJackDeck|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockDeck;
 
     /**
      * Initializes the entity manager and repositories for Player, GameSession, and CardStat.
@@ -66,21 +56,17 @@ class HitTest extends TestCase
                 [GameSession::class, $this->gameSessionRepositoryMock],
                 [CardStat::class, $this->cardStatRepositoryMock],
             ]);
-        
-        $this->mockPlayer = $this->createMock(BlackJackPlayer::class);
-        $this->mockDealer = $this->createMock(BlackJackPlayer::class);
-        $this->mockDeck = $this->createMock(BlackJackDeck::class);
     }
 
     /**
      * Helper method to call private/protected methods for testing.
      * @param object $object The object instance.
      * @param string $methodName The name of the private/protected method.
-     * @param array $parameters Parameters to pass to the method.
+     * @param mixed[] $parameters Parameters to pass to the method.
      * @return mixed The result of the method call.
      * @throws \ReflectionException
      */
-    protected function callPrivateMethod(object $object, string $methodName, array $parameters = [])
+    protected function callPrivateMethod(object $object, string $methodName, array $parameters = []): mixed
     {
         $reflection = new \ReflectionClass(get_class($object));
         $method = $reflection->getMethod($methodName);
@@ -333,7 +319,7 @@ class HitTest extends TestCase
         $this->assertTrue($result, 'Hit should return true indicating a card was drawn.');
     }
 
-    /** 
+    /**
      * Test scenario where the player busts and verify that the bust method is called
      * and balance is updated accordingly.
      */

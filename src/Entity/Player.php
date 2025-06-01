@@ -16,6 +16,7 @@ class Player
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    // @phpstan-ignore-next-line
     private ?int $id = null;
 
     /**
@@ -34,6 +35,7 @@ class Player
      * The number of hands the Player has played.
      */
     #[ORM\Column]
+    // @phpstan-ignore-next-line
     private ?int $numHands = 0;
 
     /**

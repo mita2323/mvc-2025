@@ -11,6 +11,7 @@ use App\Entity\GameSession;
 use App\Entity\CardStat;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,35 +20,24 @@ use PHPUnit\Framework\TestCase;
 class DoubleDownTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityManagerInterface&MockObject
      */
     private $entityManagerMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<PlayerEntity>&MockObject
      */
     private $playerRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<GameSession>&MockObject
      */
     private $gameSessionRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<CardStat>&MockObject
      */
     private $cardStatRepositoryMock;
-    /**
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockPlayer;
-    /**
-     * Mock instance of the dealer player for testing dealer-related functionality.
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockDealer;
-    /**
-     * Mock instance of the deck for testing deck-related interactions.
-     * @var BlackJackDeck|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockDeck;
 
     /**
      * Initializes the entity manager and repositories for Player, GameSession, and CardStat.
@@ -66,10 +56,6 @@ class DoubleDownTest extends TestCase
                 [GameSession::class, $this->gameSessionRepositoryMock],
                 [CardStat::class, $this->cardStatRepositoryMock],
             ]);
-        
-        $this->mockPlayer = $this->createMock(BlackJackPlayer::class);
-        $this->mockDealer = $this->createMock(BlackJackPlayer::class);
-        $this->mockDeck = $this->createMock(BlackJackDeck::class);
     }
 
     /**
@@ -184,7 +170,7 @@ class DoubleDownTest extends TestCase
         $result = $game->doubleDown(0);
         $this->assertFalse($result);
         $game->startGame(1, 100);
-        
+
         $player = $game->getPlayer();
         $playerReflection = new \ReflectionClass($player);
         $handStatesProperty = $playerReflection->getProperty('handStates');

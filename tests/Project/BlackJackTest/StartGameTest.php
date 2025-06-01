@@ -11,6 +11,7 @@ use App\Entity\GameSession;
 use App\Entity\CardStat;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,23 +20,27 @@ use PHPUnit\Framework\TestCase;
 class StartGameTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityManagerInterface&MockObject
      */
     private $entityManagerMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<PlayerEntity>&MockObject
      */
     private $playerRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<GameSession>&MockObject
      */
     private $gameSessionRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<CardStat>&MockObject
      */
     private $cardStatRepositoryMock;
+
     /**
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
+     * @var BlackJackPlayer&\PHPUnit\Framework\MockObject\MockObject
      */
     private $mockPlayer;
 
@@ -63,7 +68,7 @@ class StartGameTest extends TestCase
      * Helper method to call private/protected methods for testing.
      * @param object $object The object instance.
      * @param string $methodName The name of the private/protected method.
-     * @param array $parameters Parameters to pass to the method.
+     * @param mixed[] $parameters Parameters to pass to the method.
      * @return mixed The result of the method call.
      * @throws \ReflectionException
      */

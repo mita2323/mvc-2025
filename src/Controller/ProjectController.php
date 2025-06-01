@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-/** 
+/**
  * ProjectController class
  */
 class ProjectController extends AbstractController
@@ -31,7 +31,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * 
+     *
      */
     private function renderPlayPage(BlackJack $game): Response
     {
@@ -90,8 +90,24 @@ class ProjectController extends AbstractController
     #[Route('/proj/bet', name: 'blackjack_bet', methods: ['GET', 'POST'])]
     public function bet(Request $request, SessionInterface $session): Response
     {
-        $playerName = $request->request->get('player_name', $session->get('player_name'));
-        $numHands = (int) $request->request->get('num_hands', $session->get('num_hands', 1));
+        $playerName = $request->request->get('player_name');
+        if (!is_string($playerName) || trim($playerName) === '') {
+            $playerName = $session->get('player_name');
+            if (!is_string($playerName) || trim($playerName) === '') {
+                $this->addFlash('error', 'Please enter your name to start the game.');
+                return $this->redirectToRoute('project');
+            }
+        }
+
+        $numHands = $request->request->get('num_hands');
+
+        if (!is_numeric($numHands)) {
+            $numHands = $session->get('num_hands', 1);
+            if (!is_numeric($numHands)) {
+                $numHands = 1;
+            }
+        }
+        $numHands = (int) $numHands;
 
         if (empty($playerName)) {
             $this->addFlash('error', 'Please enter your name to start the game.');
@@ -108,7 +124,15 @@ class ProjectController extends AbstractController
         $session->set('player_name', $playerName);
         $session->set('num_hands', $numHands);
 
+        $playerNameRaw = $session->get('player_name');
+        if (!is_string($playerNameRaw)) {
+            $playerName = '';
+        } else {
+            $playerName = $playerNameRaw;
+        }
+
         $game = new BlackJack($playerName, $this->entityManager);
+
         $balance = $game->getPlayer()->getBalance();
 
         if ($balance <= 0) {
@@ -132,10 +156,23 @@ class ProjectController extends AbstractController
     public function start(Request $request, SessionInterface $session): Response
     {
         $playerName = $session->get('player_name');
-        $numHands = $session->get('num_hands');
-        $bet = (int) $request->request->get('bet', 10);
+        if (!is_string($playerName) || trim($playerName) === '') {
+            return $this->redirectToRoute('project');
+        }
 
-        if (empty($playerName) || $numHands === null) {
+        $numHandsRaw = $session->get('num_hands');
+        if (!is_numeric($numHandsRaw)) {
+            return $this->redirectToRoute('project');
+        }
+        $numHands = (int)$numHandsRaw;
+
+        $bet = $request->request->get('bet');
+        if (!is_numeric($bet)) {
+            $bet = 10;
+        }
+        $bet = (int) $bet;
+
+        if (empty($playerName)) {
             return $this->redirectToRoute('project');
         }
 
@@ -166,15 +203,20 @@ class ProjectController extends AbstractController
     public function play(SessionInterface $session): Response
     {
         $gameState = $session->get('game_state');
+        if (!is_array($gameState)) {
+            return $this->redirectToRoute('project');
+        }
+
         $playerName = $session->get('player_name');
-        if (!$gameState || empty($playerName)) {
+        if (!is_string($playerName) || trim($playerName) === '') {
             return $this->redirectToRoute('project');
         }
 
         $game = new BlackJack($playerName, $this->entityManager);
         $game->reset($gameState);
+
         return $this->renderPlayPage($game);
-    }
+}
 
     /**
      * Handles the "Hit" action for a specific player hand.
@@ -186,9 +228,12 @@ class ProjectController extends AbstractController
     public function hit(int $handIndex, SessionInterface $session): Response
     {
         $gameState = $session->get('game_state');
+        if (!is_array($gameState)) {
+            return $this->redirectToRoute('project');
+        }
+
         $playerName = $session->get('player_name');
-        
-        if (!$gameState || empty($playerName)) {
+        if (!is_string($playerName) || trim($playerName) === '') {
             return $this->redirectToRoute('project');
         }
 
@@ -213,8 +258,12 @@ class ProjectController extends AbstractController
     public function stand(int $handIndex, SessionInterface $session): Response
     {
         $gameState = $session->get('game_state');
+        if (!is_array($gameState)) {
+            return $this->redirectToRoute('project');
+        }
+
         $playerName = $session->get('player_name');
-        if (!$gameState || empty($playerName)) {
+        if (!is_string($playerName) || trim($playerName) === '') {
             return $this->redirectToRoute('project');
         }
 
@@ -239,8 +288,12 @@ class ProjectController extends AbstractController
     public function double(int $handIndex, SessionInterface $session): Response
     {
         $gameState = $session->get('game_state');
+        if (!is_array($gameState)) {
+            return $this->redirectToRoute('project');
+        }
+
         $playerName = $session->get('player_name');
-        if (!$gameState || empty($playerName)) {
+        if (!is_string($playerName) || trim($playerName) === '') {
             return $this->redirectToRoute('project');
         }
 
@@ -265,8 +318,12 @@ class ProjectController extends AbstractController
     public function split(int $handIndex, SessionInterface $session): Response
     {
         $gameState = $session->get('game_state');
+        if (!is_array($gameState)) {
+            return $this->redirectToRoute('project');
+        }
+
         $playerName = $session->get('player_name');
-        if (!$gameState || empty($playerName)) {
+        if (!is_string($playerName) || trim($playerName) === '') {
             return $this->redirectToRoute('project');
         }
 
@@ -291,6 +348,10 @@ class ProjectController extends AbstractController
     public function reset(SessionInterface $session): Response
     {
         $playerName = $session->get('player_name');
+        if (!is_string($playerName) || trim($playerName) === '') {
+            return $this->redirectToRoute('project');
+        }
+
         if ($playerName) {
             $playerEntity = $this->entityManager->getRepository(PlayerEntity::class)->findOneBy(['name' => $playerName]);
             if ($playerEntity) {

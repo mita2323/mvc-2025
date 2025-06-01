@@ -34,24 +34,18 @@ class GameSessionRepositoryTest extends TestCase
             ->with(GameSession::class)
             ->willReturn($this->entityManager);
 
-            $classMetadata = new class(GameSession::class) extends ClassMetadata {
-                public string $name;
+        $classMetadata = new class (GameSession::class) extends ClassMetadata {
+            public function __construct(string $name)
+            {
+                parent::__construct($name);
+            }
+        };
 
-                public function __construct(string $name)
-                {
-                    parent::__construct($name);
-                    $this->name = $name;
-                }
-            };
-
-            $this->entityManager->method('getClassMetadata')
-                ->with(GameSession::class)
-                ->willReturnCallback(function (/** @scrutinizer ignore-unused */$className) use ($classMetadata) {
-                    if (!$classMetadata instanceof ClassMetadata) {
-                        throw new \LogicException('Expected instance of ClassMetadata');
-                    }
-                    return $classMetadata;
-                });
+        $this->entityManager->method('getClassMetadata')
+            ->with(GameSession::class)
+            ->willReturnCallback(function (/** @scrutinizer ignore-unused */$className) use ($classMetadata) {
+                return $classMetadata;
+            });
     }
 
     /**
@@ -59,8 +53,14 @@ class GameSessionRepositoryTest extends TestCase
      */
     public function testConstruct(): void
     {
+        // @phpstan-ignore-next-line
         $repository = new GameSessionRepository($this->registry);
         $this->assertInstanceOf(GameSessionRepository::class, $repository);
-        $this->assertSame($this->entityManager, $repository->getEntityManager());
+
+        $refMethod = new \ReflectionMethod($repository, 'getEntityManager');
+        $refMethod->setAccessible(true);
+        $entityManager = $refMethod->invoke($repository);
+
+        $this->assertSame($this->entityManager, $entityManager);
     }
 }

@@ -11,43 +11,33 @@ use App\Entity\GameSession;
 use App\Entity\CardStat;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Test cases for the BlackJack stand method.
- */
-class StandTest extends TestCase
-{
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * Test cases for the BlackJack stand method.
+     */
+    class StandTest extends TestCase
+    {
+    /**
+     * @var EntityManagerInterface&MockObject
      */
     private $entityManagerMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<PlayerEntity>&MockObject
      */
     private $playerRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<GameSession>&MockObject
      */
     private $gameSessionRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<CardStat>&MockObject
      */
     private $cardStatRepositoryMock;
-    /**
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockPlayer;
-    /**
-     * Mock instance of the dealer player for testing dealer-related functionality.
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockDealer;
-    /**
-     * Mock instance of the deck for testing deck-related interactions.
-     * @var BlackJackDeck|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockDeck;
 
     /**
      * Initializes the entity manager and repositories for Player, GameSession, and CardStat.
@@ -66,10 +56,6 @@ class StandTest extends TestCase
                 [GameSession::class, $this->gameSessionRepositoryMock],
                 [CardStat::class, $this->cardStatRepositoryMock],
             ]);
-        
-        $this->mockPlayer = $this->createMock(BlackJackPlayer::class);
-        $this->mockDealer = $this->createMock(BlackJackPlayer::class);
-        $this->mockDeck = $this->createMock(BlackJackDeck::class);
     }
 
     /**

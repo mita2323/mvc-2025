@@ -102,7 +102,12 @@ class BlackJackGraphicTest extends TestCase
         ];
         $this->assertEquals($expected, $card->jsonSerialize());
 
+        $jsonExpected = json_encode($expected);
+        $this->assertNotFalse($jsonExpected, 'json_encode on $expected failed');
+
         $jsonEncoded = json_encode($card);
-        $this->assertJsonStringEqualsJsonString(json_encode($expected), $jsonEncoded);
+        $this->assertNotFalse($jsonEncoded, 'json_encode on $card failed');
+
+        $this->assertJsonStringEqualsJsonString($jsonExpected, $jsonEncoded);
     }
 }

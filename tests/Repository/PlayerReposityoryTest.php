@@ -34,13 +34,10 @@ class PlayerRepositoryTest extends TestCase
             ->with(Player::class)
             ->willReturn($this->entityManager);
 
-        $classMetadata = new class(Player::class) extends ClassMetadata {
-            public string $name;
-
+        $classMetadata = new class (Player::class) extends ClassMetadata {
             public function __construct(string $name)
             {
                 parent::__construct($name);
-                $this->name = $name;
             }
         };
 
@@ -54,8 +51,14 @@ class PlayerRepositoryTest extends TestCase
      */
     public function testConstruct(): void
     {
+        // @phpstan-ignore-next-line
         $repository = new PlayerRepository($this->registry);
         $this->assertInstanceOf(PlayerRepository::class, $repository);
-        $this->assertSame($this->entityManager, $repository->getEntityManager());
+
+        $refMethod = new \ReflectionMethod($repository, 'getEntityManager');
+        $refMethod->setAccessible(true);
+        $entityManager = $refMethod->invoke($repository);
+
+        $this->assertSame($this->entityManager, $entityManager);
     }
 }

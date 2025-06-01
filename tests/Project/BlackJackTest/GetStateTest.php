@@ -11,6 +11,7 @@ use App\Entity\GameSession;
 use App\Entity\CardStat;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,33 +20,39 @@ use PHPUnit\Framework\TestCase;
 class GetStateTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityManagerInterface&MockObject
      */
     private $entityManagerMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<PlayerEntity>&MockObject
      */
     private $playerRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<GameSession>&MockObject
      */
     private $gameSessionRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<CardStat>&MockObject
      */
     private $cardStatRepositoryMock;
+
     /**
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
+     * @var BlackJackPlayer&\PHPUnit\Framework\MockObject\MockObject
      */
     private $mockPlayer;
+
     /**
      * Mock instance of the dealer player for testing dealer-related functionality.
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
+     * @var BlackJackPlayer&\PHPUnit\Framework\MockObject\MockObject
      */
     private $mockDealer;
+
     /**
      * Mock instance of the deck for testing deck-related interactions.
-     * @var BlackJackDeck|\PHPUnit\Framework\MockObject\MockObject
+     * @var BlackJackDeck&\PHPUnit\Framework\MockObject\MockObject
      */
     private $mockDeck;
 
@@ -66,7 +73,7 @@ class GetStateTest extends TestCase
                 [GameSession::class, $this->gameSessionRepositoryMock],
                 [CardStat::class, $this->cardStatRepositoryMock],
             ]);
-        
+
         $this->mockPlayer = $this->createMock(BlackJackPlayer::class);
         $this->mockDealer = $this->createMock(BlackJackPlayer::class);
         $this->mockDeck = $this->createMock(BlackJackDeck::class);
@@ -74,8 +81,12 @@ class GetStateTest extends TestCase
 
     /**
      * Helper for reflection property setting.
+     * @param object $obj
+     * @param string $prop
+     * @param mixed $val
      */
-    private function setPrivateProperty(object $obj, string $prop, $val): void {
+    private function setPrivateProperty(object $obj, string $prop, mixed $val): void
+    {
         $reflection = new \ReflectionClass($obj);
         $property = $reflection->getProperty($prop);
         $property->setAccessible(true);
@@ -85,7 +96,7 @@ class GetStateTest extends TestCase
     /**
      * Test getState method when the player has no hands and the deck is empty.
      */
-    public function testGetStateWithNoHandsAndEmptyDeck()
+    public function testGetStateWithNoHandsAndEmptyDeck(): void
     {
         // Setup mocks for empty hands and balance
         $this->mockPlayer->/** @scrutinizer ignore-call */method('getName')->willReturn('TestPlayer');
@@ -126,7 +137,7 @@ class GetStateTest extends TestCase
      * Test getState when the player and dealer have hands and there are
      * card remaining in the deck.
      */
-    public function testGetStateWithPlayerAndDealerHandsAndDeck()
+    public function testGetStateWithPlayerAndDealerHandsAndDeck(): void
     {
         // Create card objects for player, dealer, and deck.
         $playerCard1 = new BlackJackGraphic('Hearts', 'King');

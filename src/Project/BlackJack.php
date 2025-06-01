@@ -48,13 +48,6 @@ class BlackJack
      */
     private int $activeHandIndex = 0;
 
-    private $playerEntity;
-    /**
-     * Current game session entity.
-     * @var GameSession|null
-     */
-    private ?GameSession $gameSession = null;
-
     /**
      * Initializes a new Blackjack game for a player.
      * @param string $playerName The name of the player.
@@ -112,7 +105,6 @@ class BlackJack
         $gameSession->setOutcome('ongoing');
         $this->entityManager->persist($gameSession);
         $this->entityManager->flush();
-        $this->gameSession = $gameSession;
 
         $this->deck = $this->createDeck();
         $this->deck->shuffle();
@@ -349,7 +341,7 @@ class BlackJack
      */
     private function playDealer(): void
     {
-    $anyPlayerHandNotBusted = false;
+        $anyPlayerHandNotBusted = false;
         foreach ($this->player->getHands() as $handIndex => $hand) {
             if ($this->player->getHandState($handIndex) !== 'busted') {
                 $anyPlayerHandNotBusted = true;
@@ -481,7 +473,7 @@ class BlackJack
 
     /**
      * Gets the current game state as an array.
-     * @return array The game state data.
+     * @return array<string, mixed> The game state data.
      */
     public function getState(): array
     {
@@ -521,7 +513,7 @@ class BlackJack
 
     /**
      * Restores the game state from a provided array.
-     * @param array $state The game data to restore.
+     * @param array<string, mixed>|mixed[] $state The game data to restore.
      */
     public function reset(array $state): void
     {

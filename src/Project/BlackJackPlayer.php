@@ -75,7 +75,7 @@ class BlackJackPlayer
 
     /**
      * Gets all original bets.
-     * 
+     * @return int[] The original bets array.
      */
     public function getOriginalBets(): array
     {
@@ -191,7 +191,7 @@ class BlackJackPlayer
 
     /**
      * Sets all bets (for state restoration).
-     * @param array $bets An associative array of bets by hand index.
+     * @param int[] $bets An array of bet amounts by hand index.
      */
     public function setAllBets(array $bets): void
     {
@@ -261,10 +261,10 @@ class BlackJackPlayer
 
     /**
      * Converts card value to integer score.
-     * @param string $cardValue The card value (e.g., 'A', 'K', '10').
+     * @param string|int $cardValue The card value (e.g., 'A', 'K', '10').
      * @return int The integer score for the card.
      */
-    private function getCardValue(string $cardValue): int
+    private function getCardValue(string|int $cardValue): int
     {
         if (in_array($cardValue, ['J', 'Q', 'K'], true)) {
             return 10;
@@ -404,7 +404,7 @@ class BlackJackPlayer
 
     /**
      * Sets the player's hands for state restoration.
-     * @param array $hands The hands to set.
+     * @param BlackJackGraphic[][] $hands The hands to set.
      */
     public function setHands(array $hands): void
     {
@@ -413,7 +413,7 @@ class BlackJackPlayer
 
     /**
      * Sets all hand states for state restoration.
-     * @param array $handStates An associative array of hand states by hand index.
+     * @param string[] $handStates An associative array of hand states by hand index.
      */
     public function setAllHandStates(array $handStates): void
     {

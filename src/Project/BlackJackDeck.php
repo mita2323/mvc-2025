@@ -57,7 +57,7 @@ class BlackJackDeck
 
     /**
      * Sets the deck's cards.
-     * @param array $cards Array of BlackJackGraphic objects or arrays with suit/value.
+     * @param array<int, BlackJackGraphic|array{suit:string, rank:string}> $cards
      */
     public function setCards(array $cards): void
     {
@@ -65,7 +65,7 @@ class BlackJackDeck
         foreach ($cards as $cardData) {
             if ($cardData instanceof BlackJackGraphic) {
                 $this->cards[] = $cardData;
-            } elseif (is_array($cardData) && isset($cardData['suit'], $cardData['rank'])) {
+            } else {
                 $this->cards[] = new BlackJackGraphic($cardData['suit'], $cardData['rank']);
             }
         }

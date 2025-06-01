@@ -11,6 +11,7 @@ use App\Entity\GameSession;
 use App\Entity\CardStat;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,35 +20,24 @@ use PHPUnit\Framework\TestCase;
 class SplitTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityManagerInterface&MockObject
      */
     private $entityManagerMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<PlayerEntity>&MockObject
      */
     private $playerRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<GameSession>&MockObject
      */
     private $gameSessionRepositoryMock;
+
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository<CardStat>&MockObject
      */
     private $cardStatRepositoryMock;
-    /**
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockPlayer;
-    /**
-     * Mock instance of the dealer player for testing dealer-related functionality.
-     * @var BlackJackPlayer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockDealer;
-    /**
-     * Mock instance of the deck for testing deck-related interactions.
-     * @var BlackJackDeck|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $mockDeck;
 
     /**
      * Initializes the entity manager and repositories for Player, GameSession, and CardStat.
@@ -66,16 +56,12 @@ class SplitTest extends TestCase
                 [GameSession::class, $this->gameSessionRepositoryMock],
                 [CardStat::class, $this->cardStatRepositoryMock],
             ]);
-        
-        $this->mockPlayer = $this->createMock(BlackJackPlayer::class);
-        $this->mockDealer = $this->createMock(BlackJackPlayer::class);
-        $this->mockDeck = $this->createMock(BlackJackDeck::class);
     }
 
     /**
      * Helper to set private or protected property on objects for test setup.
      */
-    private function setPrivateProperty($object, $property, $value): void
+    private function setPrivateProperty(object $object, string $property, mixed $value): void
     {
         $reflection = new \ReflectionClass($object);
         $prop = $reflection->getProperty($property);
@@ -145,7 +131,7 @@ class SplitTest extends TestCase
         ]);
         $handStatesProperty->setValue($player, [0 => 'active']);
         $betsProperty->setValue($player, [0 => $bet]);
-        
+
         // Simulate player having less balance than bet.
         $player->setBalance($initialBalance - $bet);
 
@@ -240,7 +226,7 @@ class SplitTest extends TestCase
         $player = $game->getPlayer();
 
         // Reset player state to default splittable hand, bet, and active state.
-        $resetPlayerState = function() use ($player, $game) {
+        $resetPlayerState = function () use ($player, $game) {
             $this->setPrivateProperty($player, 'hands', [[new BlackJackGraphic('H', '8'), new BlackJackGraphic('S', '8')]]);
             $this->setPrivateProperty($player, 'bets', [0 => 100]);
             $this->setPrivateProperty($player, 'handStates', [0 => 'active']);
