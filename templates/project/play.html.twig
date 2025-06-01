@@ -65,7 +65,7 @@
                 <div class="deck player-hand-{{ handIndex }}" style="border: {% if handIndex == activeHandIndex and status == 'ongoing' %}2px solid green{% else %}1px solid #ccc{% endif %}; padding: 0.5em;">
                     {% for card in hand %}
                         <div class="cardimage {{ card.getSuit()|default('unknown') }}">
-                            {{ card.getAsString|default('unknown') }}
+                            {{ card|default('unknown') }}
                         </div>
                     {% endfor %}
                 </div>
@@ -88,10 +88,9 @@
             <div class="deck" id="dealer-hand-display">
                 {% if dealer.getHand|length > 0 %}
                     <div class="cardimage {{ dealer.getHand[0].getSuit()|default('unknown') }}">
-                        {{ dealer.getHand[0].getAsString|default('unknown') }}
+                        {{ dealer.getHand[0].__toString()|default('unknown') }}
                     </div>
                 {% endif %}
-
                 {% if dealer.getHand|length > 1 %}
                     <div class="cardimage card-back-placeholder">
                         <img src="{{ asset('images/card-back.png') }}" alt="Card Back" class="card-back">

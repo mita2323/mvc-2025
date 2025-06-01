@@ -268,11 +268,10 @@ class SplitTest extends TestCase
         $playerEntity->setBalance(1000);
         $deck = $this->createMock(BlackJackDeck::class);
 
-        // Draw two new cards for the split hands.
-        $deck->method('draw')->willReturnOnConsecutiveCalls(
-            new BlackJackGraphic('C', '2'),
-            new BlackJackGraphic('D', '3')
-        );
+        $deck->method('draw')->willReturnCallback(function () {
+            return new BlackJackGraphic('H', '9');
+        });
+
         $this->setPrivateProperty($game, 'deck', $deck);
 
         $result = $game->split(0);
