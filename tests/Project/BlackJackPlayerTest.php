@@ -158,7 +158,7 @@ class BlackJackPlayerTest extends TestCase
      */
     public function testPlaceBet(): void
     {
-        $this->mockPlayerEntity->method('getBalance')
+        $this->mockPlayerEntity->/** @scrutinizer ignore-call */method('getBalance')
                                     ->willReturnOnConsecutiveCalls(
                                         1000.0,
                                         1000.0,
@@ -167,7 +167,7 @@ class BlackJackPlayerTest extends TestCase
                                         850.0
                                     );
 
-        $this->mockPlayerEntity->expects($this->exactly(2))
+       /** @scrutinizer ignore-deprecated */$this->mockPlayerEntity->expects($this->exactly(2))
                                 ->method('setBalance')
                                 ->withConsecutive([900], [850]);
 
@@ -284,7 +284,7 @@ class BlackJackPlayerTest extends TestCase
 
     /**
      * Tests the 'getScore' method-
-     * @param array<int, array{string, string}> $cards The cards to add to the player's hand.
+     * @param array<int, array<string>> $cards The cards to add to the player's hand, where each card is an array of [suit, rank].
      * @param int $expectedScore The expected score for the hand.
      * @dataProvider getScoreDataProvider
      */
@@ -576,7 +576,7 @@ class BlackJackPlayerTest extends TestCase
         $this->mockPlayerEntity->expects($this->exactly(4))
                             ->method('getBalance')
                             ->willReturnOnConsecutiveCalls(200.0, 200.0, 100.0, 100.0);
-        $this->mockPlayerEntity->/** @scrutinizer ignore-deprecated */expects($this->exactly(2))
+        /** @scrutinizer ignore-deprecated */$this->mockPlayerEntity->/** @scrutinizer ignore-deprecated */expects($this->exactly(2))
                             ->method('setBalance')
                             ->withConsecutive([100.0], [0.0]);
         $player = new BlackJackPlayer("Test Player", $this->mockPlayerEntity);
