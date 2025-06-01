@@ -3336,12 +3336,12 @@ var classes = [
         "number_operands": 43,
         "number_operators_unique": 5,
         "number_operands_unique": 21,
-        "cloc": 23,
-        "loc": 76,
+        "cloc": 18,
+        "loc": 71,
         "lloc": 53,
-        "mi": 82.52,
+        "mi": 80.04,
         "mIwoC": 44.88,
-        "commentWeight": 37.64,
+        "commentWeight": 35.17,
         "kanDefect": 0.29,
         "relativeStructuralComplexity": 9,
         "relativeDataComplexity": 2.34,
@@ -3354,7 +3354,7 @@ var classes = [
         "afferentCoupling": 3,
         "efferentCoupling": 1,
         "instability": 0.25,
-        "numberOfUnitTests": 70,
+        "numberOfUnitTests": 132,
         "violations": {}
     },
     {
@@ -3613,7 +3613,7 @@ var classes = [
         "afferentCoupling": 1,
         "efferentCoupling": 3,
         "instability": 0.75,
-        "numberOfUnitTests": 0,
+        "numberOfUnitTests": 60,
         "violations": {}
     },
     {

@@ -6,7 +6,6 @@ use App\Entity\GameSession;
 use App\Entity\CardStat;
 use App\Entity\Player as PlayerEntity;
 use Doctrine\ORM\EntityManagerInterface;
-
 /**
  * BlackJack class.
  */
@@ -17,37 +16,31 @@ class BlackJack
      * @var BlackJackDeck
      */
     private BlackJackDeck $deck;
-
     /**
      * The player in the game.
      * @var BlackJackPlayer
      */
     private BlackJackPlayer $player;
-
     /**
      * The dealer.
      * @var BlackJackPlayer
      */
     private BlackJackPlayer $dealer;
-
     /**
      * The current status of the game.
      * @var string
      */
     private string $status;
-
     /**
      * The Doctrine EntityManager.
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-
     /**
      * The index of the currently active player hand.
      * @var int
      */
     private int $activeHandIndex = 0;
-
     /**
      * Initializes a new Blackjack game for a player.
      * @param string $playerName The name of the player.
@@ -58,7 +51,6 @@ class BlackJack
         $this->deck = new BlackJackDeck();
         $this->deck->shuffle();
         $this->entityManager = $entityManager;
-
         $playerEntity = $entityManager->getRepository(PlayerEntity::class)->findOneBy(['name' => $playerName]);
         if (!$playerEntity) {
             $playerEntity = new PlayerEntity();
@@ -71,7 +63,6 @@ class BlackJack
         $this->dealer = new BlackJackPlayer('Dealer', null);
         $this->status = 'not_started';
     }
-
     /**
      * Creates and returns a new deck of cards.
      * @return BlackJackDeck A fresh shuffled deck.
@@ -80,7 +71,6 @@ class BlackJack
     {
         return new BlackJackDeck();
     }
-
     /**
      * Starts a new Blackjack game with the specified number of hands and bet per hand.
      * @param int $numHands The number of hands to play.
@@ -92,12 +82,10 @@ class BlackJack
         if ($numHands < 1 || $numHands > 3) {
             return false;
         }
-
         $totalBet = $betPerHand * $numHands;
         if ($this->player->getBalance() < $totalBet) {
             return false;
         }
-
         $gameSession = new GameSession();
         $gameSession->setPlayer($this->player->getEntity());
         $gameSession->setNumHands($numHands);
@@ -105,11 +93,9 @@ class BlackJack
         $gameSession->setOutcome('ongoing');
         $this->entityManager->persist($gameSession);
         $this->entityManager->flush();
-
         $this->deck = $this->createDeck();
         $this->deck->shuffle();
         $this->player->clearHands();
-
         for ($i = 0; $i < $numHands; $i++) {
             $this->player->initializeNewHand($i);
             if (!$this->player->placeBet($betPerHand, $i)) {
@@ -126,9 +112,7 @@ class BlackJack
                 return false;
             }
         }
-
         $this->activeHandIndex = 0;
-
         foreach ($this->player->getHands() as $index => $hand) {
             $score = $this->player->getScore($index);
             if ($score > 21) {
@@ -137,7 +121,6 @@ class BlackJack
                 $this->player->setHandState($index, 'finished');
             }
         }
-
         $card1 = $this->deck->draw();
         $card2 = $this->deck->draw();
         if ($card1 && $card2) {
@@ -148,7 +131,6 @@ class BlackJack
         } else {
             return false;
         }
-
         if ($this->dealer->isBlackjack()) {
             $this->playDealer();
             $this->evaluateGame();
@@ -165,7 +147,6 @@ class BlackJack
         }
         return true;
     }
-
     /**
      * Handles the player's 'hit' action, drawing a card for the specified hand.
      * @param int $handIndex The index of the hand to hit.
@@ -176,24 +157,18 @@ class BlackJack
         if ($this->status !== 'ongoing' || $handIndex !== $this->activeHandIndex || !$this->player->isHandActive($handIndex)) {
             return false;
         }
-
         $card = $this->deck->draw();
         if (!$card) {
             return false;
         }
-
         $this->player->addCard($card, $handIndex);
         $this->updateCardStat($card->getRank());
-
         if ($this->player->getScore($handIndex) > 21) {
             $this->player->bust($handIndex);
         }
-
         $this->advanceTurnLogic();
-
         return true;
     }
-
     /**
      * Handles the player's 'stand' action, ending the turn for the specified hand.
      * @param int $handIndex The index of the hand to stand on.
@@ -203,11 +178,9 @@ class BlackJack
         if ($this->status !== 'ongoing' || $handIndex !== $this->activeHandIndex || !$this->player->isHandActive($handIndex)) {
             return;
         }
-
         $this->player->stand($handIndex);
         $this->advanceTurnLogic();
     }
-
     /**
      * Handles the player's 'double down' action, doubling the bet and drawing one card.
      * @param int $handIndex The index of the hand to double down on.
@@ -218,7 +191,6 @@ class BlackJack
         if ($this->status !== 'ongoing' || $handIndex !== $this->activeHandIndex || !$this->player->isHandActive($handIndex)) {
             return false;
         }
-
         if (count($this->player->getHand($handIndex)) === 2) {
             $bet = $this->player->getBet($handIndex);
             if ($this->player->getBalance() >= $bet && $this->player->placeBet($bet, $handIndex)) {
@@ -226,13 +198,11 @@ class BlackJack
                 if ($card) {
                     $this->player->addCard($card, $handIndex);
                     $this->updateCardStat($card->getRank());
-
                     if ($this->player->getScore($handIndex) > 21) {
                         $this->player->bust($handIndex);
                     } else {
                         $this->player->setHandState($handIndex, 'finished');
                     }
-
                     $this->advanceTurnLogic();
                     return true;
                 }
@@ -240,7 +210,6 @@ class BlackJack
         }
         return false;
     }
-
     /**
      * Handles the player's 'split' action, splitting a pair into two hands.
      * @param int $handIndex The index of the hand to split.
@@ -280,7 +249,6 @@ class BlackJack
         $this->advanceTurnLogic();
         return true;
     }
-
     /**
      * Updates the state of a hand after an action.
      * @param int $handIndex The index of the hand to update.
@@ -294,14 +262,12 @@ class BlackJack
             $this->player->setHandState($handIndex, 'finished');
         }
     }
-
     /**
      * Advances the game turn, moving to the next active hand or ending the game.
      */
     private function advanceTurnLogic(): void
     {
         $nextHand = $this->findNextActiveHand($this->activeHandIndex);
-
         if ($nextHand === -1) {
             $this->playDealer();
             $this->evaluateGame();
@@ -311,7 +277,6 @@ class BlackJack
             $this->status = 'ongoing';
         }
     }
-
     /**
      * Finds the next active hand for the player.
      * @param int $startIndex The index to start searching from.
@@ -320,22 +285,18 @@ class BlackJack
     private function findNextActiveHand(int $startIndex): int
     {
         $numHands = count($this->player->getHands());
-
         for ($i = $startIndex + 1; $i < $numHands; $i++) {
             if ($this->player->isHandActive($i)) {
                 return $i;
             }
         }
-
         for ($i = 0; $i <= $startIndex; $i++) {
             if ($this->player->isHandActive($i)) {
                 return $i;
             }
         }
-
         return -1;
     }
-
     /**
      * Controls the dealer's play, drawing cards until the score is at least 17.
      */
@@ -348,11 +309,9 @@ class BlackJack
                 break;
             }
         }
-
         if (!$anyPlayerHandNotBusted && $this->dealer->getScore() < 21) {
             return;
         }
-
         while ($this->dealer->getScore() < 17) {
             $card = $this->deck->draw();
             if ($card) {
@@ -361,7 +320,6 @@ class BlackJack
             }
         }
     }
-
     /**
      * Evaluates the game outcome, comparing player and dealer scores.
      */
@@ -370,14 +328,11 @@ class BlackJack
         $dealerScore = $this->dealer->getScore();
         $dealerBlackjack = $this->dealer->isBlackjack();
         $betsForDisplay = [];
-
         foreach ($this->player->getHands() as $handIndex => $hand) {
             $playerScore = $this->player->getScore($handIndex);
             $currentBet = $this->player->getBet($handIndex);
             $betsForDisplay[$handIndex] = $currentBet;
-
             $handState = $this->player->getHandState($handIndex);
-
             if ($handState === 'busted') {
                 continue;
             } elseif ($this->player->isBlackjack($handIndex) && !$dealerBlackjack) {
@@ -387,28 +342,22 @@ class BlackJack
             } elseif ($playerScore === $dealerScore) {
                 $this->player->winBet($currentBet, $handIndex);
             }
-
             $this->player->setHandState($handIndex, 'finished');
         }
-
         $this->status = 'game_over';
-
         $playerEntity = $this->player->getEntity();
         if ($playerEntity !== null) {
             $this->entityManager->persist($playerEntity);
         }
         $this->entityManager->flush();
-
         $gameSession = $this->entityManager->getRepository(GameSession::class)->findOneBy([], ['id' => 'DESC']);
         if ($gameSession) {
             $gameSession->setOutcome('completed');
             $this->entityManager->persist($gameSession);
             $this->entityManager->flush();
         }
-
         $this->player->setOriginalBets($betsForDisplay);
     }
-
     /**
      * Updates the card statistics for a drawn card.
      * @param string $cardValue The value of the drawn card.
@@ -425,7 +374,6 @@ class BlackJack
         $this->entityManager->persist($cardStat);
         $this->entityManager->flush();
     }
-
     /**
      * Get the index of the currently active player hand.
      * @return int The active hand index.
@@ -434,7 +382,6 @@ class BlackJack
     {
         return $this->activeHandIndex;
     }
-
     /**
      * Gets the player object.
      * @return BlackJackPlayer The player.
@@ -443,7 +390,6 @@ class BlackJack
     {
         return $this->player;
     }
-
     /**
      * Gets the dealer object.
      * @return BlackJackPlayer The dealer.
@@ -452,7 +398,6 @@ class BlackJack
     {
         return $this->dealer;
     }
-
     /**
      * Gets the current game status.
      * @return string The game status.
@@ -461,7 +406,6 @@ class BlackJack
     {
         return $this->status;
     }
-
     /**
      * Gets the game deck.
      * @return BlackJackDeck The deck of cards.
@@ -470,7 +414,6 @@ class BlackJack
     {
         return $this->deck;
     }
-
     /**
      * Gets the current game state as an array.
      * @return array<string, mixed> The game state data.
@@ -488,16 +431,13 @@ class BlackJack
                 'state' => $this->player->getHandState($handIndex)
             ];
         }
-
         $dealerHands = $this->dealer->getHands();
         $dealerCards = array_map(function ($card) {
             return ['suit' => $card->getSuit(), 'value' => $card->getRank()];
         }, $dealerHands[0] ?? []);
-
         $deckCards = array_map(function ($card) {
             return ['suit' => $card->getSuit(), 'value' => $card->getRank()];
         }, $this->deck->getCards());
-
         return [
             'player' => [
                 'name' => $this->player->getName(),
@@ -510,7 +450,6 @@ class BlackJack
             'status' => $this->status,
         ];
     }
-
     /**
      * Restores the game state from a provided array.
      * @param array<string, mixed>|mixed[] $state The game data to restore.
@@ -523,16 +462,13 @@ class BlackJack
             $deckCards[] = new BlackJackGraphic($cardData['suit'], $cardData['value']);
         }
         $this->deck->setCards($deckCards);
-
         $playerName = $state['player']['name'] ?? 'Player';
         $playerEntity = $this->entityManager->getRepository(PlayerEntity::class)->findOneBy(['name' => $playerName]);
         $this->player = new BlackJackPlayer($playerName, $playerEntity);
-
         $playerHandsData = $state['player']['hands'] ?? [];
         $restoredHands = [];
         $restoredBets = [];
         $restoredHandStates = [];
-
         foreach ($playerHandsData as $handIndex => $handData) {
             $restoredCards = [];
             foreach ($handData['data'] ?? [] as $cardData) {
@@ -542,18 +478,15 @@ class BlackJack
             $restoredBets[$handIndex] = (int)($handData['bet'] ?? 0);
             $restoredHandStates[$handIndex] = $handData['state'] ?? '';
         }
-
         $this->player->setHands($restoredHands);
         $this->player->setAllBets($restoredBets);
         $this->player->setAllHandStates($restoredHandStates);
         $this->player->setBalance((int)($state['player']['balance'] ?? 0));
-
         $this->dealer = new BlackJackPlayer('Dealer');
         foreach ($state['dealer']['hands'][0] ?? [] as $cardData) {
             $card = new BlackJackGraphic($cardData['suit'], $cardData['value']);
             $this->dealer->addCard($card);
         }
-
         $this->status = $state['status'] ?? 'not_started';
         $this->activeHandIndex = $state['player']['activeHandIndex'] ?? 0;
     }

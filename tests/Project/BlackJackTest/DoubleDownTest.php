@@ -13,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-
 /**
  * Test cases for the BlackJack doubleDown method.
  */
@@ -23,22 +22,18 @@ class DoubleDownTest extends TestCase
      * @var MockObject&EntityManagerInterface
      */
     private $entityManagerMock;
-
     /**
      * @var MockObject&EntityRepository<PlayerEntity>
      */
     private $playerRepositoryMock;
-
     /**
      * @var MockObject&EntityRepository<GameSession>
      */
     private $gameSessionRepositoryMock;
-
     /**
      * @var MockObject&EntityRepository<CardStat>
      */
     private $cardStatRepositoryMock;
-
     /**
      * Initializes the entity manager and repositories for Player, GameSession, and CardStat.
      */
@@ -47,9 +42,7 @@ class DoubleDownTest extends TestCase
         $this->playerRepositoryMock = $this->createMock(EntityRepository::class);
         $this->gameSessionRepositoryMock = $this->createMock(EntityRepository::class);
         $this->cardStatRepositoryMock = $this->createMock(EntityRepository::class);
-
         $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
-
         $this->entityManagerMock->method('getRepository')
             ->willReturnMap([
                 [PlayerEntity::class, $this->playerRepositoryMock],
@@ -57,7 +50,6 @@ class DoubleDownTest extends TestCase
                 [CardStat::class, $this->cardStatRepositoryMock],
             ]);
     }
-
     /**
      * Helper method to set a private or protected property value visa reflection.
      * @param object $object The object instance to modify.
@@ -71,7 +63,6 @@ class DoubleDownTest extends TestCase
         $prop->setAccessible(true);
         $prop->setValue($object, $value);
     }
-
     /**
      * Test doubleDown method with insufficient funds.
      */
@@ -80,15 +71,12 @@ class DoubleDownTest extends TestCase
         $playerName = 'TestPlayer';
         $initialBalance = 150;
         $bet = 100;
-
         $existingPlayerEntity = new PlayerEntity();
         $existingPlayerEntity->setName($playerName);
         $existingPlayerEntity->setBalance($initialBalance);
         $this->playerRepositoryMock->method('findOneBy')->willReturn($existingPlayerEntity);
-
         $game = new BlackJack($playerName, $this->entityManagerMock);
         $game->startGame(1, $bet);
-
         $player = $game->getPlayer();
         $playerReflection = new \ReflectionClass($player);
         $handsProperty = $playerReflection->getProperty('hands');
@@ -97,25 +85,20 @@ class DoubleDownTest extends TestCase
         $handStatesProperty->setAccessible(true);
         $betsProperty = $playerReflection->getProperty('bets');
         $betsProperty->setAccessible(true);
-
         $handsProperty->setValue($player, [
             0 => [new BlackJackGraphic('H', '6'), new BlackJackGraphic('D', '4')]
         ]);
         $handStatesProperty->setValue($player, [0 => 'active']);
         $betsProperty->setValue($player, [0 => $bet]);
         $player->setBalance($initialBalance - $bet);
-
         $result = $game->doubleDown(0);
-
         $this->assertFalse($result);
         $this->assertEquals($initialBalance - $bet, $player->getBalance());
         $this->assertEquals($bet, $player->getBet(0));
         $this->assertCount(2, $player->getHand(0));
-
         $this->entityManagerMock->expects($this->never())->method('persist');
         $this->entityManagerMock->expects($this->never())->method('flush');
     }
-
     /**
      * Test doubleDown method when the hand does not have exactly two cards.
      */
@@ -126,17 +109,14 @@ class DoubleDownTest extends TestCase
         $existingPlayerEntity->setName($playerName);
         $existingPlayerEntity->setBalance(1000);
         $this->playerRepositoryMock->method('findOneBy')->willReturn($existingPlayerEntity);
-
         $game = new BlackJack($playerName, $this->entityManagerMock);
         $game->startGame(1, 100);
-
         $player = $game->getPlayer();
         $playerReflection = new \ReflectionClass($player);
         $handsProperty = $playerReflection->getProperty('hands');
         $handsProperty->setAccessible(true);
         $handStatesProperty = $playerReflection->getProperty('handStates');
         $handStatesProperty->setAccessible(true);
-
         // Test 1: Hand with 3 cards.
         $handsProperty->setValue($player, [
             0 => [new BlackJackGraphic('H', '2'), new BlackJackGraphic('D', '3'), new BlackJackGraphic('S', '4')]
@@ -144,7 +124,6 @@ class DoubleDownTest extends TestCase
         $handStatesProperty->setValue($player, [0 => 'active']);
         $result = $game->doubleDown(0);
         $this->assertFalse($result);
-
         // Test 2: Hand with only 1 card.
         $handsProperty->setValue($player, [
             0 => [new BlackJackGraphic('H', 'K')]
@@ -153,7 +132,6 @@ class DoubleDownTest extends TestCase
         $result = $game->doubleDown(0);
         $this->assertFalse($result);
     }
-
     /**
      * Test doubleDown when the game is not ongoing or hand is not active/correct index.
      */
@@ -164,35 +142,27 @@ class DoubleDownTest extends TestCase
         $existingPlayerEntity->setName($playerName);
         $existingPlayerEntity->setBalance(1000);
         $this->playerRepositoryMock->method('findOneBy')->willReturn($existingPlayerEntity);
-
         $game = new BlackJack($playerName, $this->entityManagerMock);
-
         $result = $game->doubleDown(0);
         $this->assertFalse($result);
         $game->startGame(1, 100);
-
         $player = $game->getPlayer();
         $playerReflection = new \ReflectionClass($player);
         $handStatesProperty = $playerReflection->getProperty('handStates');
         $handStatesProperty->setAccessible(true);
-
         $handStatesProperty->setValue($player, [0 => 'finished']);
         $result = $game->doubleDown(0);
         $this->assertFalse($result);
-
         $reflection = new \ReflectionClass($game);
         $activeHandIndexProperty = $reflection->getProperty('activeHandIndex');
         $activeHandIndexProperty->setAccessible(true);
         $activeHandIndexProperty->setValue($game, 1);
-
         $handStatesProperty->setValue($player, [0 => 'active']);
         $result = $game->doubleDown(0);
         $this->assertFalse($result);
-
         $this->entityManagerMock->expects($this->never())->method('persist');
         $this->entityManagerMock->expects($this->never())->method('flush');
     }
-
     /**
      * Test doubleDown method when all conditions are met, card is drawn, and
      * hand finishes successfully.
@@ -203,9 +173,7 @@ class DoubleDownTest extends TestCase
         $playerEntity->setName('TestPlayer');
         $playerEntity->setBalance(1000);
         $this->playerRepositoryMock->method('findOneBy')->willReturn($playerEntity);
-
         $game = new BlackJack('TestPlayer', $this->entityManagerMock);
-
         // Setup mock player
         $mockPlayer = $this->createMock(BlackJackPlayer::class);
         $mockPlayer->method('isHandActive')->with(0)->willReturn(true);
@@ -220,22 +188,17 @@ class DoubleDownTest extends TestCase
         $mockPlayer->expects($this->once())->method('addCard');
         $mockPlayer->expects($this->once())->method('setHandState')->with(0, 'finished');
         $mockPlayer->expects($this->never())->method('bust');
-
         // Setup mock deck to return a card
         $mockDeck = $this->createMock(BlackJackDeck::class);
         $mockDeck->method('draw')->willReturn(new BlackJackGraphic('spades', '5'));
-
         // Inject mocks and set game state
         $this->setPrivateProperty($game, 'player', $mockPlayer);
         $this->setPrivateProperty($game, 'deck', $mockDeck);
         $this->setPrivateProperty($game, 'status', 'ongoing');
         $this->setPrivateProperty($game, 'activeHandIndex', 0);
-
         $result = $game->doubleDown(0);
-
         $this->assertTrue($result, 'Double down should succeed');
     }
-
     /**
      * Test doubleDown method when the action causes the hand to bust.
      */
@@ -245,13 +208,10 @@ class DoubleDownTest extends TestCase
         $playerEntity->setName('TestPlayer');
         $playerEntity->setBalance(1000);
         $this->playerRepositoryMock->method('findOneBy')->willReturn($playerEntity);
-
         $game = new BlackJack('TestPlayer', $this->entityManagerMock);
         $game->startGame(1, 100);
-
         $this->setPrivateProperty($game, 'status', 'ongoing');
         $this->setPrivateProperty($game, 'activeHandIndex', 0);
-
         $mockPlayer = $this->createMock(BlackJackPlayer::class);
         $mockPlayer->method('getHand')->with(0)->willReturn([
             new BlackJackGraphic('hearts', 'K'),
@@ -261,29 +221,22 @@ class DoubleDownTest extends TestCase
         $mockPlayer->method('getBalance')->willReturn(1000);
         $mockPlayer->method('isHandActive')->with(0)->willReturn(true);
         $mockPlayer->method('placeBet')->with(100, 0)->willReturn(true);
-
         $mockPlayer->expects($this->once())
             ->method('addCard')
             ->with($this->isInstanceOf(BlackJackGraphic::class), 0);
-
         $mockPlayer->method('getScore')->with(0)->willReturn(25);
         $mockPlayer->expects($this->once())->method('bust')->with(0);
         $mockPlayer->expects($this->never())->method('setHandState');
-
         $reflection = new \ReflectionClass($game);
         $playerProp = $reflection->getProperty('player');
         $playerProp->setAccessible(true);
         $playerProp->setValue($game, $mockPlayer);
-
         $mockDeck = $this->createMock(BlackJackDeck::class);
         $mockDeck->method('draw')->willReturn(new BlackJackGraphic('spades', '5'));
-
         $deckProp = $reflection->getProperty('deck');
         $deckProp->setAccessible(true);
         $deckProp->setValue($game, $mockDeck);
-
         $result = $game->doubleDown(0);
-
         $this->assertTrue($result, 'Double down causing bust should succeed');
     }
 }

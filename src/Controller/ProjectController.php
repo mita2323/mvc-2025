@@ -216,7 +216,7 @@ class ProjectController extends AbstractController
         $game->reset($gameState);
 
         return $this->renderPlayPage($game);
-}
+    }
 
     /**
      * Handles the "Hit" action for a specific player hand.

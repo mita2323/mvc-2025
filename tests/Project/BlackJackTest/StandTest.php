@@ -13,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-
 /**
  * Test cases for the BlackJack stand method.
  */
@@ -23,22 +22,18 @@ class StandTest extends TestCase
      * @var MockObject&EntityManagerInterface
      */
     private $entityManagerMock;
-
     /**
      * @var MockObject&EntityRepository<PlayerEntity>
      */
     private $playerRepositoryMock;
-
     /**
      * @var MockObject&EntityRepository<GameSession>
      */
     private $gameSessionRepositoryMock;
-
     /**
      * @var MockObject&EntityRepository<CardStat>
      */
     private $cardStatRepositoryMock;
-
     /**
      * Initializes the entity manager and repositories for Player, GameSession, and CardStat.
      */
@@ -47,9 +42,7 @@ class StandTest extends TestCase
         $this->playerRepositoryMock = $this->createMock(EntityRepository::class);
         $this->gameSessionRepositoryMock = $this->createMock(EntityRepository::class);
         $this->cardStatRepositoryMock = $this->createMock(EntityRepository::class);
-
         $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
-
         $this->entityManagerMock->method('getRepository')
             ->willReturnMap([
                 [PlayerEntity::class, $this->playerRepositoryMock],
@@ -57,7 +50,6 @@ class StandTest extends TestCase
                 [CardStat::class, $this->cardStatRepositoryMock],
             ]);
     }
-
     /**
      * Helper method to set private or protected properties on objects during testing.
      * @param object $object The object instance to modify.
@@ -71,7 +63,6 @@ class StandTest extends TestCase
         $prop->setAccessible(true);
         $prop->setValue($object, $value);
     }
-
     /**
      * Test the stand method.
      */
@@ -82,23 +73,17 @@ class StandTest extends TestCase
         $existingPlayerEntity->setName($playerName);
         $existingPlayerEntity->setBalance(1000);
         $this->playerRepositoryMock->method('findOneBy')->willReturn($existingPlayerEntity);
-
         $game = new BlackJack($playerName, $this->entityManagerMock);
         $game->startGame(1, 100);
-
         $player = $game->getPlayer();
-
         // Set player's hand state to 'active' so stand action applies to it.
         $playerReflection = new \ReflectionClass($player);
         $handStatesProperty = $playerReflection->getProperty('handStates');
         $handStatesProperty->setAccessible(true);
         $handStatesProperty->setValue($player, [0 => 'active']);
-
         $game->stand(0);
-
         $this->assertEquals('game_over', $game->getStatus());
     }
-
     /**
      * Tests that the stand method returns early without proceeding when the game
      * status is not appropriate or the conditions are not met.
@@ -109,23 +94,17 @@ class StandTest extends TestCase
         $playerEntity->setName('TestPlayer');
         $playerEntity->setBalance(1000);
         $this->playerRepositoryMock->method('findOneBy')->willReturn($playerEntity);
-
         $game = new BlackJack('TestPlayer', $this->entityManagerMock);
         $game->startGame(1, 100);
-
         $this->setPrivateProperty($game, 'status', 'finished');
         $this->setPrivateProperty($game, 'activeHandIndex', 0);
-
         $mockPlayer = $this->createMock(BlackJackPlayer::class);
-
         // Inject mock player to intercept calls.
         $reflection = new \ReflectionClass($game);
         $playerProp = $reflection->getProperty('player');
         $playerProp->setAccessible(true);
         $playerProp->setValue($game, $mockPlayer);
-
         $game->stand(0);
-
         $mockPlayer->expects($this->never())->method('stand');
     }
 }
