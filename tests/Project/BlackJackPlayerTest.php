@@ -576,7 +576,7 @@ class BlackJackPlayerTest extends TestCase
         $this->mockPlayerEntity->expects($this->exactly(4))
                             ->method('getBalance')
                             ->willReturnOnConsecutiveCalls(200.0, 200.0, 100.0, 100.0);
-        $this->mockPlayerEntity->expects($this->exactly(2))
+        $this->mockPlayerEntity->/** @scrutinizer ignore-deprecated */expects($this->exactly(2))
                             ->method('setBalance')
                             ->withConsecutive([100.0], [0.0]);
         $player = new BlackJackPlayer("Test Player", $this->mockPlayerEntity);

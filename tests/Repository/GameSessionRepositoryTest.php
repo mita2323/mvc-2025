@@ -46,7 +46,7 @@ class GameSessionRepositoryTest extends TestCase
 
             $this->entityManager->method('getClassMetadata')
                 ->with(GameSession::class)
-                ->willReturnCallback(function ($className) use ($classMetadata) {
+                ->willReturnCallback(function (/** @scrutinizer ignore-unused */$className) use ($classMetadata) {
                     if (!$classMetadata instanceof ClassMetadata) {
                         throw new \LogicException('Expected instance of ClassMetadata');
                     }
