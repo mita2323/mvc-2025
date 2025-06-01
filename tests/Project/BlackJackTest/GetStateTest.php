@@ -128,7 +128,7 @@ class GetStateTest extends TestCase
         $deckCard2 = new BlackJackGraphic('Clubs', 'Jack');
         // Setup player mock to return one hand with two cards and bet info.
         $this->mockPlayer->/** @scrutinizer ignore-call */method('getName')->willReturn('PlayerOne');
-        $this->mockPlayer->method('getBalance')->willReturn(500);
+        $this->mockPlayer->/** @scrutinizer ignore-call */method('getBalance')->willReturn(500);
         $this->mockPlayer->method('getHands')->willReturn([0 => [$playerCard1, $playerCard2]]);
         $this->mockPlayer->method('getBet')->with(0)->willReturn(50);
         $this->mockPlayer->method('getHandState')->with(0)->willReturn('playing');
