@@ -14,28 +14,28 @@ use Doctrine\ORM\EntityRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Test cases for the BlackJack stand method.
+ */
+class StandTest extends TestCase
+{
     /**
-     * Test cases for the BlackJack stand method.
-     */
-    class StandTest extends TestCase
-    {
-    /**
-     * @var EntityManagerInterface&MockObject
+     * @var MockObject&EntityManagerInterface
      */
     private $entityManagerMock;
 
     /**
-     * @var EntityRepository<PlayerEntity>&MockObject
+     * @var MockObject&EntityRepository<PlayerEntity>
      */
     private $playerRepositoryMock;
 
     /**
-     * @var EntityRepository<GameSession>&MockObject
+     * @var MockObject&EntityRepository<GameSession>
      */
     private $gameSessionRepositoryMock;
 
     /**
-     * @var EntityRepository<CardStat>&MockObject
+     * @var MockObject&EntityRepository<CardStat>
      */
     private $cardStatRepositoryMock;
 

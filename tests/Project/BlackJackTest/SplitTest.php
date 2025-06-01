@@ -20,22 +20,22 @@ use PHPUnit\Framework\TestCase;
 class SplitTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface&MockObject
+     * @var MockObject&EntityManagerInterface
      */
     private $entityManagerMock;
 
     /**
-     * @var EntityRepository<PlayerEntity>&MockObject
+     * @var MockObject&EntityRepository<PlayerEntity>
      */
     private $playerRepositoryMock;
 
     /**
-     * @var EntityRepository<GameSession>&MockObject
+     * @var MockObject&EntityRepository<GameSession>
      */
     private $gameSessionRepositoryMock;
 
     /**
-     * @var EntityRepository<CardStat>&MockObject
+     * @var MockObject&EntityRepository<CardStat>
      */
     private $cardStatRepositoryMock;
 
