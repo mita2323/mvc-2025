@@ -283,9 +283,10 @@ class BlackJackPlayerTest extends TestCase
     }
 
     /**
-     * Tests the 'getScore' method-
-     * @param array<int, array<string>> $cards The cards to add to the player's hand, where each card is an array of [suit, rank].
+     * Tests the 'getScore' method.
+     * @param array<int, array{0: string, 1: string}> $cards The cards to add to the player's hand.
      * @param int $expectedScore The expected score for the hand.
+     * @return void
      * @dataProvider getScoreDataProvider
      */
     public function testGetScore(array $cards, int $expectedScore): void
@@ -299,7 +300,7 @@ class BlackJackPlayerTest extends TestCase
 
     /**
      * Provides data for testing the 'getScore' method.
-     * @return array<string, array{list<array<string>>, int}>
+     * @return array<string, array{array<int, array{string, string}>, int}>
      */
     public static function getScoreDataProvider(): array
     {
