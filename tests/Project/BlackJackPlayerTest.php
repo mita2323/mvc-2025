@@ -167,9 +167,9 @@ class BlackJackPlayerTest extends TestCase
                                         850.0
                                     );
 
-       /** @scrutinizer ignore-deprecated */$this->mockPlayerEntity->expects($this->exactly(2))
-                                ->method('setBalance')
-                                ->withConsecutive([900], [850]);
+        /** @scrutinizer ignore-deprecated */$this->mockPlayerEntity->expects($this->exactly(2))
+                                 ->method('setBalance')
+                                 ->withConsecutive([900], [850]);
 
         $player = new BlackJackPlayer("Test Player", $this->mockPlayerEntity);
 

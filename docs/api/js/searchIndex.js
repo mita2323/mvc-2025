@@ -483,7 +483,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\ProjectController\u003A\u003ArenderPlayPage\u0028\u0029",
             "name": "renderPlayPage",
-            "summary": "",
+            "summary": "Renders\u0020the\u0020Blackjack\u0020game\u0020page\u0020with\u0020the\u0020current\u0020game\u0020state.",
             "url": "classes/App-Controller-ProjectController.html#method_renderPlayPage"
         },                {
             "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Aproject\u0028\u0029",

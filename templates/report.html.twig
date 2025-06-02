@@ -242,7 +242,104 @@
             <section id="kmom10">
                 <h2>Kmom10</h2>
                 <p>
-                    Redovisningstext för kmom10
+                    Jag har skapat en landningssida /proj som syns i navbaren på min report-sida. Trycker man på ’Projekt’ länken kommer 
+                    man till mitt projekt sida som har en stil och utseende som skiljer sig tydligt från min report-sida och har en separat 
+                    navbar för projektet. Min ’About’ sida innehåller information om projektet och vad det handlar om.
+                </p><br>
+                <p>
+                    För detta projekt har jag valt att bygga vidare på mitt Black Jack spel från tidigare kursmoment. Spelet börjar 
+                    med att spelaren skriver in sitt namn och sedan kan spelaren välja att spela mellan 1 och 3 händer samtidigt mot banken. 
+                    Sedan går man vidare till satsningsfasen, där spelaren väljer hur mycket de vill satsa per hand, summan måste vara minst 
+                    10 kr och högst deras saldo. Efter att insatsen skickats startar spelet genom att kort delar ut, och spelaren 
+                    omdirigeras till huvudspelets gränssnitt. Play.html.twig mallen ansvarar för att visa och hantera spelets huvudsakliga 
+                    gränssnitt. Den renderar spelarens och dealerns händer, visar spelresultat, erbjuder handlingsalternativ som att ta kort,
+                    eller stanna. Under pågående spel (status == ’ongoing’) visas spelarens händer med poäng, insatser och villkorliga
+                    knappar, medan dealerns hand delvis är dold. När spelet avslutas visas resultat och via JavaScript, animeras dealerns
+                    kort med poänguppdatering. Om spelarens saldo når noll, då visas ett meddelande att spelet är slut, annars omdirigeras
+                    spelaren till satsningssidan efter en 10-sekunders nedräkning. 
+                </p><br>
+                <p>
+                    Min ProjectController.php hanterar alla flöden kring spelet Blackjack och använder rutter för att styra olika delar av 
+                    spelet, som startsida, regler, satsning, spelhandlingar (ta kort, stanna, dubbla, splitta) och återställning. 
+                    Kontrollen injicerar EntityManagerInterface för att hantera spelarens saldo i databasen och använder sessioner för 
+                    att spara spelarens namn, antal händer och speltillstånd. Funktionen ’reset’ återställer spelarens saldo till 1000 
+                    i databasen och rensar sessionen. Varje metod renderar den relevanta Twig-mallen och inkluderar felhantering.
+                </p><br>
+                <p>
+                   BlackJackDeck.php definierar klassen BlackJackDeck, som hanterar en 52-kortslek för BlackJack. Kort representeras av 
+                   BlackJackGraphic-objekt. Klassen skapar leken i konstruktorn genom att kombinera fyra färger och 13 värden. Den 
+                   innehåller metoder för att hämta (getCards), blanda (shuffle), dra (draw) och ersätta (setCards) kortleken.
+                </p><br>
+                <p>
+                    BlackJackGraphic.php innehåller klassen BlackJackGraphic, som representerar ett spelkort i Blackjack. Den lagrar färg och 
+                    värde, beräknar kortet poäng, och erbjuder metoden för att hämta rank, färg, unicode-symbol, strängrepresentation samt 
+                    JSON-data visa JSONSerializable.
+                </p><br>
+                <p>
+                    BlackJackPlayer.php definierar klassen BlackJackPlayer och hanterar en spelares eller dealers tillstånd i Blackjack. Den
+                    lagrar namn, händer, insatser, handstatusar och eventuell databasentitet för saldo. Klassen innehåller metoder för att 
+                    lägga till kort, hantera insatser och vinster, samt räkna poäng med hänsyns till ess. Den stödjer även handlingar som 
+                    split, stand, och bust, samt kontroller för blackjack. Klassen används för både spelare och dealer, och är en viktig 
+                    del av spelets logik. 
+                </p><br>
+                <p>
+                    BlackJack.php innehåller klassen BlackJack, som hanterar logiken för Blackjack spelet. Klassen initierar ett spel med en 
+                    blandad kortlek (BlackJackDeck), en spelare och en dealer (BlackJackPlayer), samt spårar speltillstånd och spelarens 
+                    saldo. Metoden ’startGame’ validerar insats och antal händer, delar ut kort och sätter spelets status. Spelaren kan sedan 
+                    utföra handlingar som hit, stand, doubleDown och split, som påverkar handen och turordningen. Dealerns tur styrs av 
+                    ’playDealer’, som drar kort tills minst 17 uppnås. Spelet utvärderas i ’evaluateGame’, där resultat jämförs och spelarens 
+                    saldo uppdateras. För att spara och återställa spelet används metoderna ’getState’ och ’reset’, vilket möjliggör 
+                    sessionsbaserat spel. Metoder som ’getPlayer’, ’getDealer’ och ’getStatus’ ger åtkomst till spelets aktuella data. 
+                    BlackJack fungerar som hjärtat i applikationen och binder samman spelregler, användardata och gränssnitt.  
+                </p><br>
+                <p>
+                    I min Entity folder har jag mina Entity filer, CardStat.php som lagrar statistik om hur ofta varje kortvärden har 
+                    dragits i spelet, GameSession.php som representerar en enskild spelomgång för en spelare, och Player.php som 
+                    representerar en spelare i systemet.
+                </p><br>
+                <p>
+                    I Repository finns mina tre repository-klasserna som tillhör projektet. CardStatRepository.php hanterar databasfrågor 
+                    för CardStat-entiteten, GameSessionRepository.php som hanterar alla databasoperationer relaterade till 
+                    GameSession-entiteten, och PlayerRepository.php som sköter databasanrop relaterade till Player-entiteten.
+                </p><br>
+                <p>
+                    I templates/project ligger alla mina Twig mallar, och i tests/Project har jag alla mina tester till detta projekt. 
+                </p><br>
+                <p>
+                    I mitt README.md fil finns scrutinizer badges som är klickbara, instruktion för hur man klonar och startar igång 
+                    webbplatsen, samt en kort beskrivning om innehållet av report.
+                </p><br>
+                <p>
+                    För mitt Blackjack projekt har mina tester nästan 100% kodtäckning. Att den inte är 100% beror på att jag inte hann 
+                    skriva alla tester för BlackJack klassen. Enligt PHP metrics är min genomsnittlig cyklomatisk komplexitet per klass 
+                    lite hög, och detta beror på tre klasser: BlackJackPlayer, ProjectController och BlackJack. Dessa filer är för stora 
+                    och för komplexa. I scrutinizer har min kod fått betyget 8.88 och detta beror på de samma tre filer. För att förbättra 
+                    scrutinizer betygen och förbättra underhållbarheten och komplexiteten skulle det vara bra att dela upp dessa stora och 
+                    långa filer till mindre filer som är lättare att underhålla. 
+                </p><br>
+                <p>
+                   Själva blackjack spelet tyckte jag var lärorikt och roligt att bygga vidare på och utveckla. Det tog en rimlig lång tid 
+                   att genomföra själva spelet, dock fick jag spendera mycket tid på att skriva tester som passerade med composer phpunit 
+                   för projektet. Eftersom jag har ganska mycket kod, fick jag skriva väldigt många olika tester, och jag fick många 
+                   felmeddelanden som jag behövde felsöka och fixa. Ett annat moment som tog länge var att fixa till alla issues i 
+                   phpmetrics och alla errors och failures i composer lint. Ett problem som jag stötte på var efter att jag hade genererat 
+                   metrics för min kod, upptäckte jag att jag hade tre filer som hade dåliga underhållbarhet och för hög komplexitet. 
+                   Jag ville försöka fixa detta men eftersom jag hade redan skrivit tester för dessa filer, gick det inte bra att försöka 
+                   dela upp dem då jag fick väldigt många felmeddelanden. Hade jag haft mer tid, hade jag säkert kunnat förbättra dessa 
+                   tre filer. 
+                </p><br>
+                <p>
+                    Jag tycker att projektet inte var för lätt eller för svår, och tog en rimlig tid att genomföra. Detta projekt var 
+                    ett bra och rimligt projekt för denna kurs.
+                </p><br>
+                <p>
+                    Mina tankar om kursen är att kursmomenten är väl uppdelad, och övningarna hjälper till att förbereda innan man arbetar
+                    med uppgiften för kursmomentet. På dbwebb.se finns det en 'läs & studera' del som innehåller föreläsningar och litteratur
+                    vilket jag tycker är mycket hjälpsam, samt alla föreläsningar som finns på youtube. Discord är ett väldigt bra verktyg då
+                    man kan ställa frågor eller söka genom andra elevers lösningar till felmeddelanden eller error som man själv får. Kursen
+                    hade bra storlek på övningar och uppgifter till varje kursmoment, vilket är bra då man hinner man den andra kursen webapp,
+                    och inte ligger efter. Lärarna ger bra feedback för varje inlämnad uppgift. Jag är nöjd med kursen och skulle rekommendera
+                    den till mina vänner/kollegor. På en skala av 1-10 skulle jag ge kursen en 9.
                 </p>
             </section>
         </div>

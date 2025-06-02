@@ -31,7 +31,9 @@ class ProjectController extends AbstractController
     }
 
     /**
-     *
+     * Renders the Blackjack game page with the current game state.
+     * @param BlackJack $game The Blackjack game instance.
+     * @return Response The HTTP response with the rendered game page.
      */
     private function renderPlayPage(BlackJack $game): Response
     {
@@ -361,7 +363,6 @@ class ProjectController extends AbstractController
             }
         }
         $session->clear();
-        $this->addFlash('success', 'Your balance has been reset to 1000');
         return $this->redirectToRoute('project');
     }
 }
