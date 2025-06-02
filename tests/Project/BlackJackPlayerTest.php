@@ -300,7 +300,7 @@ class BlackJackPlayerTest extends TestCase
 
     /**
      * Provides data for testing the 'getScore' method.
-     * @return array<string, array{array<int, array{string, string}>, int}>
+     * @return array<string, array{0: array<int, array{0: string, 1: string}>, 1: int}>
      */
     public static function getScoreDataProvider(): array
     {
